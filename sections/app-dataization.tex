@@ -11,7 +11,7 @@ the formula:
 ^{\circ}F ={} ^{\circ}C \times 1.8 + 32,
 \end{equation*}
 Assuming that \(^{\circ}C\) already equals \ff{25} and is attached to the \ff{c} attribute instead of being provided by a user:
-\iexec[maybe]{phino rewrite --output=latex --sweet --nonumber --label=eq:celsius --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
+\iexec[maybe]{phino rewrite --output=latex --sweet --nonumber --label=eq:celsius --margin=100 --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
 \input{_tex/celsius-formula.tex}
 
 The functions are defined as follows:
