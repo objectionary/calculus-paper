@@ -59,63 +59,22 @@ Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
   there is no expression \(e_1\) such that \(\nf \trans e_1\).
 
 \begin{figure*}
-\newcommand\trrule[5][]{%
-  \newrule[#1]{#2}:
+\newcommand\trrule[5]{%
+  \newrule{#1}:
   &
-  { $ #3 $ }
+  { $ #2 $ }
   \(\trans\)
-  { $ #4 $ }
-  \quad #5
-  \\%
+  { $ #3 $ }
+  \ifblank{#4}{}{\; { #4 } }%
+  \\
+  \ifblank{#5}{}{& { #5 } \\}%
 }
 \begin{mdframed}
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{rl}
-\trrule{copy}
-  { [[ B_1, \tau -> ?, B_2 ]] ( \tau -> e ) }
-  { [[ B_1, \tau -> n, B_2 ]] }
-  { if \( \ctx{e}{\scopeof{e}} \strans n \) }
-\trrule{dot}
-  { [[ B_1, \tau -> \nf, B_2 ]].\tau }
-  { \ctx{\nf}{\scopeof{n}} ( \rho -> \scopeof{n} ) }
-  { }
-\trrule[\alpha]{alpha}
-  { b ( \phiTerminal{\alpha_i} -> e ) }
-  { b ( \tau -> e) }
-  { if $ \tau \in b $ and \( \ordinal{\tau}{\bar{b}} = i \) }
-\trrule[\varphi]{phi}
-  { b.\tau }
-  { b.@.\tau }
-  { if \( \tau \notin b \) and $ @ \in b $ }
-\trrule{stay}
-  { b( \rho -> e ) }
-  { b }
-  { if $ ^ \in b $ }
-\trrule{over}
-  { b( \tau -> e) }
-  { T }
-  { if $\tau \in b $ and $ \tau \not= ^ $ }
-\trrule{stop}
-  { b.\tau }
-  { T }
-  { if $ [ \tau {,}\; @ {,}\; L ] \cap b = \emptyset $ }
-\trrule{null}
-  { [[ B_1, \tau -> ?, B_2 ]].\tau }
-  { T }
-  { }
-\trrule{miss}
-  { b ( \tau -> e ) }
-  { T }
-  { if \( \tau \notin b \) and \( \tau \notin [ \phiTerminal{\alpha_0}, \phiTerminal{\alpha_1}, \dots ] \) }
-\trrule{dd}
-  { T.\tau }
-  { T }
-  { }
-\trrule{dc}
-  { T ( \tau -> e ) }
-  { T }
-  { }
-\end{tabular}
+\newcommand\indexof[1]{\text{\sffamily IDX}(#1)}
+\newcommand\isnormal[1]{\text{\sffamily NF}(#1)}
+\iexec[maybe]{phino explain --normalize > _tex/rules.tex}
+\input{_tex/rules.tex}
 \end{mdframed}
 \capt{Reduction rules.}
 \label{fig:reduction}
