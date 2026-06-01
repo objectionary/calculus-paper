@@ -30,7 +30,7 @@ jobs:
             apt-get install --yes openjdk-17-jdk &&
             wget -q -O /usr/bin/phino http://phino.objectionary.com/releases/ubuntu-24.04/phino-latest &&
             chmod a+x /usr/bin/phino &&
-            phino --version
+            phino --version &&
             npm install -g eolang &&
             latexmk
           opts: -pdf
