@@ -5,7 +5,7 @@
 
 In this section, we introduce the core concepts of the calculus.
 The purpose of this section is to define the entities that constitute the calculus---such as
-  expressions, formations, attributes, and scope---together with their structural relationships.
+  expressions, formations, and attributes---together with their structural relationships.
 The definitions given here are descriptive rather than operational.
 They explain what expressions are, not how they are evaluated or transformed.
 
@@ -154,43 +154,6 @@ In $b(\phiTerminal{\alpha_i} -> e)$ application, \(e\) must be attached to the a
 A \textbf{dispatch}, denoted as $ e . \tau $, where \(e\) is the \enquote{subject,}
   means an attempt to retrieve what is attached to \(\tau\) in the formation to which \(e\) may be transformed.
 \end{definition}
-
-\newcommand\scopeof[1]{{#1}_{\varsigma}}
-\begin{definition}[Scope]
-The \textbf{scope} of expression \(e\), denoted as \(\scopeof{e}\), is either
-  \begin{inparaenum}[a)]
-  \item the formation where the expression is attached to an attribute,
-  \item or the scope of the subject of the application where \(e\) is the argument.
-  \end{inparaenum}
-\end{definition}
-
-Informally, the scope is the formation that is the \enquote{closest} to the pair, moving to the left in the expression.
-In~\cref{eq:simple-scope}, the scope of \ff{author} is the formation where the \ff{source} attribute stays,
-  while the scope of \ff{cite} is the formation where the \ff{ref} attribute stays.
-\begin{phiquation}
-\label{eq:simple-scope}
-[[ ref -> \phiOver{ [[ source -> Q.book( author -> b_1 ) ]] }, cite -> b_2 ]]
-\end{phiquation}
-
-\Cref{fig:scopes} illustrates the concept of scope.
-
-\begin{figure*}
-\begin{mdframed}
-\begin{phiquation*}
-[[ |a| -> \phiOver{ [[ |y| -> b_2.|t|( |f| -> [[ |z| -> b_3 ]] ( |x| -> e ) ) ]] } ]]
-
-[[ |f| -> \phiOver{ [[ |k| -> b_1( |x| -> e ) ]] } ]]
-
-[[ |k| -> [[ |y| -> b( |f| -> \phiOver{ [[ |x| -> e ]] } ) ]] ]]
-
-[[ |k| -> \phiOver{ [[ |f| -> [[ |x| -> ? ]] ( |x| -> b_2 ) ( |x| -> b_3 ) ( |x| -> e ) ]] } ]]
-\end{phiquation*}
-\end{mdframed}
-\capt{Illustrative examples of scopes: the bars over the terms highlight \(\scopeof{e}\), the scope of \(e\).}
-\label{fig:scopes}
-\end{figure*}
-
-In an expression, the locator $Q$ means the program, while the locator \phiTerminal{\(\xi\)} means the scope of the expression.
 
 \begin{definition}
 Since any expression may recursively be defined as \begin{inparaenum}[1)]

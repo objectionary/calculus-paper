@@ -29,4 +29,4 @@ to [arXiv](https://arxiv.org/abs/2111.13384).
 [texsc]: https://rubygems.org/gems/texsc
 [texqc]: https://rubygems.org/gems/texqc
 [tlmgr]: https://tug.org/texlive/tlmgr.html
-[pdf]: https://github.com/objectionary/calculus-paper
+[pdf]: https://github.com/objectionary/calculus-paper/blob/gh-pages/paper.pdf
