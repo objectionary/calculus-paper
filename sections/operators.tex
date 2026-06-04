@@ -52,9 +52,12 @@ The notation \(e_1 \strans e_2\) denotes a reflexive transitive
   closure of all reductions, so that there is a possibly empty finite
   sequence of reductions between \(e_1\) and \(e_2\).
 
+\begin{definition}[Normal Form]
 An expression that has no more possible applications of reductions
   is \emph{irreducible} or a \emph{normal form}, denoted as \(\nf{}_i\)
   ranging over \(\mathcal{N} \in \mathcal{E}\).
+\end{definition}
+
 Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
   there is no expression \(e_1\) such that \(\nf \trans e_1\).
 
@@ -65,6 +68,20 @@ Confluence guarantees that the normal form of an expression, when it exists, is 
   irrespective of the order in which the rules are applied.
 We have proved this property mechanically in Lean~4,
   with the proof available in a public GitHub repository\footnote{\url{https://github.com/objectionary/proof}}.
+
+\begin{definition}[Absolute]
+An normal form is \textbf{absolute},
+  denoted by \(a\) and ranging over \(\mathcal{A} \subseteq \mathcal{N}\),
+  if it is one of:
+  \begin{inparaenum}[a)]
+  \item $T$,
+  \item $Q$,
+  \item formation,
+  \item application $ a_1 ( \tau -> a_2 ) $,
+  or
+  \item dispatch $ a_1 . \tau $.
+  \end{inparaenum}
+\end{definition}
 
 \begin{figure*}
 \newcommand\trrule[5]{%
@@ -111,25 +128,25 @@ The inference rules at \cref{fig:morphing} inductively describe the algorithm of
 \begin{figure*}
 \begin{mdframed}
 \begin{phiquation*}
-\newrule{Mprim} \
+\newrule{prim} \
 \frac \
 {  } \
 { << e{,}\; u{,}\; s >> \stepto << p{,}\; s >> }  \
 \;\text{if}\; e \in \mathcal{P} \
 \qquad \
-\newrule{Mnmz} \
+\newrule{nmz} \
 \frac \
 { << \nf{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> } \
 { << e{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> }  \
 \;\text{if}\; e \strans \nf \;\text{and}\; e \not\equiv n
 
-\newrule[\lambda]{Mlambda} \
+\newrule[\lambda]{lambda} \
 \frac \
 { << e \bullet t{,}\; u{,}\; s_2 >> \stepto << p{,}\; s_3 >>} \
 { <<  [[  B_1 ,  L>  f , B_2  ]]  \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_3 >> }  \
 \;\text{if}\; f {(} [[ B_1, B_2 ]] {,}\; u{,}\; s_1 {)} \to << e{,}\; s_2 >>
 
-\newrule[\Phi]{Mphi} \
+\newrule[\Phi]{phi} \
 \frac \
 { << e \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >>} \
 { << Q.\tau \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> }  \
