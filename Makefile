@@ -8,6 +8,11 @@ SHELL=bash
 
 REPO=objectionary/calculus-paper
 
+all: paper.pdf zip
+
+paper.pdf:
+	latexmk -pdf paper
+
 zip: *.tex sections/*.tex
 	./zip-it.sh "$(REPO)"
 

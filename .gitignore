@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
+# SPDX-License-Identifier: MIT
+
 *-SAVE-ERROR
 *.aux
 *.bbl
@@ -11,6 +14,7 @@
 *.pyg
 *.run.xml
 *.synctex.gz
+*.xcp
 *.zip
 .DS_Store
 .eoc/

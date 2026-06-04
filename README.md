@@ -3,7 +3,7 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2111.13384-green.svg)](https://arxiv.org/abs/2111.13384)
 [![make](https://github.com/objectionary/eolang-paper/actions/workflows/latexmk.yml/badge.svg)](https://github.com/objectionary/eolang-paper/actions/workflows/latexmk.yml)
 
-This is the first paper about 𝜑-calculus.
+This is the first paper about 𝜑-calculus ([read in PDF][pdf]).
 
 The reference interpreter is [phino].
 
@@ -29,3 +29,4 @@ to [arXiv](https://arxiv.org/abs/2111.13384).
 [texsc]: https://rubygems.org/gems/texsc
 [texqc]: https://rubygems.org/gems/texqc
 [tlmgr]: https://tug.org/texlive/tlmgr.html
+[pdf]: https://github.com/objectionary/calculus-paper
