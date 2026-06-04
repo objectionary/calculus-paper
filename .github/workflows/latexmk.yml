@@ -20,6 +20,8 @@ jobs:
   latexmk:
     timeout-minutes: 15
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v6
       - uses: yegor256/latexmk-action@0.20.0
@@ -35,3 +37,11 @@ jobs:
             latexmk
           opts: -pdf
           depends: DEPENDS.txt
+      - if: github.event_name == 'push'
+        run: mkdir -p gh-pages && cp paper.pdf gh-pages/paper.pdf
+      - if: github.event_name == 'push'
+        uses: peaceiris/actions-gh-pages@v4.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages
+          keep_files: true
