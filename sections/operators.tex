@@ -140,7 +140,7 @@ The inference rules at \cref{fig:morphing} inductively describe the algorithm of
 \label{fig:morphing}
 \end{figure*}
 
-The notation \(<< e, u, s_1 >> \stepto << p, s_2 >>\)
+The notation $<< e, u, s_1 >> \stepto << p, s_2 >>$
   means that \(\mathbb{M}(e, u, s_1)\) evaluates to \(p\), thus \emph{morphing} \(e\)
   with a side-effect of changing \(s_1\) to \(s_2\),
   in the universe \(u\).
@@ -181,7 +181,7 @@ The inference rules in \cref{fig:dataization} inductively describe the algorithm
 The rules \nameref{r:box} and \nameref{r:phi} coexist because
 $D \notin \mathcal{T}$, thus making the expression $ [[ @ -> 42 ]].D $ invalid.
 
-The notation \(<< e, u, s_1 >> \stepto << \delta, s_2 >>\)
+The notation $<< e, u, s_1 >> \stepto << \delta, s_2 >>$
   means that \(\mathbb{D}(e, u, s_1)\) evaluates to \(\delta\),
   thus \emph{dataizing} \(e\) with a side-effect of changing the state of evaluation \(s_1\) to \(s_2\), in the universe \(u\).
 The notation \(\mathbb{D}(e, u)\) is a shortened form of \(\mathbb{D}(e, u, s_0)_{(1)}\),

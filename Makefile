@@ -8,9 +8,11 @@ SHELL=bash
 
 REPO=objectionary/calculus-paper
 
+TEXS := $(wildcard sections/*.tex) paper.tex
+
 all: paper.pdf zip
 
-paper.pdf:
+paper.pdf: $(TEXS)
 	latexmk -pdf paper
 
 zip: *.tex sections/*.tex
