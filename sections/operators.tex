@@ -55,7 +55,7 @@ The notation \(e_1 \strans e_2\) denotes a reflexive transitive
 \begin{definition}[Normal Form]
 An expression that has no more possible applications of reductions
   is \emph{irreducible} or a \emph{normal form}, denoted as \(\nf{}_i\)
-  ranging over \(\mathcal{N} \in \mathcal{E}\).
+  ranging over \(\mathcal{N} \subseteq \mathcal{E}\).
 \end{definition}
 
 Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
@@ -72,14 +72,11 @@ We have proved this property mechanically in Lean~4,
 \begin{definition}[Absolute]
 An normal form is \textbf{absolute},
   denoted by \(a\) and ranging over \(\mathcal{A} \subseteq \mathcal{N}\),
-  if it is one of:
+  unless it is
   \begin{inparaenum}[a)]
-  \item $T$,
-  \item $Q$,
-  \item formation,
-  \item application $ a_1 ( \tau -> a_2 ) $,
+  \item a dispatch with \(\phiTerminal{\xi}\) subject
   or
-  \item dispatch $ a_1 . \tau $.
+  \item an application with a non-absolute argument.
   \end{inparaenum}
 \end{definition}
 
@@ -100,7 +97,7 @@ An normal form is \textbf{absolute},
 \newcommand\isnormal[1]{\text{\sffamily NF}(#1)}
 \newcommand\xifree[1]{\text{\sffamily XF}(#1)}
 \iexec[maybe]{phino explain --normalize > _tex/rules.tex}
-\input{_tex/rules.tex}
+\adjustbox{max width=\linewidth}{\input{_tex/rules.tex}}
 \end{mdframed}
 \capt{Reduction rules.}
 \label{fig:reduction}
@@ -128,25 +125,25 @@ The inference rules at \cref{fig:morphing} inductively describe the algorithm of
 \begin{figure*}
 \begin{mdframed}
 \begin{phiquation*}
-\newrule{prim} \
+\newrule[prim]{Mprim} \
 \frac \
 {  } \
 { << e{,}\; u{,}\; s >> \stepto << p{,}\; s >> }  \
 \;\text{if}\; e \in \mathcal{P} \
 \qquad \
-\newrule{nmz} \
+\newrule[nmz]{Mnmz} \
 \frac \
 { << \nf{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> } \
 { << e{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> }  \
 \;\text{if}\; e \strans \nf \;\text{and}\; e \not\equiv n
 
-\newrule[\lambda]{lambda} \
+\newrule[\lambda]{Mlambda} \
 \frac \
 { << e \bullet t{,}\; u{,}\; s_2 >> \stepto << p{,}\; s_3 >>} \
 { <<  [[  B_1 ,  L>  f , B_2  ]]  \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_3 >> }  \
 \;\text{if}\; f {(} [[ B_1, B_2 ]] {,}\; u{,}\; s_1 {)} \to << e{,}\; s_2 >>
 
-\newrule[\Phi]{phi} \
+\newrule[\Phi]{Mphi} \
 \frac \
 { << e \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >>} \
 { << Q.\tau \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> }  \
