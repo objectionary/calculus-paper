@@ -61,14 +61,6 @@ An expression that has no more possible applications of reductions
 Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
   there is no expression \(e_1\) such that \(\nf \trans e_1\).
 
-The reduction relation is \emph{confluent}:
-  if \(e \strans e_1\) and \(e \strans e_2\),
-  then there exists an expression \(e_3\) such that \(e_1 \strans e_3\) and \(e_2 \strans e_3\).
-Confluence guarantees that the normal form of an expression, when it exists, is unique,
-  irrespective of the order in which the rules are applied.
-We have proved this property mechanically in Lean~4,
-  with the proof available in a public GitHub repository\footnote{\url{https://github.com/objectionary/proof}}.
-
 \begin{definition}[Absolute]
 An normal form is \textbf{absolute},
   denoted by \(a\) and ranging over \(\mathcal{A} \subseteq \mathcal{N}\),
@@ -106,6 +98,14 @@ An normal form is \textbf{absolute},
 \ifdefined\examples
 \Cref{app:normalization-examples} demonstrates how normalization works through examples.
 \fi
+
+The reduction relation is \emph{confluent}:
+  if \(e \strans e_1\) and \(e \strans e_2\),
+  then there exists an expression \(e_3\) such that \(e_1 \strans e_3\) and \(e_2 \strans e_3\).
+Confluence guarantees that the normal form of an expression, when it exists, is unique,
+  irrespective of the order in which the rules are applied.
+We have proved this property mechanically in Lean~4,
+  with the proof available in a public GitHub repository\footnote{\url{https://github.com/objectionary/proof}}.
 
 \subsection{Equivalence}\label{sec:equivalence}
 
