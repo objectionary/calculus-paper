@@ -155,15 +155,19 @@ A \textbf{dispatch}, denoted as $ e . \tau $, where \(e\) is the \enquote{subjec
   means an attempt to retrieve what is attached to \(\tau\) in the formation to which \(e\) may be transformed.
 \end{definition}
 
-\begin{definition}
+\begin{definition}[Head and Tail]
 Since any expression may recursively be defined as \begin{inparaenum}[1)]
     \item $T$,
-    \item formation,
-    \item application,
+    \item a formation,
+    \item an application,
     or
-    \item dispatch,
+    \item a dispatch,
 \end{inparaenum}
-it consists of a \textbf{head} and a possibly empty \textbf{tail}, denoted together as \(h\bullet{}t\).
+it may be split into a \textbf{head} \(h\) and a possibly empty \textbf{tail} \(t\),
+  denoted together as \(h\bullet{}t\),
+  where \(t\) is the ordered sequence of dispatches and applications that,
+  attached to \(h\), reconstructs the expression.
+A tail may begin with either a dispatch or an application, and the split is not unique.
 \end{definition}
 
 \begin{example}
@@ -172,13 +176,17 @@ it consists of a \textbf{head} and a possibly empty \textbf{tail}, denoted toget
 \begin{table*}
 \capt{A few examples that demonstrate the separation between a head and a possibly empty tail of an expression.}
 \label{tab:head-and-tail}
+\adjustbox{max width=\linewidth}{%
 \begin{tabular}{lll}
 \toprule
 Expression & Head & Tail \\
 \midrule
-$b_1( foo -> b_2 )$
-  & $b_1( foo -> b_2 )$
+$b_1$
+  & $b_1$
   & --- \\
+$b_1( foo -> b_2 )$
+  & $b_1$
+  & $( foo -> b_2 )$ \\
 $b_1.|aa|.|bb|( ~0 -> b_2 )$
   & $b_1$
   & $aa.bb( ~0 -> b_2 )$ \\
@@ -186,10 +194,10 @@ $[[ |a| -> b_2 ]].|aa|.|test|.|bb|$
   & $[[ |a| -> b_2 ]]$
   & $aa.test.bb$ \\
 $b_1( |foo| -> b_2)( ~0 -> 42 ).|print|( ~1 -> 7 )$
-  & $b_1( |foo| -> b_2)( ~0 -> 42 )$
-  & $|print|( ~1 -> 7 )$ \\
+  & $b_1$
+  & $( |foo| -> b_2)( ~0 -> 42 ).|print|( ~1 -> 7 )$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table*}
 \end{example}
 
