@@ -1,6 +1,20 @@
 % SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
 % SPDX-License-Identifier: MIT
 
+\newcommand\trrule[5]{%
+  \newrule{#1}:
+  &
+  { $ #2 $ }
+  \(\trans\)
+  { $ #3 $ }
+  \ifblank{#4}{}{\; { #4 } }%
+  \\
+  \ifblank{#5}{}{& { #5 } \\}%
+}
+\newcommand\indexof[1]{\text{\sffamily IDX}(#1)}
+\newcommand\isnormal[1]{\text{\sffamily NF}(#1)}
+\newcommand\xifree[1]{\text{\sffamily XF}(#1)}
+
 \section{Operators}\label{sec:operators}
 
 In this section we introduce a family of semantic operators defined on \(\phi\)-expressions.
@@ -73,21 +87,8 @@ An normal form is \textbf{absolute},
 \end{definition}
 
 \begin{figure*}
-\newcommand\trrule[5]{%
-  \newrule{#1}:
-  &
-  { $ #2 $ }
-  \(\trans\)
-  { $ #3 $ }
-  \ifblank{#4}{}{\; { #4 } }%
-  \\
-  \ifblank{#5}{}{& { #5 } \\}%
-}
 \begin{mdframed}
 \renewcommand{\arraystretch}{1.2}
-\newcommand\indexof[1]{\text{\sffamily IDX}(#1)}
-\newcommand\isnormal[1]{\text{\sffamily NF}(#1)}
-\newcommand\xifree[1]{\text{\sffamily XF}(#1)}
 \iexec[maybe]{phino explain --normalize > _tex/rules.tex}
 \adjustbox{max width=\linewidth}{\input{_tex/rules.tex}}
 \end{mdframed}
@@ -124,31 +125,8 @@ The inference rules at \cref{fig:morphing} inductively describe the algorithm of
 
 \begin{figure*}
 \begin{mdframed}
-\begin{phiquation*}
-\newrule[prim]{Mprim} \
-\frac \
-{  } \
-{ << e{,}\; u{,}\; s >> \stepto << p{,}\; s >> }  \
-\;\text{if}\; e \in \mathcal{P} \
-\qquad \
-\newrule[nmz]{Mnmz} \
-\frac \
-{ << \nf{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> } \
-{ << e{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> }  \
-\;\text{if}\; e \strans \nf \;\text{and}\; e \not\equiv n
-
-\newrule[\lambda]{Mlambda} \
-\frac \
-{ << e \bullet t{,}\; u{,}\; s_2 >> \stepto << p{,}\; s_3 >>} \
-{ <<  [[  B_1 ,  L>  f , B_2  ]]  \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_3 >> }  \
-\;\text{if}\; f {(} [[ B_1, B_2 ]] {,}\; u{,}\; s_1 {)} \to << e{,}\; s_2 >>
-
-\newrule[\Phi]{Mphi} \
-\frac \
-{ << e \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >>} \
-{ << Q.\tau \bullet{} t{,}\; u{,}\; s_1 >> \stepto << p{,}\; s_2 >> }  \
-\;\text{if}\; u = [[  B_1 , \tau -> e, B_2 ]]
-\end{phiquation*}
+\iexec[maybe]{phino explain --morph > _tex/rules-morph.tex}
+\adjustbox{max width=\linewidth}{\input{_tex/rules-morph.tex}}
 \end{mdframed}
 \capt{Morphing rules.}
 \label{fig:morphing}
@@ -170,23 +148,8 @@ The inference rules in \cref{fig:dataization} inductively describe the algorithm
 
 \begin{figure*}
 \begin{mdframed}
-\begin{phiquation*}
-\newrule[\Delta]{delta} \
-\frac \
-{ } \
-{ << [[ B_1, D> \delta, B_2 ]] {,}\; u {,}\; s >> \stepto << \delta {,}\; s >> } \
-\quad \
-\newrule{norm} \
-\frac{ << p {,}\; u {,}\; s_2 >> \stepto << \delta {,}\; s_3 >> } \
-{ << e {,}\; u {,}\; s_1 >>  \stepto << \delta {,}\; s_3 >> } \
-\;\text{if}\; \mathbb{M} {(} e {,}\; u {,}\; s_1 {)} \to << p {,}\; s_2 >>
-
-\newrule{box} \
-\frac \
-{ << e {,}\; u {,}\; s_1 >> \stepto << \delta {,}\; s_2 >> } \
-{ << [[ B_1, @ -> e, B_2 ]] {,}\; u {,}\; s_1 >>  \stepto << \delta {,}\; s_2 >> } \
-\;\text{if}\; [ D {,}\; L ] \cap {(} B_1 \cup B_2 {)} = \emptyset
-\end{phiquation*}
+\iexec[maybe]{phino explain --dataize > _tex/rules-dataize.tex}
+\adjustbox{max width=\linewidth}{\input{_tex/rules-dataize.tex}}
 \end{mdframed}
 \capt{Dataization rules.}
 \label{fig:dataization}
