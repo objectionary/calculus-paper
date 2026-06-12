@@ -17,9 +17,8 @@ cp -R ../examples .
 mkdir bibliography
 cp ../bibliography/main.bib bibliography/main.bib
 
-TLROOT=$(kpsewhich -var-value TEXMFDIST)
 for p in ffcode to-be-determined href-ul iexec eolang naive-ebnf; do
-    cp "${TLROOT}/tex/latex/${p}/${p}.sty" .
+    cp "$(kpsewhich "${p}.sty")" .
 done
 for d in _tex sections examples; do
     cp -r "../${d}" .
