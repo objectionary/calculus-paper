@@ -14,15 +14,14 @@ The syntax of a program is defined by BNF in \cref{fig:ebnf}, where the starting
 <Formation> := "\(\llbracket\)" <Binding> "\(\rrbracket\)" \\
 <Application> := <Expression> "\(\lparen\)" <A-Pair> "\(\rparen\)" \\
 <A-Pair> := <\(\tau\)-Pair> | <\(\alpha\)-Pair> \\
-<Dispatch> := <Subject> "." <Attribute> \\
-<Subject> := <Expression> | <Locator> \\
+<Dispatch> := <Expression> "." <Attribute> \\
 <Locator> := "\(\Phi\)" | "\(\xi\)" \\
 <Binding> := <Pair> <Bindings> | \(\epsilon\) \\
 <Bindings> := "," <Pair> <Bindings> | \(\epsilon\) \\
 <Pair> := <\(\varnothing\)-Pair> | <\(\tau\)-Pair> | <\(\Delta\)-Pair> | <\(\lambda\)-Pair> \\
 <\(\varnothing\)-Pair> := <Attribute> "\(\mapsto\)" "\(\varnothing\)" \\
-<\(\tau\)-Pair> := <Attribute> "\(\mapsto\)" <Subject> \\
-<\(\alpha\)-Pair> := <Alpha> "\(\mapsto\)" <Subject> \\
+<\(\tau\)-Pair> := <Attribute> "\(\mapsto\)" <Expression> \\
+<\(\alpha\)-Pair> := <Alpha> "\(\mapsto\)" <Expression> \\
 <\(\Delta\)-Pair> := "\(\Delta\)" "\(\phiDotted\)" <Data> \\
 <\(\lambda\)-Pair> := "\(\lambda\)" "\(\phiDotted\)" <Function> \\
 \end{ebnf}
