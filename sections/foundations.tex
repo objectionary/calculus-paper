@@ -20,6 +20,11 @@ An \textbf{attribute}, ranged over \(\mathcal{T}\) by \(\tau_i\),
   may be attached.
 \end{definition}
 
+\begin{definition}[Alpha]
+An \textbf{alpha}, ranged over \(\mathcal{H}\) by \(\eta_i\),
+  is a positional identifier.
+\end{definition}
+
 \begin{definition}[Void vs. Attached]
 An attribute is \textbf{void} if $?$ is attached to it,
   otherwise it is an \textbf{attached} attribute.
@@ -129,9 +134,10 @@ $[[ D> CA-FE, |foo| -> \phiTerminal{\xi}, |x| -> \phiTerminal{\xi}.|foo| ]]$
 \end{example}
 
 \begin{definition}[Application]
-An \textbf{application}, denoted as $ e_1 ( \tau -> e_2 ) $,
-  means an attempt to attach \(e_2\) (the \enquote{argument}) to the \(\tau\) attribute of \(e_1\)
-  (the \enquote{subject}).
+An \textbf{application}, denoted as $ e_1 ( \tau -> e_2 ) $ or $ e_1 ( \eta_i -> e_2 ) $,
+  means an attempt to attach \(e_2\) (the \enquote{argument}) to either
+  the \(\tau\) attribute of \(e_1\) (the \enquote{subject})
+  or the \(i\)-th attribute of \(e_1\).
 \end{definition}
 
 \Cref{eq:simple-application} demonstrates application,
