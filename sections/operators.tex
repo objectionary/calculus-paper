@@ -133,7 +133,7 @@ Two expressions are said to be syntactically equivalent or just
 The \emph{morphing} partial function
   \(\mathbb{M} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightharpoonup \mathcal{N} \times \mathcal{S} \)
-  maps normal expressions to normal expressions,
+  maps normal forms to normal forms,
   possibly modifying the \emph{state} of evaluation.
 The inference rules at \cref{fig:morphing} inductively describe
   the algorithm of morphing.
@@ -160,8 +160,8 @@ In \nameref{r:lambda}, the function \(f\) is called by value.
 The \emph{dataization} partial function
   \(\mathbb{D} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightharpoonup \mathcal{D} \times \mathcal{S}\)
-  maps expressions to data, possibly modifying the \emph{state}
-  of evaluation, in a given context.
+  maps normal forms to data, possibly modifying the \emph{state}
+  of evaluation.
 The inference rules in \cref{fig:dataization} inductively
   describe the algorithm of dataization.
 
