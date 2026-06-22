@@ -103,36 +103,6 @@ An \textbf{abstract} is a formation with at least one void attribute.
 
 A formation that is not an abstract may be called a \emph{closed} formation.
 
-\newcommand\ordinal[2]{#1 \circ #2}
-\begin{definition}[Ordinal]
-An attribute's \textbf{ordinal}, denoted as \(\ordinal{\tau}{b}\),
-  is a non-negative whole number that is equal to the position of \(\tau\)
-  in \(\bar{b}\), starting from zero.
-\end{definition}
-
-\begin{example}
-\Cref{tab:ordinals} shows a few examples of attributes and their ordinals.
-
-\begin{table*}
-\capt{A few examples of attributes' ordinals in their formations.}
-\label{tab:ordinals}
-\begin{tabular}{lr}
-\toprule
-\(b\) & \(\ordinal{\ff{x}}{b}\) \\
-\midrule
-$[[ |x| -> \phiTerminal{\xi}.|k| ]]$
-  & 0 \\
-$[[ |foo| -> \phiTerminal{\xi}.|k|, |x| -> Q.|t| ]]$
-  & 1 \\
-$[[ L> |Fn|, |x| -> \phiTerminal{\xi}.|k| ]]$
-  & 0 \\
-$[[ D> CA-FE, |foo| -> \phiTerminal{\xi}, |x| -> \phiTerminal{\xi}.|foo| ]]$
-  & 2 \\
-\bottomrule
-\end{tabular}
-\end{table*}
-\end{example}
-
 \begin{definition}[Application]
 An \textbf{application}, denoted as $ e_1 ( \tau -> e_2 ) $ or $ e_1 ( \eta_i -> e_2 ) $,
   means an attempt to attach \(e_2\) (the \enquote{argument}) to either
@@ -153,8 +123,8 @@ Even though $?$ being attached to an attribute of a formation resembles NULL ref
   in \phic{}, void attributes may be attached to expressions only once,
   while any further reattachments are prohibited.
 
-In $b(\phiTerminal{\alpha_i} -> e)$ application, \(e\) must be attached to the attribute \(\tau\) of \(b\)
-  for which \(\ordinal{\tau}{\bar{b}}\) equals \(i\).
+In $b(\phiTerminal{\alpha_i} -> e)$ application, \(e\) must be attached
+  to the \(\i\)-th attribute of \(b\).
 
 \begin{definition}[Dispatch]
 A \textbf{dispatch}, denoted as $ e . \tau $, where \(e\) is the \enquote{subject,}
