@@ -17,18 +17,23 @@
 
 \section{Operators}\label{sec:operators}
 
-In this section we introduce a family of semantic operators defined on \(\phi\)-expressions.
+In this section we introduce a family of semantic operators
+  defined on \(\phi\)-expressions.
 These operators do not extend the syntax of the calculus.
-Instead, they describe systematic transformations of expressions that reveal, modify, or project their semantic content.
+Instead, they describe systematic transformations of expressions that reveal,
+  modify, or project their semantic content.
 Each operator is defined in terms of the reduction semantics introduced earlier
-  and preserves the core meaning of expressions while possibly changing their form or role.
+  and preserves the core meaning of expressions
+  while possibly changing their form or role.
 
 \subsection{Contextualization}\label{sec:contextualization}
 \label{r:contextualize}
 \newcommand\ctx[2]{\mathbb{C}( #1 \triangleleft{} #2 )}
 
-The \emph{contextualization} total function \(\mathbb{C} : \mathcal{E} \times \mathcal{B} \to \mathcal{E}\)
-  denoted as \( \ctx{e}{b} \), which removes \(\phiTerminal{\xi}\) from the expression,
+The \emph{contextualization} total function
+  \(\mathbb{C} : \mathcal{E} \times \mathcal{B} \to \mathcal{E}\)
+  denoted as \( \ctx{e}{b} \), which removes \(\phiTerminal{\xi}\)
+  from the expression,
   is defined by induction in \cref{fig:contextualization}.
 
 \begin{figure*}
@@ -54,13 +59,14 @@ The \emph{contextualization} total function \(\mathbb{C} : \mathcal{E} \times \m
 \subsection{Normalization}\label{sec:normalization}
 
 An expression that may be rewritten by the \emph{rules} (or \emph{reductions})
-listed in \cref{fig:reduction} is a \emph{reducible} expression.
+  listed in \cref{fig:reduction} is a \emph{reducible} expression.
 The notation \(e_1 \trans e_2\), optionally followed by a condition,
-denotes a reduction of \(e_1\) to \(e_2\), if the condition holds.
+  denotes a reduction of \(e_1\) to \(e_2\), if the condition holds.
 
 These rules may be applied in any order.
 
-A specific reduction may be denoted, for example, as \(\trans_{\nameref{r:dot}}\),
+A specific reduction may be denoted, for example,
+  as \(\trans_{\nameref{r:dot}}\),
   or just \(\trans\) when no specific reduction is meant.
 The notation \(e_1 \strans e_2\) denotes a reflexive transitive
   closure of all reductions, so that there is a possibly empty finite
@@ -99,32 +105,38 @@ A normal form is \textbf{absolute},
 \end{figure*}
 
 \ifdefined\examples
-\Cref{app:normalization-examples} demonstrates how normalization works through examples.
+\Cref{app:normalization-examples} demonstrates how normalization
+  works through examples.
 \fi
 
 The reduction relation is \emph{confluent}:
   if \(e \strans e_1\) and \(e \strans e_2\),
-  then there exists an expression \(e_3\) such that \(e_1 \strans e_3\) and \(e_2 \strans e_3\).
-Confluence guarantees that the normal form of an expression, when it exists, is unique,
+  then there exists an expression \(e_3\) such that
+  \(e_1 \strans e_3\) and \(e_2 \strans e_3\).
+Confluence guarantees that the normal form of an expression,
+  when it exists, is unique,
   irrespective of the order in which the rules are applied.
 We have proved this property mechanically in Lean~4,
-  with the proof available in a public GitHub repository\footnote{\url{https://github.com/objectionary/proof}}.
+  with the proof available in a public
+  GitHub repository\footnote{\url{https://github.com/objectionary/proof}}.
 
 \subsection{Equivalence}\label{sec:equivalence}
 
 \begin{definition}[Equivalence]
 Two expressions are said to be syntactically equivalent or just
-\textbf{equivalent} (denoted by \(\equiv\)) if their normal forms are
-syntactically identical.
+  \textbf{equivalent} (denoted by \(\equiv\)) if their normal forms are
+  syntactically identical.
 \end{definition}
 
 \subsection{Morphing}\label{sec:morphing}
 
 The \emph{morphing} partial function
-  \(\mathbb{M} : \mathcal{E} \times \mathcal{B} \times \mathcal{S} \rightharpoonup \mathcal{P} \times \mathcal{S} \)
+  \(\mathbb{M} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
+    \rightharpoonup \mathcal{N} \times \mathcal{S} \)
   maps normal expressions to normal expressions,
   possibly modifying the \emph{state} of evaluation.
-The inference rules at \cref{fig:morphing} inductively describe the algorithm of morphing.
+The inference rules at \cref{fig:morphing} inductively describe
+  the algorithm of morphing.
 
 \begin{figure*}
 \begin{mdframed}
@@ -135,19 +147,23 @@ The inference rules at \cref{fig:morphing} inductively describe the algorithm of
 \label{fig:morphing}
 \end{figure*}
 
-The notation $<< e, u, s_1 >> \stepto << p, s_2 >>$
-  means that \(\mathbb{M}(e, u, s_1)\) evaluates to \(p\), thus \emph{morphing} \(e\)
+The notation $<< n_1, e, s_1 >> \stepto << n_2, s_2 >>$
+  means that \(\mathbb{M}(n_1, e, s_1)\) evaluates
+  to \(n_2\), thus \emph{morphing} \(n_1\)
   with a side-effect of changing \(s_1\) to \(s_2\),
-  in the universe \(u\).
+  having $Q$ equal to \(e\).
 
 In \nameref{r:lambda}, the function \(f\) is called by value.
 
 \subsection{Dataization}\label{sec:dataization}
 
 The \emph{dataization} partial function
-\(\mathbb{D} : \mathcal{E} \times \mathcal{B} \times \mathcal{S} \rightharpoonup \mathcal{D} \times \mathcal{S}\)
-maps expressions to data, possibly modifying the \emph{state} of evaluation, in a given context.
-The inference rules in \cref{fig:dataization} inductively describe the algorithm of dataization.
+  \(\mathbb{D} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
+    \rightharpoonup \mathcal{D} \times \mathcal{S}\)
+  maps expressions to data, possibly modifying the \emph{state}
+  of evaluation, in a given context.
+The inference rules in \cref{fig:dataization} inductively
+  describe the algorithm of dataization.
 
 \begin{figure*}
 \begin{mdframed}
@@ -158,16 +174,18 @@ The inference rules in \cref{fig:dataization} inductively describe the algorithm
 \label{fig:dataization}
 \end{figure*}
 
-The rules \nameref{r:box} and \nameref{r:phi} coexist because
-$D \notin \mathcal{T}$, thus making the expression $ [[ @ -> 42 ]].D $ invalid.
-
-The notation $<< e, u, s_1 >> \stepto << \delta, s_2 >>$
-  means that \(\mathbb{D}(e, u, s_1)\) evaluates to \(\delta\),
-  thus \emph{dataizing} \(e\) with a side-effect of changing the state of evaluation \(s_1\) to \(s_2\), in the universe \(u\).
-The notation \(\mathbb{D}(e, u)\) is a shortened form of \(\mathbb{D}(e, u, s_0)_{(1)}\),
-  which is a \emph{pure} dataization --- inputting an empty state of evaluation and ignoring
+The notation $<< n, e, s_1 >> \stepto << \delta, s_2 >>$
+  means that \(\mathbb{D}(n, e, s_1)\) evaluates to \(\delta\),
+  thus \emph{dataizing} \(n\) with a side-effect of changing
+  the state of evaluation \(s_1\) to \(s_2\),
+  having $Q$ equal to \(e\).
+The notation \(\mathbb{D}(n, u)\) is a shortened form
+  of \(\mathbb{D}(n, u, s_0)_{(1)}\),
+  which is a \emph{pure} dataization ---
+  inputting an empty state of evaluation and ignoring
   the output state of evaluation.
-Here and later, the notation \(x_{(i)}\) denotes the \(i\)-th element of the tuple \(x\) (counting starts from one).
+Here and later, the notation \(x_{(i)}\) denotes the \(i\)-th
+  element of the tuple \(x\) (counting starts from one).
 
 \ifdefined\examples
 \Cref{app:dataization-examples} demonstrates how the dataization function works through examples.
@@ -176,9 +194,10 @@ Here and later, the notation \(x_{(i)}\) denotes the \(i\)-th element of the tup
 \subsection{Congruence}
 
 \begin{definition}[Congruence]
-Two expressions \(e_1\) and \(e_2\) are said to be behaviorally equivalent
-  or \textbf{congruent} (denoted by \(\cong\)) if for any state \(s\) and any context \(b\):
-  \(\mathbb{D}(e_1, b, s) = \mathbb{D}(e_2, b, s)\).
+Two expressions \(n_1\) and \(n_2\) are said to be behaviorally equivalent
+  or \textbf{congruent} (denoted by \(\cong\)) if for any state \(s\)
+  and any \(e\):
+  \(\mathbb{D}(n_1, e, s) = \mathbb{D}(n_2, e, s)\).
 \end{definition}
 
 Two congruent expressions may be non-equivalent, for example:
