@@ -161,44 +161,6 @@ A \textbf{dispatch}, denoted as $ e . \tau $, where \(e\) is the \enquote{subjec
   means an attempt to retrieve what is attached to \(\tau\) in the formation to which \(e\) may be transformed.
 \end{definition}
 
-\begin{definition}
-Since any expression may recursively be defined as \begin{inparaenum}[1)]
-    \item $T$,
-    \item formation,
-    \item application,
-    or
-    \item dispatch,
-\end{inparaenum}
-it consists of a \textbf{head} and a possibly empty \textbf{tail}, denoted together as \(h\bullet{}t\).
-\end{definition}
-
-\begin{example}
-\Cref{tab:head-and-tail} shows a few examples that demonstrate the separation between a head and a possibly empty tail of an expression.
-
-\begin{table*}
-\capt{A few examples that demonstrate the separation between a head and a possibly empty tail of an expression.}
-\label{tab:head-and-tail}
-\begin{tabular}{lll}
-\toprule
-Expression & Head & Tail \\
-\midrule
-$b_1( foo -> b_2 )$
-  & $b_1( foo -> b_2 )$
-  & --- \\
-$b_1.|aa|.|bb|( ~0 -> b_2 )$
-  & $b_1$
-  & $aa.bb( ~0 -> b_2 )$ \\
-$[[ |a| -> b_2 ]].|aa|.|test|.|bb|$
-  & $[[ |a| -> b_2 ]]$
-  & $aa.test.bb$ \\
-$b_1( |foo| -> b_2)( ~0 -> 42 ).|print|( ~1 -> 7 )$
-  & $b_1( |foo| -> b_2)( ~0 -> 42 )$
-  & $|print|( ~1 -> 7 )$ \\
-\bottomrule
-\end{tabular}
-\end{table*}
-\end{example}
-
 \begin{definition}[Atom]
 An \textbf{atom} is a formation with a function attached to its $L$-asset.
 \end{definition}
