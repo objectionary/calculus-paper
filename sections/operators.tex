@@ -122,7 +122,8 @@ syntactically identical.
 
 The \emph{morphing} partial function
   \(\mathbb{M} : \mathcal{E} \times \mathcal{B} \times \mathcal{S} \rightharpoonup \mathcal{P} \times \mathcal{S} \)
-  maps expressions to primitives, possibly modifying the \emph{state} of evaluation.
+  maps normal expressions to normal expressions,
+  possibly modifying the \emph{state} of evaluation.
 The inference rules at \cref{fig:morphing} inductively describe the algorithm of morphing.
 
 \begin{figure*}
@@ -167,10 +168,6 @@ The notation \(\mathbb{D}(e, u)\) is a shortened form of \(\mathbb{D}(e, u, s_0)
   which is a \emph{pure} dataization --- inputting an empty state of evaluation and ignoring
   the output state of evaluation.
 Here and later, the notation \(x_{(i)}\) denotes the \(i\)-th element of the tuple \(x\) (counting starts from one).
-
-\begin{lemma}
-The dataization function is partial, because not every primitive contains $D$-asset.
-\end{lemma}
 
 \ifdefined\examples
 \Cref{app:dataization-examples} demonstrates how the dataization function works through examples.
