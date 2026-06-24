@@ -2,25 +2,31 @@
 % SPDX-License-Identifier: MIT
 
 \newpage
-\section{Examples of Dataization}
+\section{Example of Dataization}
 \label{app:dataization-examples}
 
 Consider a program that converts degrees from Celsius to Fahrenheit using
-the formula:
+  the formula:
+%
 \begin{equation*}
 ^{\circ}F ={} ^{\circ}C \times 1.8 + 32,
 \end{equation*}
-Assuming that \(^{\circ}C\) already equals \ff{25} and is attached to the \ff{c} attribute instead of being provided by a user:
+%
+Assuming that \(^{\circ}C\) already equals \ff{25} and is attached
+  to the \ff{c} attribute instead of being provided by a user:
+%
 \iexec[maybe]{phino rewrite --output=latex --sweet --nonumber --label=eq:celsius --margin=100 --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
 \input{_tex/celsius-formula.tex}
 
 The functions are defined as follows:
+%
 \begin{phiquation*}
-|F1| : << b{,}\; u{,}\; s >> \to << u.number( D> \mathbb{D} {(} b.^ {,}\; u {)} \times \mathbb{D} {(} b.|x| {,}\; u {)} ) {,}\; s >>
-|F2| : << b{,}\; u{,}\; s >> \to << u.number( D> \mathbb{D} {(} b.^ {,}\; u {)} + \mathbb{D} {(} b.|x| {,}\; u {)} ) {,}\; s >>
+|F1| : << b{,}\; e{,}\; s >> \to << e.number( D> \mathbb{D} {(} b.^ {,}\; e {)} \times \mathbb{D} {(} b.|x| {,}\; e {)} ) {,}\; s >>
+|F2| : << b{,}\; e{,}\; s >> \to << e.number( D> \mathbb{D} {(} b.^ {,}\; e {)} + \mathbb{D} {(} b.|x| {,}\; e {)} ) {,}\; s >>
 \end{phiquation*}
 
-The following sequence of transformations constitutes the evaluation of the program:
+The following sequence of transformations constitutes
+  the evaluation of the program:
 
 \iexec[maybe]{phino dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --flat --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=5 --meet-popularity=1 ./examples/celsius.phi > _tex/celsius-dataization.tex}
 \newsavebox{\celsiusbox}
