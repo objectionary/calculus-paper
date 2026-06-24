@@ -7,13 +7,27 @@
   { $ #2 $ }
   \(\trans\)
   { $ #3 $ }
-  \ifblank{#4}{}{\; { #4 } }%
+  \ifblank{#4}{}{\; { $ #4 $ } }%
   \\
-  \ifblank{#5}{}{& { #5 } \\}%
-}
-\newcommand\indexof[1]{\text{\sffamily IDX}(#1)}
-\newcommand\isnormal[1]{\text{\sffamily NF}(#1)}
-\newcommand\xifree[1]{\text{\sffamily XF}(#1)}
+  \ifblank{#5}{}{& { $ #5 $ } \\}%
+  }
+% \newcommand\indexof[1]{\text{\sffamily IDX}(#1)}
+% \newcommand\isnormal[1]{\text{\sffamily NF}(#1)}
+% \newcommand\xifree[1]{\text{\sffamily XF}(#1)}
+\newcommand\phinoNormalizationRule[5]{\trrule{#1}{#2}{#3}{#4}{#5}}
+\newcommand\phinoMorphingRule[5]{\trrule{#1}{#2}{#3}{#4}{#5}}
+\newcommand\phinoDataizationRule[5]{\trrule{#1}{#2}{#3}{#4}{#5}}
+\newcommand\phinoEvaluate[1]{\mathbb{E}( #1 )}
+\newcommand\phinoNormalize[1]{\mathbb{N}( #1 )}
+\newcommand\phinoDataize[1]{\mathbb{D}( #1 )}
+\newcommand\phinoMorph[1]{\mathbb{M}( #1 )}
+\newcommand\phinoGlobal{Q}
+
+\newcommand\inputrules[1]{
+  \adjustbox{max width=\linewidth}{
+  \begin{tabular}{lr}
+  \input{#1}
+  \end{tabular}}}
 
 \section{Operators}\label{sec:operators}
 
@@ -101,7 +115,7 @@ A normal form is \textbf{absolute},
 \begin{mdframed}
 \renewcommand{\arraystretch}{1.2}
 \iexec[maybe]{phino explain --normalize > _tex/rules.tex}
-\adjustbox{max width=\linewidth}{\input{_tex/rules.tex}}
+\inputrules{_tex/rules.tex}
 \end{mdframed}
 \capt{Reduction rules.}
 \label{fig:reduction}
@@ -162,7 +176,7 @@ The inference rules at \cref{fig:morphing} inductively describe
 \begin{figure*}
 \begin{mdframed}
 \iexec[maybe]{phino explain --morph > _tex/rules-morph.tex}
-\adjustbox{max width=\linewidth}{\input{_tex/rules-morph.tex}}
+\inputrules{_tex/rules-morph.tex}
 \end{mdframed}
 \capt{Morphing rules.}
 \label{fig:morphing}
@@ -187,7 +201,7 @@ The inference rules in \cref{fig:dataization} inductively
 \begin{figure*}
 \begin{mdframed}
 \iexec[maybe]{phino explain --dataize > _tex/rules-dataize.tex}
-\adjustbox{max width=\linewidth}{\input{_tex/rules-dataize.tex}}
+\inputrules{_tex/rules-dataize.tex}
 \end{mdframed}
 \capt{Dataization rules.}
 \label{fig:dataization}
