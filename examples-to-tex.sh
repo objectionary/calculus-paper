@@ -5,10 +5,12 @@
 set -e -o pipefail
 
 dir=$1
+d=$(basename "${dir}")
 
 while IFS= read -r f; do
     e=$(basename "${f}")
     e=${e//.phi}
+    e=${d}-${e}
     phino merge "${f}" runtime.phi | \
         phino rewrite --normalize --hide=Q.org --focus=Q.ex "--expression=${e}" \
             --nonumber --sequence --compress "--meet-prefix=${e}" --output=latex \
