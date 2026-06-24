@@ -30,5 +30,23 @@ The following sequence of transformations constitutes
 
 \iexec[maybe]{phino dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --flat --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=5 --meet-popularity=1 ./examples/celsius.phi > _tex/celsius-dataization.tex}
 \newsavebox{\celsiusbox}
-\sbox{\celsiusbox}{\begin{minipage}{2.2\linewidth}\input{_tex/celsius-dataization.tex}\end{minipage}}
+% The derivation is one tall stack of long lines, so we typeset it as an inline
+%   \aligned of its natural width, rather than a page-width display, letting
+%   \adjustbox rotate and scale it to the page without an overfull box.
+\expandafter\let\expandafter\celsiusEq\csname equation*\endcsname
+\expandafter\let\expandafter\celsiusEnd\csname endequation*\endcsname
+\let\celsiusSplit\split
+\let\celsiusEndsplit\endsplit
+\let\celsiusGathered\gathered
+\let\celsiusEndgathered\endgathered
+\renewenvironment{equation*}{\(}{\)}
+\renewenvironment{split}{\aligned}{\endaligned}
+\renewenvironment{gathered}{\aligned}{\endaligned}
+\sbox{\celsiusbox}{\input{_tex/celsius-dataization.tex}}
+\expandafter\let\csname equation*\endcsname\celsiusEq
+\expandafter\let\csname endequation*\endcsname\celsiusEnd
+\let\split\celsiusSplit
+\let\endsplit\celsiusEndsplit
+\let\gathered\celsiusGathered
+\let\endgathered\celsiusEndgathered
 \noindent\adjustbox{angle=-90}{\adjustbox{max width=.95\textheight,max height=\linewidth}{\usebox{\celsiusbox}}}
