@@ -118,9 +118,16 @@ A normal form is \textbf{absolute},
 \label{fig:reduction}
 \end{figure*}
 
-The \emph{normalization} total function
+The \emph{normalization} function
   \(\mathbb{N} : \mathcal{E} \rightarrow \mathcal{N} \)
   maps expressions to normal forms.
+
+The normalization function is total, meaning that
+  every expression has a normal form.
+The reduction relation terminates:
+  for any \(e \in \mathcal{E}\) there is no infinite sequence of reductions,
+  so finitely many steps always reach an irreducible \(\nf \in \mathcal{N}\).
+Thus, \(\mathbb{N}\) is defined for every expression.
 
 \ifdefined\examples
 \Cref{app:normalization-examples} demonstrates how normalization
@@ -147,7 +154,7 @@ Two expressions are said to be syntactically equivalent or just
 
 \subsection{Evaluation}\label{sec:evaluation}
 
-The \emph{evaluation} total function
+The \emph{evaluation} function
   \(\mathbb{E} : \mathcal{B} \times \mathcal{S}
     \rightarrow \mathcal{N} \times \mathcal{S} \)
   maps formations to normal forms
@@ -161,13 +168,21 @@ The function \(F\) is called by value.
 
 \subsection{Morphing}\label{sec:morphing}
 
-The \emph{morphing} total function
-  \(\mathbb{M} : \mathcal{N} \times \mathcal{S}
+The \emph{morphing} function
+  \(\mathbb{M} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightarrow \mathcal{N} \times \mathcal{S} \)
   maps normal forms to normal forms,
   possibly modifying the \emph{state} of evaluation.
 The inference rules at \cref{fig:morphing} inductively describe
   the algorithm of morphing.
+
+The morphing function is total, meaning that
+  every normal form can be morphed in any state.
+The inference rules of \cref{fig:morphing} cover all cases:
+  for any \(n \in \mathcal{N}\) and any \(s \in \mathcal{S}\),
+  a rule always applies and its derivation terminates,
+  yielding a normal form and a state.
+Thus, \(\mathbb{M}\) is defined for every pair of normal form and state.
 
 \begin{figure*}
 \begin{mdframed}
@@ -186,7 +201,7 @@ The notation $<< n_1, e, s_1 >> \stepto << n_2, s_2 >>$
 
 \subsection{Dataization}\label{sec:dataization}
 
-The \emph{dataization} partial function
+The \emph{dataization} function
   \(\mathbb{D} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightharpoonup \mathcal{D} \times \mathcal{S}\)
   maps normal forms to data, possibly modifying the \emph{state}
