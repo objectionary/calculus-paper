@@ -193,12 +193,6 @@ Thus, \(\mathbb{M}\) is defined for every pair of normal form and state.
 \label{fig:morphing}
 \end{figure*}
 
-The notation $<< n_1, e, s_1 >> \stepto << n_2, s_2 >>$
-  means that \(\mathbb{M}(n_1, e, s_1)\) evaluates
-  to \(n_2\), thus \emph{morphing} \(n_1\)
-  with a side-effect of changing \(s_1\) to \(s_2\),
-  having $Q$ equal to \(e\).
-
 \subsection{Dataization}\label{sec:dataization}
 
 The \emph{dataization} function
@@ -218,18 +212,11 @@ The inference rules in \cref{fig:dataization} inductively
 \label{fig:dataization}
 \end{figure*}
 
-The notation $<< n, e, s_1 >> \stepto << \delta, s_2 >>$
-  means that \(\mathbb{D}(n, e, s_1)\) evaluates to \(\delta\),
-  thus \emph{dataizing} \(n\) with a side-effect of changing
-  the state of evaluation \(s_1\) to \(s_2\),
-  having $Q$ equal to \(e\).
-The notation \(\mathbb{D}(n, u)\) is a shortened form
-  of \(\mathbb{D}(n, u, s_0)_{(1)}\),
-  which is a \emph{pure} dataization ---
-  inputting an empty state of evaluation and ignoring
-  the output state of evaluation.
-Here and later, the notation \(x_{(i)}\) denotes the \(i\)-th
-  element of the tuple \(x\) (counting starts from one).
+The notation \(\mathbb{D}(n)\) is a shortened form
+  of \(\mathbb{D}(n, u, s)\),
+  where \(u\) is the expressed earlier assigned to $Q$
+  and
+  \(s\) is the state not expected to change.
 
 \ifdefined\examples
 \Cref{app:dataization-examples} demonstrates how the dataization function works through examples.
