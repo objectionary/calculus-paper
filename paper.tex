@@ -79,13 +79,13 @@
 
 \newcounter{phimeet}
 \makeatletter
-\newcommand\phiMeet[2]{%
+\newcommand\phinoMeet[2]{%
   \ifmeasuring@\else\refstepcounter{phimeet}\cref@label{phimeet:#1}\fi%
   \def\param{#1}%
   {\color{gray}\overbracket[0.4pt][1pt]{{\color{black}#2}}^{{\color{gray}\Pi_{\thephimeet}}}}}
 \makeatother
 \crefformat{phimeet}{{\color{gray}\Pi_{#2#1#3}}}
-\newcommand\phiAgain[1]{\cref{phimeet:#1}}
+\newcommand\phinoAgain[1]{\cref{phimeet:#1}}
 
 \acmBooktitle{untitled}
 \title{\texorpdfstring{\(\varphi\)}{phi}-Calculus: Object-Oriented Formalism}
