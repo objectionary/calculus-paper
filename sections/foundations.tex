@@ -41,8 +41,10 @@ A \textbf{state} of evaluation \(s_i\) ranges over \(\mathcal{S}\),
 
 \begin{definition}[Function]
 A \textbf{function} is a total mapping
-\(\mathcal{B} \times \mathcal{B} \times \mathcal{S} \to \mathcal{E} \times \mathcal{S}\)
-  that deterministically maps formation, universe, and state to an expression and a new state.
+  \(\mathcal{B} \times \mathcal{B} \times \mathcal{S}
+  \to \mathcal{E} \times \mathcal{S}\)
+  that deterministically maps formation, universe,
+  and state to an expression and a new state.
 \end{definition}
 
 \begin{definition}[Asset]
@@ -57,15 +59,19 @@ is a possibly empty sequence of key-value pairs, where all keys are unique.
 \end{definition}
 
 \begin{definition}[Formation]
-An object \textbf{formation}, denoted as $[[ B ]]$, ranged over \(\mathcal{B}\) by \(b_i\), is a binding.
+An object \textbf{formation}, denoted as $[[ B ]]$,
+  ranged over \(\mathcal{B}\) by \(b_i\), is a binding.
 \end{definition}
 
-If $ b = [[ B ]] $, then the predicate \(k \in b\) holds if the key \(k\) is present \(B\).
+If $ b = [[ B ]] $, then the predicate \(k \in b\)
+  holds if the key \(k\) is present in \(B\).
 
-We introduce the term \enquote{formation} rather than using the more traditional term \enquote{construction}
+We introduce the term \enquote{formation} rather than using
+  the more traditional term \enquote{construction}
   because the latter generally implies the presence of a
   class from which an object is being constructed or instantiated.
-Instead, formation is closer to the creation of a prototype, which may either be used \enquote{as is} or copied.
+Instead, formation is closer to the creation of a prototype,
+  which may either be used \enquote{as is} or copied.
 
 The following is an example of a formation with four pairs, where the first one
   is an asset attached to data, while the other three are attributes attached to
@@ -80,18 +86,23 @@ The arrow $ -> $ denotes an attachment of an expression (right-hand side)
 The arrow $ ..> $ denotes an attachment of data or function to an asset.
 
 \begin{definition}[Domain]
-A \textbf{domain} of formation \(b\), denoted as \(\bar{b}\), is a sequence of all attributes of \(b\), excluding assets.
+A \textbf{domain} of binding \(B\),
+  denoted as \(\bar{B}\), is a sequence of all attributes of \(B\),
+  excluding assets.
 \end{definition}
 
-The domain of the formation in \cref{eq:object-example} is \(\langle \ff{b}, \ff{a}, \ff{foo} \rangle\).
+The domain of the binding in the formation of \cref{eq:object-example}
+  is \(\langle \ff{b}, \ff{a}, \ff{foo} \rangle\).
 Assets $D$ and $L$ do not belong to the domain.
 
 \begin{definition}[Program]
-A \textbf{program}, also known as \emph{Universe}, is a formation attached to $Q$.
+A \textbf{program}, also known as \emph{Universe},
+  is an expression attached to $Q$.
 \end{definition}
 
 \begin{definition}[Terminator]
-The \textbf{terminator}, denoted as $T$, is an expression that signals an error.
+The \textbf{terminator}, denoted as $T$,
+  is an expression that signals an error.
 \end{definition}
 
 \begin{definition}[Abstract]
@@ -104,7 +115,8 @@ An \textbf{abstract} is a formation with at least one void attribute.
 A formation that is not an abstract may be called a \emph{closed} formation.
 
 \begin{definition}[Application]
-An \textbf{application}, denoted as $ e_1 ( \tau -> e_2 ) $ or $ e_1 ( \eta_i -> e_2 ) $,
+An \textbf{application},
+  denoted as $ e_1 ( \tau -> e_2 ) $ or $ e_1 ( \eta_i -> e_2 ) $,
   means an attempt to attach \(e_2\) (the \enquote{argument}) to either
   the \(\tau\) attribute of \(e_1\) (the \enquote{subject})
   or the \(i\)-th attribute of \(e_1\).
@@ -115,11 +127,15 @@ An \textbf{application}, denoted as $ e_1 ( \tau -> e_2 ) $ or $ e_1 ( \eta_i ->
 The application creates a new formation $[[ |a| -> b_2 ]]$,
   while the existing formation remains intact.
 
-The formation in \cref{eq:price-color} is an abstract, because its attribute \ff{price} is void.
-The formation in \cref{eq:simple-application} was an abstract before the application,
-  but the formation created by the application is closed since its attribute \ff{a} is not void (attached to \(b_2\)).
+The formation in \cref{eq:price-color} is an abstract,
+  because its attribute \ff{price} is void.
+The formation in \cref{eq:simple-application}
+  was an abstract before the application,
+  but the formation created by the application is closed
+  since its attribute \ff{a} is not void (attached to \(b_2\)).
 
-Even though $?$ being attached to an attribute of a formation resembles NULL references, there is a significant difference:
+Even though $?$ being attached to an attribute of a formation
+  resembles NULL references, there is a significant difference:
   in \phic{}, void attributes may be attached to expressions only once,
   while any further reattachments are prohibited.
 
@@ -127,22 +143,27 @@ In $b(\phiTerminal{\alpha_i} -> e)$ application, \(e\) must be attached
   to the \(i\)-th attribute of \(b\).
 
 \begin{definition}[Dispatch]
-A \textbf{dispatch}, denoted as $ e . \tau $, where \(e\) is the \enquote{subject,}
-  means an attempt to retrieve what is attached to \(\tau\) in the formation to which \(e\) may be transformed.
+A \textbf{dispatch},
+  denoted as $ e . \tau $, where \(e\) is the \enquote{subject,}
+  means an attempt to retrieve what is attached to \(\tau\)
+  in the formation to which \(e\) may be transformed.
 \end{definition}
 
 \begin{definition}[Atom]
 An \textbf{atom} is a formation with a function attached to its $L$-asset.
 \end{definition}
 
-\Cref{eq:Sqrt} demonstrates an atom with a function that calculates the square root of a number,
+\Cref{eq:Sqrt} demonstrates an atom with a function
+  that calculates the square root of a number,
   which it retrieves from the $D$-asset
   of $b.~0$ with the help of the morphing function (\cref{sec:morphing}).
-The implementation of functions is outside the scope of \phic{}: they may be implemented,
-  for example, in \(\lambda\)-calculus or a programming language such as Java or C++.
+The implementation of functions is outside the scope of \phic{}:
+  they may be implemented,
+  for example, in \(\lambda\)-calculus
+  or a programming language such as Java or C++.
 
 \begin{definition}[Decoration]
-\textbf{decoration} is a mechanism of extending a formation (``decoratee'')
+\textbf{Decoration} is a mechanism of extending a formation (``decoratee'')
   by attaching it to the $@$-attribute of a formation (``decorator''),
   which makes attributes of the decoratee retrievable from the decorator,
   unless the decorator has its own attributes with the same names.
@@ -153,7 +174,8 @@ Attaching expression \(e\) to the $^$ attribute of formation \(b\)
   means setting the \textbf{parent} of \(b\) to \(e\).
 \end{definition}
 
-The presence of \enquote{parent} in each formation is essential for the coordination of inner formations after dispatch.
+The presence of \enquote{parent} in each formation is essential
+  for the coordination of inner formations after dispatch.
 Consider the following abstract with an inner formation:
 \begin{phiquation*}
 \Big\{ |x| -> [[ |a| -> ?, next -> [[ @ -> $.^.|a|.plus( 1 ), ^ -> Q.|x| ]] ]], |k| -> $.|x|( |42| ) \Big\} {.}
@@ -163,6 +185,7 @@ Here, if the parent of $Q.|x|.|next|$ were attached in the formation,
   would not be equal to \ff{43}.
 Instead, it would be equal to $T$, because $ Q.|k|.|next|.^ $
   would still be attached to $ Q.|x| $ after the dispatch of $ Q.|k|.next $.
-The parent attribute may be compared with the \ff{this} pointer in Java or C++, which
-  does not point anywhere until a method of a class is called.
-Then, when the method is called, the \ff{this} pointer refers to the formation that owns the method.
+The parent attribute may be compared with the \ff{this} pointer in Java or C++,
+  which does not point anywhere until a method of a class is called.
+Then, when the method is called, the \ff{this} pointer
+  refers to the formation that owns the method.

@@ -1,19 +1,19 @@
 % SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
 % SPDX-License-Identifier: MIT
 
-\newcommand\trrule[5]{%
-  \newrule{#1}:
+\newcommand\trrule[6][]{%
+  \newrule[#1]{#2}:
   &
-  { $ #2 $ }
-  \(\trans\)
   { $ #3 $ }
-  \ifblank{#4}{}{\; if { $ #4 $ } }%
+  \(\trans\)
+  { $ #4 $ }
+  \ifblank{#5}{}{\; if { $ #5 $ } }%
   \\
-  \ifblank{#5}{}{& where { $ #5 $ } \\}%
+  \ifblank{#6}{}{& where { $ #6 $ } \\}%
   }
-\newcommand\phinoNormalizationRule[5]{\trrule{#1}{#2}{#3}{#4}{#5}}
-\newcommand\phinoMorphingRule[5]{\trrule{#1}{#2}{#3}{#4}{#5}}
-\newcommand\phinoDataizationRule[5]{\trrule{#1}{#2}{#3}{#4}{#5}}
+\newcommand\phinoNormalizationRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
+\newcommand\phinoMorphingRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
+\newcommand\phinoDataizationRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
 \newcommand\phinoEvaluate[1]{\mathbb{E}\lparen #1 \rparen}
 \newcommand\phinoNormalize[1]{\mathbb{N}\lparen #1 \rparen}
 \newcommand\phinoDataize[1]{\mathbb{D}\lparen #1 \rparen}
