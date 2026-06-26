@@ -179,7 +179,7 @@ The function \(f\) is called by value.
 The \emph{morphing} function
   \(\mathbb{M} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightarrow \mathcal{N} \times \mathcal{S} \)
-  maps normal forms to normal forms,
+  maps normal forms to either formations or $T$,
   possibly modifying the \emph{state} of evaluation.
 The inference rules at \cref{fig:morphing} inductively describe
   the algorithm of morphing.
@@ -191,14 +191,6 @@ The morphing function is total, meaning that
 
 \begin{proof}
 \tbd{We still need to prove this.}
-\end{proof}
-
-\begin{proposition}
-The morphing function maps every normal form to either a formation or $T$.
-\end{proposition}
-
-\begin{proof}
-By definition.
 \end{proof}
 
 \begin{figure*}
