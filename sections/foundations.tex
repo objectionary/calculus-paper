@@ -3,9 +3,11 @@
 
 \section{Foundations}\label{sec:foundations}
 
-In this section, we introduce the core concepts of the calculus.
-The purpose of this section is to define the entities that constitute the calculus---such as
-  expressions, formations, and attributes---together with their structural relationships.
+In this section, we introduce the core concepts of \phic{}.
+The purpose of this section is to define the entities
+  that constitute the calculus---such as
+  expressions, formations, and attributes---together
+  with their structural relationships.
 The definitions given here are descriptive rather than operational.
 They explain what expressions are, not how they are evaluated or transformed.
 
@@ -31,7 +33,8 @@ An attribute is \textbf{void} if $?$ is attached to it,
 \end{definition}
 
 \begin{definition}[Data]
-\textbf{Data}, ranged over \(\mathcal{D}\) by \(\delta_i\), is a possibly empty sequence of 8-bit bytes.
+\textbf{Data}, ranged over \(\mathcal{D}\) by \(\delta_i\),
+  is a possibly empty sequence of 8-bit bytes.
 \end{definition}
 
 \begin{definition}[State]
@@ -41,10 +44,11 @@ A \textbf{state} of evaluation \(s_i\) ranges over \(\mathcal{S}\),
 
 \begin{definition}[Function]
 A \textbf{function} is a total mapping
-  \(\mathcal{B} \times \mathcal{B} \times \mathcal{S}
+  \(\mathcal{B} \times \mathcal{E} \times \mathcal{S}
   \to \mathcal{E} \times \mathcal{S}\)
   that deterministically maps formation, universe,
-  and state to an expression and a new state.
+  and state to an expression and a new state,
+  denoted as \(f_i\) ranges over \(\mathcal{F}\)
 \end{definition}
 
 \begin{definition}[Asset]
