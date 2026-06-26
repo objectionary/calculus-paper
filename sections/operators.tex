@@ -123,11 +123,8 @@ The \emph{normalization} function
   maps expressions to normal forms.
 
 The normalization function is total, meaning that
-  every expression has a normal form.
-The reduction relation terminates:
-  for any \(e \in \mathcal{E}\) there is no infinite sequence of reductions,
-  so finitely many steps always reach an irreducible \(\nf \in \mathcal{N}\).
-Thus, \(\mathbb{N}\) is defined for every expression.
+  every expression has a normal form and the reduction relation terminates.
+  \tbd{We still need to prove this.}
 
 \ifdefined\examples
 \Cref{app:normalization-examples} demonstrates how normalization
@@ -177,12 +174,12 @@ The inference rules at \cref{fig:morphing} inductively describe
   the algorithm of morphing.
 
 The morphing function is total, meaning that
-  every normal form can be morphed in any state.
-The inference rules of \cref{fig:morphing} cover all cases:
-  for any \(n \in \mathcal{N}\) and any \(s \in \mathcal{S}\),
-  a rule always applies and its derivation terminates,
-  yielding a normal form and a state.
-Thus, \(\mathbb{M}\) is defined for every pair of normal form and state.
+  every normal form can be morphed and its derivation terminates.
+  \tbd{We still need to prove this.}
+
+The morphing function maps every normal form to either
+  a formation or $T$.
+  \tbd{We still need to prove this.}
 
 \begin{figure*}
 \begin{mdframed}
@@ -202,6 +199,10 @@ The \emph{dataization} function
   of evaluation.
 The inference rules in \cref{fig:dataization} inductively
   describe the algorithm of dataization.
+
+The dataization function is total, meaning that
+  every normal form can be dataized and its derivation terminates.
+  \tbd{We still need to prove this.}
 
 \begin{figure*}
 \begin{mdframed}
