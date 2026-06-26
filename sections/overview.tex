@@ -3,33 +3,45 @@
 
 \section{Informal Overview}\label{sec:overview}
 
-An object \emph{formation} is a collection of \emph{attributes}, which are uniquely named pairs, for example:
+An object \emph{formation} is a collection of \emph{attributes},
+  which are uniquely named pairs, for example:
+%
 \begin{phiquation}
 \label{eq:price-color}
 [[ price -> ?, color -> [[ D> FF-C0-CB ]] ]] {.}
 \end{phiquation}
+%
 This formation has two attributes \ff{price} and \ff{color}.
-The formation is an \emph{abstract} because the \ff{price} attribute is \emph{void}, i.e. there is nothing \emph{attached} to it.
-The \ff{color} attribute is attached to another formation with one $D$-\emph{asset},
+The formation is an \emph{abstract} because the \ff{price} attribute
+  is \emph{void}, i.e. there is nothing \emph{attached} to it.
+The \ff{color} attribute is attached to another formation
+  with one $D$-\emph{asset},
   which is attached to \emph{data} (three bytes).
 
-A \emph{full application} of a pair---an attribute and an \emph{expression}---to an abstract
+A \emph{full application} of a pair---an attribute and
+  an \emph{expression}---to an abstract
   \emph{results} in a new \emph{closed} formation, for example:
+%
 \begin{phiquation}
 \label{eq:simple-application}
 [[ |x| -> ? ]]( |y| -> b ) \trans [[ |x| -> b ]] {.}
 \end{phiquation}
+%
 A \emph{partial} application results in a new abstract, for example:
+%
 \begin{phiquation*}
 [[ |x| -> ?, |y| -> ? ]]( |x| -> b ) \trans [[ |x| -> b, |y| -> ? ]] {.}
 \end{phiquation*}
 
-A formation may be \emph{dispatched} from another formation with the help of \emph{dot notation}
+A formation may be \emph{dispatched} from another formation
+  with the help of \emph{dot notation}
   where the right side \emph{accesses} the left side, for example:
+%
 \begin{phiquation}
 \label{eq:dot-notation}
 [[ |x| -> \phiOver{$.|p|(|t| -> b)}.|y|, |p| -> [[ |t| -> ?, |y| -> $.|t| ]] ]].|x| \trans b {.}
 \end{phiquation}
+%
 The leftmost symbol \phiTerminal{\(\xi\)} denotes the formation itself;
   the following $.|p|$ part retrieves the formation attached to the attribute \(\ff{p}\);
   then, the application $(|t|->b)$ makes a copy of the formation;
@@ -38,28 +50,35 @@ The leftmost symbol \phiTerminal{\(\xi\)} denotes the formation itself;
 Attributes are \emph{immutable}, i.e. an application to a formation,
   where the attribute is already attached,
   results in a \emph{terminator} denoted as $T$ (runtime error), for example:
+%
 \begin{phiquation*}
 [[ |x| -> b_1 ]]( |x| -> b_2 ) \trans T {.}
 \end{phiquation*}
 
 An expression may be textually reduced, for example:
+%
 \begin{phiquation*}
 [[ |x| -> ?, |y| -> ? ]]( |x| -> b_1 )( |y| -> b_2 ) \trans
   \trans [[ |x| -> b_1, |y| -> ? ]] ( |y| -> b_2 ) \trans
   \trans [[ |x| -> b_1, |y| -> b_2 ]] {.}
 \end{phiquation*}
+%
 The formation on the left is reduced to the formation on the right in two reduction steps.
 Some expressions may be in \emph{normal form}, which means no further applicable reductions.
 
-A formation is called a \emph{decorator} if it has the $@$-attribute with an expression attached to it,
+A formation is called a \emph{decorator} if it has the $@$-attribute
+  with an expression attached to it,
   known as a \emph{decoratee}.
-An attribute dispatched from a decorator reduces to the same attribute dispatched from the decoratee,
+An attribute dispatched from a decorator reduces
+  to the same attribute dispatched from the decoratee,
   if the attribute is not present in the decorator, for example:
+%
 \begin{phiquation*}
 [[ @ -> [[ |x| -> b ]] ]].|x| \trans b {.}
 \end{phiquation*}
 
 A formation may have data attached only to its $D$-asset, for example:
+%
 \begin{phiquation*}
 [[ |x| -> [[ D> 00-2A ]] ]] {.}
 \end{phiquation*}
@@ -68,16 +87,20 @@ A formation may have a \emph{function} attached to its $L$-asset.
 Such a formation is referred to as an \emph{atom}.
 An atom may be \emph{morphed} to another formation by evaluating its function,
 for example:
+%
 \begin{phiquation}
 \label{eq:Sqrt}
 \frac \
   { \vdash |Sqrt| {(} b {,}\; u {,}\; s {)} \to << [[ D> \sqrt{\mathbb{D} {(} b.|x| {,}\; u {,}\; s {)} } ]], s >> } \
   {[[ L> |Sqrt|, |x| -> 256 ]] \to 16} {.}
 \end{phiquation}
+%
 There is also a \emph{dataization} function \(\mathbb{D}(b, u, s)\)
   that normalizes its first argument and then either returns the data
-  attached to the $D$-asset of the normal form or morphs the atom into a formation and dataizes it (recursively),
+  attached to the $D$-asset of the normal form or morphs the atom
+  into a formation and dataizes it (recursively),
   for example:
+%
 \begin{phiquation*}
-\mathbb{D} {(} [[ |x| -> 42 ]].|x| \trans 42 {,}\; u {,}\; s {)} \to 42.
+\mathbb{D} \lparen [[ |x| -> 42 ]].|x| \trans 42 {,}\; e {,}\; s \rparen \to 42.
 \end{phiquation*}
