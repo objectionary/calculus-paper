@@ -66,7 +66,7 @@
       \phino@premises \\ \hline
       \phino@conclusion
     \end{tabular}%
-    \ifx\phino@condition\@empty\else\quad if\quad \phino@condition\fi%
+    \ifx\phino@condition\@empty\else\; if\;\phino@condition\fi%
   }}%
 \makeatother
 
@@ -218,6 +218,10 @@ The \emph{morphing} function
   possibly modifying the \emph{state} of evaluation.
 The inference rules at \cref{fig:morphing} inductively describe
   the algorithm of morphing.
+The notation \(\phinoMorph{n_1}{e}{n_2}\)
+  means that \(n_1\) morphs to \(n_2\)
+  with a side-effect of moving \(s_1\) to \(s_2\),
+  in the universe \(e\).
 
 \begin{theorem}
 The morphing function is total, meaning that
@@ -247,6 +251,10 @@ The \emph{dataization} function
   of evaluation.
 The inference rules in \cref{fig:dataization} inductively
   describe the algorithm of dataization.
+The notation \(\phinoDataize{n}{e}{d}\)
+  means that \(n\) dataizes to \(d\)
+  with a side-effect of moving \(s_1\) to \(s_2\),
+  in the universe \(e\).
 
 \begin{theorem}
 The dataization function is total, meaning that
