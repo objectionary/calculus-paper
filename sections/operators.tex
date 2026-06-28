@@ -57,13 +57,17 @@
   \global\let\phino@condition\@empty
 }{%
   \adjustbox{max width=\linewidth,margin=0em .3em}{%
-    \newrule[\phino@label]{\phino@name}\;
-    \begin{tabular}[c]{c}
+    \ifx\phino@label\@empty%
+      \newrule{\phino@name}\;%
+    \else%
+      \newrule[\phino@label]{\phino@name}\;%
+    \fi%
+    \begin{tabular}[c]{c}%
       \phino@premises \\ \hline
       \phino@conclusion
     \end{tabular}%
-    \ifx\phino@condition\@empty\else\quad if\quad \phino@condition\fi
-  }}
+    \ifx\phino@condition\@empty\else\quad if\quad \phino@condition\fi%
+  }}%
 \makeatother
 
 \newcommand\inputrules[1]{
@@ -154,13 +158,8 @@ A normal form is \textbf{absolute},
 \label{fig:reduction}
 \end{figure*}
 
-The \emph{normalization} function
-  \(\mathbb{N} : \mathcal{E} \rightarrow \mathcal{N} \)
-  maps expressions to normal forms.
-
 \begin{theorem}
-The normalization function is total, meaning that
-  every expression has a normal form and the reduction relation terminates.
+Every expression has a normal form, meaing that reduction always terminates.
 \end{theorem}
 
 \begin{proof}
