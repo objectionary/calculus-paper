@@ -1,6 +1,23 @@
 % SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
 % SPDX-License-Identifier: MIT
 
+\newcounter{rule}
+\makeatletter
+\newcommand\rulemnemo[1]{\text{\sffamily{}R\(_\text{\scshape\sffamily{}#1}\)}}
+\newcommand\newrule[2][]{%
+  \def\param{#1}%
+  \ifx\param\empty%
+    \def\sub{#2}%
+  \else%
+    \def\sub{\(#1\)}%
+  \fi%
+  \refstepcounter{rule}%
+  \protected@edef\@currentlabelname{\rulemnemo{\sub}}%
+  \label@noarg{r:#2}%
+  \rulemnemo{\sub}%
+  }
+\makeatother
+
 \newcommand\trrule[6][]{%
   \newrule[#1]{#2}:
   &
@@ -12,18 +29,15 @@
   \ifblank{#6}{}{& where { $ #6 $ } \\}%
   }
 \newcommand\phinoNormalizationRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
-\newcommand\phinoMorphingRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
-\newcommand\phinoDataizationRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
 \newcommand\phinoEvaluate[2]{\mathbb{E}\lparen #1 \rparen \rightarrow #2}
 \newcommand\phinoNormalize[2]{#1 \trans{} #2}
-\newcommand\phinoDataize[3]{\mathbb{D}\lparen #1 {,}\; #2 \rparen \rightarrow #3}
-\newcommand\phinoMorph[3]{\mathbb{M}\lparen #1 {,}\; #2 \rparen \rightarrow #3}
+\newcommand\phinoDataize[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Downarrow} \langle #3 \rangle}
+\newcommand\phinoMorph[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Rrightarrow} \langle #3 \rangle}
 \newcommand\phinoContextualize[3]{\mathbb{C}\lparen #1 \triangleleft{} #2 \rparen \rightarrow #3}
 \newcommand\phinoNotFormation[1]{#1 \notin \mathcal{B}}
 \newcommand\phinoGlobal{Q}
 
 \makeatletter
-\newcommand\phinoRuleName[1]{\ensuremath{\mathsf{R}_{\mathsf{#1}}}}
 \let\phino@premises\@empty
 \newcommand\phinoName[1]{\gdef\phino@name{#1}}
 \newcommand\phinoLabel[1]{\gdef\phino@label{#1}}
@@ -42,17 +56,14 @@
   \global\let\phino@conclusion\@empty
   \global\let\phino@condition\@empty
 }{%
-  \par\medskip
-  \centering
-  \adjustbox{max width=\linewidth}{%
-    \phinoRuleName{\phino@label}\quad
+  \adjustbox{max width=\linewidth,margin=0em .3em}{%
+    \newrule[\phino@label]{\phino@name}\;
     \begin{tabular}[c]{c}
       \phino@premises \\ \hline
       \phino@conclusion
     \end{tabular}%
     \ifx\phino@condition\@empty\else\quad if\quad \phino@condition\fi
-  }%
-  \par}
+  }}
 \makeatother
 
 \newcommand\inputrules[1]{
@@ -230,6 +241,7 @@ The morphing function is total, meaning that
 
 \begin{figure*}
 \begin{mdframed}
+\centering
 \iexec[maybe]{phino explain --morph > _tex/rules-morph.tex}
 \input{_tex/rules-morph.tex}
 \end{mdframed}
@@ -258,6 +270,7 @@ The dataization function is total, meaning that
 
 \begin{figure*}
 \begin{mdframed}
+\centering
 \iexec[maybe]{phino explain --dataize > _tex/rules-dataize.tex}
 \input{_tex/rules-dataize.tex}
 \end{mdframed}

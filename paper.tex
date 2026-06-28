@@ -55,23 +55,6 @@
 \renewcommand\EbnfTerminal[1]{\textcolor{rgbTerminals}{#1}}
 \renewcommand\phiTerminal[1]{{\color{rgbTerminals}{#1}}}
 
-\newcounter{rule}
-\makeatletter
-\newcommand\rulemnemo[1]{\text{\sffamily{}R\(_\text{\scshape\sffamily{}#1}\)}}
-\newcommand\newrule[2][]{%
-  \def\param{#1}%
-  \ifx\param\empty%
-    \def\sub{#2}%
-  \else%
-    \def\sub{\(#1\)}%
-  \fi%
-  \refstepcounter{rule}%
-  \protected@edef\@currentlabelname{\rulemnemo{\sub}}%
-  \label@noarg{r:#2}%
-  \rulemnemo{\sub}%
-}
-\makeatother
-
 \makeatletter
 \newcommand\phiOver[1]{%
   {\color{gray}\overbracket[0.4pt][1pt]{{\color{black}#1}}}}
