@@ -217,7 +217,8 @@ The \emph{morphing} function
   maps normal forms to either formations or $T$,
   possibly modifying the \emph{state} of evaluation.
 The inference rules at \cref{fig:morphing} inductively describe
-  the algorithm of morphing.
+  the algorithm of morphing: rules must be applied in any order
+  until they stop matching.
 The notation \(\phinoMorph{n_1}{e}{n_2}\)
   means that \(n_1\) morphs to \(n_2\)
   with a side-effect of moving \(s_1\) to \(s_2\),
@@ -250,7 +251,8 @@ The \emph{dataization} function
   maps normal forms to data, possibly modifying the \emph{state}
   of evaluation.
 The inference rules in \cref{fig:dataization} inductively
-  describe the algorithm of dataization.
+  describe the algorithm of dataization: rules must be applied in any order
+  until they stop matching.
 The notation \(\phinoDataize{n}{e}{d}\)
   means that \(n\) dataizes to \(d\)
   with a side-effect of moving \(s_1\) to \(s_2\),
