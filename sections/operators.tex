@@ -33,7 +33,7 @@
 \newcommand\phinoNormalize[2]{#1 \trans{} #2}
 \newcommand\phinoDataize[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Downarrow} \langle #3 \rangle}
 \newcommand\phinoMorph[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Rrightarrow} \langle #3 \rangle}
-\newcommand\phinoContextualize[3]{\mathbb{C}\lparen #1 \triangleleft{} #2 \rparen \rightarrow #3}
+\newcommand\phinoContextualize[3]{ \langle #1 {,}\; #2 \rangle \mathrel{\Rightarrow} \langle #3 \rangle}
 \newcommand\phinoNotFormation[1]{#1 \notin \mathcal{B}}
 \newcommand\phinoGlobal{Q}
 
@@ -98,19 +98,9 @@ The \emph{contextualization} total function
 
 \begin{figure*}
 \begin{mdframed}
-\begin{phiquation*}
-\ctx{ \phiTerminal{\xi} } {b} \to b \
-\qquad \
-\ctx{ Q } {b} \to Q \
-\qquad \
-\ctx{ [[ B ]] } {b} \to [[ B ]] \
-\qquad \
-\ctx{ T } {b} \to T
-
-\ctx{ e.\tau } {b} \to \ctx{e}{b} . \tau \
-\qquad \
-\ctx{ e_1( \tau -> e_2 ) } {b} \to \ctx{e_1}{b} ( \tau -> \ctx{e_2}{b} )
-\end{phiquation*}
+\centering
+\iexec[maybe]{phino explain --contextualize > _tex/rules-contextualize.tex}
+\input{_tex/rules-contextualize.tex}
 \end{mdframed}
 \capt{Contextualization by induction.}
 \label{fig:contextualization}
