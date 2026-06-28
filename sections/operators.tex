@@ -92,10 +92,22 @@ Each operator is defined in terms of the reduction semantics introduced earlier
 \protected@edef\@currentlabelname{\ensuremath{\mathbb{C}}}%
 \makeatother
 \label{r:contextualize}
-\newcommand\ctx[2]{\mathbb{C}( #1 \triangleleft{} #2 )}
+
+\begin{definition}[Absolute]
+An expression is \textbf{absolute},
+  denoted by \(k\) and ranging over \(\mathcal{K} \subseteq \mathcal{E}\),
+  if it is either
+  \begin{inparaenum}[a)]
+  \item $Q$,
+  \item formation,
+  \item dispatch with an absolute subject,
+  or
+  \item application with absolute subject and argument.
+  \end{inparaenum}
+\end{definition}
 
 The \emph{contextualization} function
-  \(\mathbb{C} : \mathcal{E} \times \mathcal{B} \to \mathcal{E}\)
+  \(\mathbb{C} : \mathcal{E} \times \mathcal{K} \to \mathcal{E}\)
   removes \(\phiTerminal{\xi}\) from the expression.
 The inference rules at \cref{fig:contextualization} inductively describe
   the algorithm of contextualization: rules must be applied in any order
@@ -147,19 +159,6 @@ An expression that has no more possible applications of reductions
 
 Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
   there is no expression \(e_1\) such that \(\nf \trans e_1\).
-
-\begin{definition}[Absolute]
-A normal form is \textbf{absolute},
-  denoted by \(k\) and ranging over \(\mathcal{K} \subseteq \mathcal{N}\),
-  if it is either
-  \begin{inparaenum}[a)]
-  \item $Q$,
-  \item formation,
-  \item dispatch with an absolute subject,
-  or
-  \item application with absolute subject and argument.
-  \end{inparaenum}
-\end{definition}
 
 \begin{figure*}
 \begin{mdframed}
