@@ -32,7 +32,9 @@
   \ifblank{#6}{}{& where { $ #6 $ } \\}%
   }
 \newcommand\phinoNormalizationRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
-\newcommand\phinoEvaluate[2]{\langle #1 \rangle \rightarrow #2}
+\newcommand\phinoEvaluate[2]{\langle #1 \rangle%
+  \mathrel{\vcenter{\hbox{\begin{tikzpicture}\draw[-{Triangle[length=1.8mm,width=1.8mm]},line width=0.6pt](0,0)--(1.3em,0);\end{tikzpicture}}}}%
+  \langle #2 \rangle}
 \newcommand\phinoNormalize[2]{#1 \trans{} #2}
 \newcommand\phinoDataize[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Downarrow} \langle #3 \rangle}
 \newcommand\phinoMorph[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Rrightarrow} \langle #3 \rangle}
@@ -234,7 +236,7 @@ The \emph{evaluation} function
 {f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}
 {\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{n}}
 \end{phiquation*}
-The notation \(\phinoEvaluate{n_1}{s}{n_2}\)
+The notation \(\phinoEvaluate{n_1}{n_2}\)
   means that \(n_1\) evaluates to \(n_2\)
   with a side-effect of moving \(s_1\) to \(s_2\),
   in the universe \(e\).
