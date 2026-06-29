@@ -46,21 +46,16 @@
 \let\phino@premises\@empty
 \newcommand\phinoName[1]{\gdef\phino@name{#1}}
 \newcommand\phinoLabel[1]{\gdef\phino@label{#1}}
-\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{$#1$}}
+\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{#1}}
 \newcommand\phinoCondition[1]{\gdef\phino@condition{$#1$}}
 \newcommand\phinoPremise[1]{%
   \ifx\phino@premises\@empty
-    \gdef\phino@premises{$#1$}%
+    \gdef\phino@premises{#1}%
   \else
-    \g@addto@macro\phino@premises{\qquad $#1$}%
+    \g@addto@macro\phino@premises{\qquad #1}%
   \fi}
 \newcommand\infrule[2]{%
-  \begin{tabular}[c]{c}%
-    #1 \\
-    \hline
-    #2
-  \end{tabular}%
-  }
+  \ensuremath{\dfrac{#1}{#2}}}
 \newenvironment{phinoContextualizationInference}
   {\begin{phinoInference}}
   {\end{phinoInference}}
@@ -232,9 +227,7 @@ The \emph{evaluation} function
   by calling the function attached to $L$
   and possibly modifying the \emph{state} of evaluation:
 \begin{phiquation*}
-\infrule
-{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}
-{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{n}}
+\infrule{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{n}}
 \end{phiquation*}
 The notation \(\phinoEvaluate{n_1}{n_2}\)
   means that \(n_1\) evaluates to \(n_2\)
