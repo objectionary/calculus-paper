@@ -228,13 +228,11 @@ Two expressions are said to be syntactically equivalent or just
 \begin{definition}[Evaluation]
 The \emph{evaluation} function
   \(\mathcal{B} \times \mathcal{S}
-    \rightarrow \mathcal{N} \times \mathcal{S} \)
-  maps formations to normal forms
-  by calling by value the function attached to $L$
-  and shifting the \emph{state} of evaluation,
-  while the notation \(\phinoEvaluate{b_1}{e}{s_1}{n_2}{s_2}\)
-  means that \(b_1\) evaluates to \(n_2\)
-  with a side-effect of shifting \(s_1\) to \(s_2\),
+    \rightarrow \mathcal{N} \times \mathcal{S} \),
+  denoted as \(\phinoEvaluate{b}{e}{s_1}{n}{s_2}\),
+  maps \(b\) to \(n\)
+  calling by value the function attached to $L$ of \(b\)
+  and shifting the \emph{state} of evaluation \(s_1\) to \(s_2\),
   in the universe \(e\):
 \begin{phiquation*}
 \infrule{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2}}
@@ -243,18 +241,14 @@ The \emph{evaluation} function
 
 \subsection{Morphing}\label{sec:morphing}
 
+\begin{definition}[Morphing]
 The \emph{morphing} function
   \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}
-    \rightarrow \mathcal{N} \times \mathcal{S} \)
-  maps normal forms to either formations or $T$,
-  possibly modifying the \emph{state} of evaluation.
-The inference rules at \cref{fig:morphing} inductively describe
-  the algorithm of morphing: rules must be applied in any order
-  until they stop matching.
-The notation \(\phinoMorph{n_1}{e}{s_1}{n_2}{s_2}\)
-  means that \(n_1\) morphs to \(n_2\)
-  with a side-effect of shifting \(s_1\) to \(s_2\),
-  in the universe \(e\).
+    \rightarrow \mathcal{N} \times \mathcal{S} \),
+  denoted as \(\phinoMorph{n_1}{e}{s_1}{n_2}{s_2}\),
+  maps \(n_1\) to either \(n_2\), which is either a formation or $T$,
+  possibly shifting the state \(s_1\) to \(s_2\).
+\end{definition}
 
 \begin{theorem}
 The morphing function is total, meaning that
@@ -286,18 +280,15 @@ The morphing function is confluent, meaning that
 
 \subsection{Dataization}\label{sec:dataization}
 
+\begin{definition}[Dataization]
 The \emph{dataization} function
   \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}
-    \rightharpoonup \mathcal{D} \times \mathcal{S}\)
-  maps normal forms to data, possibly modifying the \emph{state}
-  of evaluation.
-The inference rules in \cref{fig:dataization} inductively
-  describe the algorithm of dataization: rules must be applied in any order
-  until they stop matching.
-The notation \(\phinoDataize{n}{e}{s_1}{\delta}{s_2}\)
-  means that \(n\) dataizes to \(\delta\)
-  with a side-effect of shifting \(s_1\) to \(s_2\),
+    \rightharpoonup \mathcal{D} \times \mathcal{S}\),
+  denoted as \(\phinoDataize{n}{e}{s_1}{\delta}{s_2}\),
+  maps \(n\) dataizes to \(\delta\),
+  possibly shifting \(s_1\) to \(s_2\)
   in the universe \(e\).
+\end{definition}
 
 \begin{theorem}
 The dataization function is total, meaning that
