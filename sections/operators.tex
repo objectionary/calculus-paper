@@ -32,7 +32,7 @@
   \ifblank{#6}{}{& where { $ #6 $ } \\}%
   }
 \newcommand\phinoNormalizationRule[6][]{\trrule[#1]{#2}{#3}{#4}{#5}{#6}}
-\newcommand\phinoEvaluate[2]{\mathbb{E}\lparen #1 \rparen \rightarrow #2}
+\newcommand\phinoEvaluate[2]{\langle #1 \rangle \rightarrow #2}
 \newcommand\phinoNormalize[2]{#1 \trans{} #2}
 \newcommand\phinoDataize[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Downarrow} \langle #3 \rangle}
 \newcommand\phinoMorph[3]{\langle #1 {,}\; #2 \rangle \mathrel{\Rrightarrow} \langle #3 \rangle}
@@ -52,6 +52,22 @@
   \else
     \g@addto@macro\phino@premises{\qquad $#1$}%
   \fi}
+\newcommand\infrule[2]{%
+  \begin{tabular}[c]{c}%
+    #1 \\
+    \hline
+    #2
+  \end{tabular}%
+  }
+\newenvironment{phinoContextualizationInference}
+  {\begin{phinoInference}}
+  {\end{phinoInference}}
+\newenvironment{phinoMorphingInference}
+  {\begin{phinoInference}}
+  {\end{phinoInference}}
+\newenvironment{phinoDataizationInference}
+  {\begin{phinoInference}}
+  {\end{phinoInference}}
 \newenvironment{phinoInference}{%
   \global\let\phino@name\@empty
   \global\let\phino@label\@empty
@@ -65,10 +81,7 @@
     \else%
       \newrule[\phino@label]{\phino@name}\;%
     \fi%
-    \begin{tabular}[c]{c}%
-      \phino@premises \\ \hline
-      \phino@conclusion
-    \end{tabular}%
+    \infrule{\phino@premises}{\phino@conclusion}%
     \ifx\phino@condition\@empty\else\; if\;\phino@condition\fi%
   }}%
 \makeatother
@@ -110,7 +123,7 @@ An expression is \textbf{absolute},
 \end{definition}
 
 The \emph{contextualization} function
-  \(\mathbb{C} : \mathcal{E} \times \mathcal{K} \to \mathcal{E}\)
+  \(\mathcal{E} \times \mathcal{K} \to \mathcal{E}\)
   removes \(\phiTerminal{\xi}\) from the expression.
 The inference rules at \cref{fig:contextualization} inductively describe
   the algorithm of contextualization: rules must be applied in any order
@@ -211,21 +224,27 @@ Two expressions are said to be syntactically equivalent or just
 \subsection{Evaluation}\label{sec:evaluation}
 
 The \emph{evaluation} function
-  \(\mathbb{E} : \mathcal{B} \times \mathcal{S}
+  \(\mathcal{B} \times \mathcal{S}
     \rightarrow \mathcal{N} \times \mathcal{S} \)
   maps formations to normal forms
   by calling the function attached to $L$
   and possibly modifying the \emph{state} of evaluation:
 \begin{phiquation*}
-\mathbb{E} \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle.
+\infrule
+{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}
+{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{n}}
 \end{phiquation*}
+The notation \(\phinoEvaluate{n_1}{s}{n_2}\)
+  means that \(n_1\) evaluates to \(n_2\)
+  with a side-effect of moving \(s_1\) to \(s_2\),
+  in the universe \(e\).
 
 The function \(f\) is called by value.
 
 \subsection{Morphing}\label{sec:morphing}
 
 The \emph{morphing} function
-  \(\mathbb{M} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
+  \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightarrow \mathcal{N} \times \mathcal{S} \)
   maps normal forms to either formations or $T$,
   possibly modifying the \emph{state} of evaluation.
@@ -259,7 +278,7 @@ The morphing function is total, meaning that
 \subsection{Dataization}\label{sec:dataization}
 
 The \emph{dataization} function
-  \(\mathbb{D} : \mathcal{N} \times \mathcal{E} \times \mathcal{S}
+  \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}
     \rightharpoonup \mathcal{D} \times \mathcal{S}\)
   maps normal forms to data, possibly modifying the \emph{state}
   of evaluation.
@@ -300,11 +319,13 @@ The dataization function is total, meaning that
 Two expressions \(n_1\) and \(n_2\) are said to be behaviorally equivalent
   or \textbf{congruent} (denoted by \(\cong\)) if for any state \(s\)
   and any \(e\):
-  \(\mathbb{D}(n_1, e, s) = \mathbb{D}(n_2, e, s)\).
+\begin{phiquation*}
+\phinoDataize{n_1}{e}{n} \quad\text{and}\quad \phinoDataize{n_2}{e}{n}.
+\end{phiquation*}
 \end{definition}
 
 Two congruent expressions may be non-equivalent, for example:
 \begin{phiquation*}
-\Big\{ \tau_1 -> [[ foo -> ?, D> 01-02 ]], \tau_2 -> [[ bar -> ?, D> 01-02 ]] \Big\}
+\Big\{ [[ \tau_1 -> [[ foo -> ?, D> 01-02 ]], \tau_2 -> [[ bar -> ?, D> 01-02 ]] ]] \Big\}
 Q.\tau_1 \cong Q.\tau_2 \;\not\to\; Q.\tau_1 \equiv Q.\tau_2 {.}
 \end{phiquation*}
