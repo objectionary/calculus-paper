@@ -220,21 +220,21 @@ Two expressions are said to be syntactically equivalent or just
 
 \subsection{Evaluation}\label{sec:evaluation}
 
+\begin{definition}[Evaluation]
 The \emph{evaluation} function
   \(\mathcal{B} \times \mathcal{S}
     \rightarrow \mathcal{N} \times \mathcal{S} \)
   maps formations to normal forms
-  by calling the function attached to $L$
-  and possibly modifying the \emph{state} of evaluation:
+  by calling by value the function attached to $L$
+  and shifting the \emph{state} of evaluation,
+  while the notation \(\phinoEvaluate{b_1}{n_2}\)
+  means that \(b_1\) evaluates to \(n_2\)
+  with a side-effect of shifting \(s_1\) to \(s_2\),
+  in the universe \(e\):
 \begin{phiquation*}
 \infrule{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{n}}
 \end{phiquation*}
-The notation \(\phinoEvaluate{n_1}{n_2}\)
-  means that \(n_1\) evaluates to \(n_2\)
-  with a side-effect of moving \(s_1\) to \(s_2\),
-  in the universe \(e\).
-
-The function \(f\) is called by value.
+\end{definition}
 
 \subsection{Morphing}\label{sec:morphing}
 
