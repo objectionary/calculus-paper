@@ -354,11 +354,65 @@ The derivation is hence finite whenever the recursion through \nameref{r:box}
 
 \begin{theorem}
 The dataization function is confluent, meaning that
-  every normal form can be dataized to only one data.
+  every normal form can be dataized to only one data,
+  provided the functions attached to atoms are pure---their result
+  depends on nothing beyond the formation, the universe, and the state.
 \end{theorem}
 
 \begin{proof}
-\tbd{We still need to prove this.}
+Dataization is specified by the syntax-directed inference system of
+  \cref{fig:dataization}, so confluence amounts to the relation $\Downarrow$
+  being single-valued: whenever \(\phinoDataize{n}{e}{s_1}{\delta}{s_2}\)
+  and \(\phinoDataize{n}{e}{s_1}{\delta'}{s_2'}\), we have \(\delta = \delta'\)
+  and \(s_2 = s_2'\).
+We argue by induction on the first derivation, after observing that at most
+  one rule applies to any configuration \(\langle n, e, s_1 \rangle\),
+  so both derivations are headed by the same rule.
+
+The conclusions of the six rules partition every configuration.
+If $n = T$, only \nameref{r:end} matches, since every other rule demands
+  a formation or, for \nameref{r:norm}, an expression distinct from $T$.
+If \(n\) is neither a formation nor $T$, only \nameref{r:norm} matches.
+If $n = [[ B ]]$ is a formation, the asset and attribute it carries select
+  a single rule:
+  \begin{inparaenum}[a)]
+  \item a $D$-asset selects \nameref{r:delta} and an $L$-asset selects
+    \nameref{r:fire}, the two being mutually exclusive because a well-formed
+    formation attaches either data or a function to its asset, never both;
+  \item with neither asset present, an $@$-attribute selects \nameref{r:box}
+    and its absence selects \nameref{r:none},
+  \end{inparaenum}
+  the latter pair separated by the explicit conditions
+  $[D, L] \cap B = \emptyset$ and $[D, L, @] \cap B = \emptyset$.
+Hence no configuration matches two rules.
+
+Because the same rule heads both derivations, it suffices to check that each
+  rule maps its premises to a single result.
+\nameref{r:delta}, \nameref{r:none}, and \nameref{r:end} are axioms whose
+  conclusions read the result directly off \(n\)---the attached data,
+  the empty data, and the empty data respectively---each leaving the state
+  untouched, so they admit no other outcome.
+\nameref{r:box} chains three premises: contextualization is a total function
+  (\cref{sec:contextualization}) and yields a unique \(n\); normalization is
+  confluent (\cref{sec:normalization}) and yields a unique normal form \(n_1\);
+  and the dataization of \(n_1\) is unique by the induction hypothesis.
+\nameref{r:norm} chains morphing, which is confluent (\cref{sec:morphing}) and
+  yields a unique formation or $T$, with a dataization premise that is unique
+  by the induction hypothesis.
+\nameref{r:fire} evaluates the function \(F\) attached to the $L$-asset.
+By \cref{sec:evaluation} a function is a total mapping that deterministically
+  maps formation, universe, and state to an expression and a new state;
+  being pure, its result depends on nothing else.
+The universe \(e\) is fixed throughout the derivation and the state propagates
+  only through the explicit threading of the rules, so both derivations present
+  the call with identical arguments and it returns the same
+  \(\langle n, s_2 \rangle\); normalization then yields a unique \(n_1\) and the
+  dataization premise is unique by the induction hypothesis.
+In every case the preceding premises are determined before the recursive one,
+  so the sub-derivations dataize the same normal form in the same state and the
+  induction hypothesis applies.
+The two derivations therefore agree on the result, and dataization relates each
+  normal form to at most one data and state.
 \end{proof}
 
 \ifdefined\examples
