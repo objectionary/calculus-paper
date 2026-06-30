@@ -293,12 +293,54 @@ The \emph{dataization} function
 \end{definition}
 
 \begin{theorem}
-The dataization function is total, meaning that
-  every normal form can be dataized and its derivation terminates.
+Dataization is defined for every normal form, meaning that for any \(n\),
+  \(e\), and \(s_1\) at least one rule of \cref{fig:dataization} applies
+  and the derivation never gets stuck;
+  it terminates whenever the program denotes a terminating computation.
 \end{theorem}
 
 \begin{proof}
-\tbd{We still need to prove this.}
+The domain of dataization is \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}\),
+  so it suffices to show that every normal form \(n\) matches the conclusion
+  of at least one rule of \cref{fig:dataization};
+  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
+By the grammar of \cref{fig:ebnf}, every expression, and hence every normal form,
+  is a formation, an application, a dispatch, a locator, or the terminator \(T\),
+  which yields three exhaustive cases.
+
+If \(n = T\), then \nameref{r:end} fires and closes the derivation at once.
+
+If \(n\) is neither a formation nor \(T\),
+  then \(\phinoNotFormation{n}\) and \(n \neq T\),
+  which is exactly the condition of \nameref{r:norm};
+  the rule morphs \(n\) and dataizes the result,
+  and since morphing delivers a formation or \(T\) (\cref{sec:morphing}),
+  that result falls into one of the two other cases.
+
+If \(n = [[ B ]]\) is a formation, we inspect its assets and attributes in order:
+  \begin{inparaenum}[a)]
+  \item if \(B\) carries a \(D\)-asset, \nameref{r:delta} fires;
+  \item otherwise, if \(B\) carries an \(L\)-asset, \nameref{r:fire} fires;
+  \item otherwise, if \(B\) carries an \(@\)-attribute, \nameref{r:box} fires,
+    its condition \([D, L] \cap B = \emptyset\) granted by the two exclusions above;
+  \item otherwise \(B\) holds none of \(D\), \(L\), and \(@\),
+    which is the condition of \nameref{r:none}, and that rule fires.
+  \end{inparaenum}
+These four alternatives are exhaustive, so a formation always matches a rule.
+No input is therefore stuck, and dataization is defined on the whole of its domain.
+
+Termination is by induction on the derivation.
+The rules \nameref{r:delta}, \nameref{r:none}, and \nameref{r:end} are axioms
+  and discharge with no premise.
+Each remaining rule reduces the dataization of \(n\) to the dataization of a normal
+  form produced by an operator that itself terminates---contextualization
+  (\cref{sec:contextualization}) and normalization (\cref{sec:normalization})
+  for \nameref{r:box}, evaluation and normalization for \nameref{r:fire},
+  and morphing (\cref{sec:morphing}) for \nameref{r:norm}---so every premise is
+  again a dataization judgment, and \nameref{r:norm} never recurs into itself.
+The derivation is hence finite whenever the recursion through \nameref{r:box}
+  and \nameref{r:fire} is well-founded,
+  which holds for every program that denotes a terminating computation.
 \end{proof}
 
 \begin{figure*}
