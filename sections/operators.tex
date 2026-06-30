@@ -49,16 +49,16 @@
 \let\phino@premises\@empty
 \newcommand\phinoName[1]{\gdef\phino@name{#1}}
 \newcommand\phinoLabel[1]{\gdef\phino@label{#1}}
-\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{#1}}
+\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{$#1$}}
 \newcommand\phinoCondition[1]{\gdef\phino@condition{$#1$}}
 \newcommand\phinoPremise[1]{%
   \ifx\phino@premises\@empty
-    \gdef\phino@premises{#1}%
+    \gdef\phino@premises{$#1$}%
   \else
-    \g@addto@macro\phino@premises{\qquad #1}%
+    \g@addto@macro\phino@premises{\qquad $#1$}%
   \fi}
 \newcommand\infrule[2]{%
-  \ensuremath{\dfrac{#1}{#2}}}
+  \ensuremath{\dfrac{\text{#1}}{\text{#2}}}}
 \newenvironment{phinoContextualizationInference}
   {\begin{phinoInference}}
   {\end{phinoInference}}
@@ -233,7 +233,7 @@ The \emph{evaluation} function
   and shifting the \emph{state} of evaluation \(s_1\) to \(s_2\),
   in the universe \(e\):
 \begin{phiquation*}
-\infrule{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2}}
+\dfrac{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2}}
 \end{phiquation*}
 \end{definition}
 
