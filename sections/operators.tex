@@ -292,18 +292,17 @@ The \emph{dataization} function
   in the universe \(e\).
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}[Progress]
 Dataization is defined for every normal form, meaning that for any \(n\),
   \(e\), and \(s_1\) at least one rule of \cref{fig:dataization} applies
-  and the derivation never gets stuck;
-  it terminates whenever the program denotes a terminating computation.
+  and the derivation never gets stuck.
 \end{theorem}
 
 \begin{proof}
 The domain of dataization is \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}\),
   so it suffices to show that every normal form \(n\) matches the conclusion
   of at least one rule of \cref{fig:dataization};
-  neither the universe \(e\) nor the state \(s\) restricts which rule fires.
+  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
 By the grammar of \cref{fig:ebnf}, every expression, and hence every normal form,
   is a formation, an application, a dispatch, a locator, or the terminator $T$,
   which yields three exhaustive cases.
