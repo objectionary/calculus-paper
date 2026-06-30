@@ -303,27 +303,27 @@ Dataization is defined for every normal form, meaning that for any \(n\),
 The domain of dataization is \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}\),
   so it suffices to show that every normal form \(n\) matches the conclusion
   of at least one rule of \cref{fig:dataization};
-  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
+  neither the universe \(e\) nor the state \(s\) restricts which rule fires.
 By the grammar of \cref{fig:ebnf}, every expression, and hence every normal form,
-  is a formation, an application, a dispatch, a locator, or the terminator \(T\),
+  is a formation, an application, a dispatch, a locator, or the terminator $T$,
   which yields three exhaustive cases.
 
-If \(n = T\), then \nameref{r:end} fires and closes the derivation at once.
+If $n = T$, then \nameref{r:end} fires and closes the derivation at once.
 
-If \(n\) is neither a formation nor \(T\),
-  then \(\phinoNotFormation{n}\) and \(n \neq T\),
+If \(n\) is neither a formation nor $T$,
+  then \(\phinoNotFormation{n}\) and $n \neq T$,
   which is exactly the condition of \nameref{r:norm};
   the rule morphs \(n\) and dataizes the result,
-  and since morphing delivers a formation or \(T\) (\cref{sec:morphing}),
+  and since morphing delivers a formation or $T$ (\cref{sec:morphing}),
   that result falls into one of the two other cases.
 
-If \(n = [[ B ]]\) is a formation, we inspect its assets and attributes in order:
+If $n = [[ B ]]$ is a formation, we inspect its assets and attributes in order:
   \begin{inparaenum}[a)]
-  \item if \(B\) carries a \(D\)-asset, \nameref{r:delta} fires;
-  \item otherwise, if \(B\) carries an \(L\)-asset, \nameref{r:fire} fires;
-  \item otherwise, if \(B\) carries an \(@\)-attribute, \nameref{r:box} fires,
-    its condition \([D, L] \cap B = \emptyset\) granted by the two exclusions above;
-  \item otherwise \(B\) holds none of \(D\), \(L\), and \(@\),
+  \item if \(B\) carries a $D$-asset, \nameref{r:delta} fires;
+  \item otherwise, if \(B\) carries an $L$-asset, \nameref{r:fire} fires;
+  \item otherwise, if \(B\) carries an $@$-attribute, \nameref{r:box} fires,
+    its condition $[D, L] \cap B = \emptyset$ granted by the two exclusions above;
+  \item otherwise \(B\) holds none of $D$, $L$, and $@$,
     which is the condition of \nameref{r:none}, and that rule fires.
   \end{inparaenum}
 These four alternatives are exhaustive, so a formation always matches a rule.
