@@ -13,4 +13,4 @@ while IFS= read -r f; do
         phino rewrite --normalize --focus=Q.ex "--expression=${e}" --max-depth=5 --max-cycles=1 \
             --nonumber --sequence --compress "--meet-prefix=${e}" --output=latex \
             --flat --sweet
-done < <(find "${dir}" -name '*.phi' -type f)
+done < <(find "${dir}" -name '*.phi' -type f | sort)
