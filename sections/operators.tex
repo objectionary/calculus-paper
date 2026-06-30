@@ -21,7 +21,7 @@
   }
 \makeatother
 
-\newcommand\trrule[6][]{%
+\newcommand\phinoNormalizationRule[6][]{%
   \newrule[#1]{#2}:
   &
   { $ #3 $ }
@@ -31,8 +31,6 @@
   \\
   \ifblank{#6}{}{& where { $ #6 $ } \\}%
   }
-\newcommand\phinoNormalizationRule[6][]{%
-  \trrule[#1]{#2}{#3}{#4}{#5}{#6}}
 \newcommand\phinoEvaluate[5]{%
   \langle #1 {,}\; #2 {,}\; #3 \rangle%
   \mathrel{\vcenter{\hbox{\begin{tikzpicture}\draw[-{Triangle[length=1.8mm,width=1.8mm]},line width=0.6pt](0,0)--(1.3em,0);\end{tikzpicture}}}}%
