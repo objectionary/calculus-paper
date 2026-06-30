@@ -57,8 +57,6 @@
   \else
     \g@addto@macro\phino@premises{\qquad $#1$}%
   \fi}
-\newcommand\infrule[2]{%
-  \ensuremath{\dfrac{\text{#1}}{\text{#2}}}}
 \newenvironment{phinoContextualizationInference}
   {\begin{phinoInference}}
   {\end{phinoInference}}
@@ -81,7 +79,7 @@
     \else%
       \newrule[\phino@label]{\phino@name}\;%
     \fi%
-    \infrule{\phino@premises}{\phino@conclusion}%
+    \ensuremath{\dfrac{\text{\phino@premises}}{\text{\phino@conclusion}}}%
     \ifx\phino@condition\@empty\else\; if\;\phino@condition\fi%
   }}%
 \makeatother
