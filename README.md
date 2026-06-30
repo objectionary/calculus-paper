@@ -1,7 +1,7 @@
 # Paper About φ-Calculus
 
 [![arXiv](https://img.shields.io/badge/arXiv-2111.13384-green.svg)](https://arxiv.org/abs/2111.13384)
-[![make](https://github.com/objectionary/eolang-paper/actions/workflows/latexmk.yml/badge.svg)](https://github.com/objectionary/eolang-paper/actions/workflows/latexmk.yml)
+[![make](https://github.com/objectionary/calculus-paper/actions/workflows/latexmk.yml/badge.svg)](https://github.com/objectionary/calculus-paper/actions/workflows/latexmk.yml)
 
 This is the first paper about 𝜑-calculus ([read in PDF][pdf]).
 
