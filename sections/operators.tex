@@ -61,7 +61,30 @@ The contextualization function is total, meaning that
 \end{theorem}
 
 \begin{proof}
-\tbd{We still need to prove this.}
+Fix an absolute \(k\) and argue by structural induction on the expression \(e\),
+  establishing at once that a derivation of \(\phinoContextualize{e}{k}{e_1}\)
+  exists for some \(e_1\) and that it is finite.
+By the grammar of \cref{fig:ebnf} an expression is a locator ($Q$ or
+  \(\phiTerminal{\xi}\)), a terminator $T$, a formation, a dispatch, or an
+  application, and its outermost constructor tells these cases apart.
+The rules of \cref{fig:contextualization} match the cases one-to-one, so exactly
+  one rule applies to every expression.
+For $Q$, \(\phiTerminal{\xi}\), $T$ and a formation $[[ B ]]$
+  the matching rule---\nameref{r:cg}, \nameref{r:cxi}, \nameref{r:ct} or
+  \nameref{r:cf}---is an axiom that yields a result in a single step, so the base
+  cases hold; \nameref{r:cf} rewrites the formation to itself and never descends
+  into \(B\), halting the recursion at every formation boundary.
+A dispatch \(e_1.\tau\) selects \nameref{r:cd}, whose single premise
+  contextualizes the subject \(e_1\); an application $e_1( \tau -> e_2 )$ or
+  $e_1( \phiTerminal{\alpha_i} -> e_2 )$ selects \nameref{r:ca} or
+  \nameref{r:caa}, whose two premises contextualize \(e_1\) and \(e_2\).
+Every premise is a strict subexpression of its conclusion, so by the induction
+  hypothesis each has a finite derivation and a result, and the chosen rule
+  assembles them into a finite derivation of the whole; the argument \(k\) is
+  copied wholesale at \nameref{r:cxi} and never traversed.
+The recursion therefore follows the finite syntax tree and every rule is defined
+  on its case, so contextualization is total on \(\mathcal{E} \times \mathcal{K}\)
+  and each derivation terminates.
 \end{proof}
 
 \subsection{Normalization}\label{sec:normalization}
