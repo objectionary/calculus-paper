@@ -142,15 +142,15 @@ Two expressions are said to be syntactically equivalent or just
 
 \begin{definition}[Evaluation]
 The \emph{evaluation} function
-  \(\mathcal{B} \times \mathcal{S}
-    \rightarrow \mathcal{N} \times \mathcal{S} \),
+  \(\mathcal{B} \times \mathcal{E} \times \mathcal{S}
+    \rightarrow \mathcal{E} \times \mathcal{S} \),
   denoted as \(\phinoEvaluate{b}{e}{s_1}{n}{s_2}\),
   maps \(b\) to \(n\)
   calling by value the function attached to $L$ of \(b\)
   and shifting the \emph{state} of evaluation \(s_1\) to \(s_2\),
   in the universe \(e\):
 \begin{phiquation*}
-\dfrac{f \lparen [[ B_1, L>f, B_2 ]] {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2}}
+\dfrac{F \lparen [[ B_1, L>F, B_2 ]] {,}\; e {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>F, B_2 ]]}{e}{s_1}{n}{s_2}}
 \end{phiquation*}
 \end{definition}
 
