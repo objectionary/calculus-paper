@@ -5,17 +5,17 @@
 \section{Example of Dataization}
 \label{app:dataization-examples}
 
-Consider a program that converts degrees from Celsius to Fahrenheit using
-  the formula:
+Consider an algorithm that converts degrees from Celsius to Fahrenheit:
 %
 \begin{equation*}
 ^{\circ}F ={} ^{\circ}C \times 1.8 + 32,
 \end{equation*}
 %
 Assuming that \(^{\circ}C\) already equals \ff{25} and is attached
-  to the \ff{c} attribute instead of being provided by a user:
+  to the \ff{c} attribute instead of being provided by a user,
+  the algorithm may be represented by an expression:
 %
-\iexec[maybe]{phino rewrite --output=latex --sweet --nonumber --label=eq:celsius --margin=100 --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
+\iexec[maybe]{phino rewrite --output=latex --sweet --label=eq:celsius --margin=80 --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
 \input{_tex/celsius-formula.tex}
 
 The functions are defined as follows:
@@ -26,7 +26,7 @@ The functions are defined as follows:
 \end{phiquation*}
 
 The following sequence of transformations constitutes
-  the evaluation of the program:
+  the dataization of \cref{eq:celsius}:
 
 \iexec[maybe]{phino dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --flat --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=5 --meet-popularity=1 ./examples/celsius.phi > _tex/celsius-dataization.tex}
 \newsavebox{\celsiusbox}

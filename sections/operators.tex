@@ -208,28 +208,31 @@ The \emph{dataization} function
 \end{definition}
 
 \begin{theorem}[Progress]
-Dataization is defined for every normal form, meaning that for any \(n\),
-  \(e\), and \(s_1\) at least one rule of \cref{fig:dataization} applies
-  and the derivation never gets stuck.
+Dataization is defined for every normal form except the terminator $T$,
+  meaning that for any \(n \neq T\), \(e\), and \(s_1\) at least one rule of
+  \cref{fig:dataization} applies, so a derivation never gets stuck at a term
+  that ought to carry data.
+The terminator $T$ matches no rule: a derivation that reaches it halts without
+  a datum, which is exactly the error that $T$ signals.
 \end{theorem}
 
 \begin{proof}
-The domain of dataization is \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}\),
-  so it suffices to show that every normal form \(n\) matches the conclusion
-  of at least one rule of \cref{fig:dataization};
-  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
 By the grammar of \cref{fig:ebnf}, every expression, and hence every normal form,
-  is a formation, an application, a dispatch, a locator, or the terminator $T$,
-  which yields three exhaustive cases.
+  is a formation, an application, a dispatch, a locator, or the terminator $T$;
+  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
+We show that every case other than $T$ matches a rule, while $T$ matches none.
 
-If $n = T$, then \nameref{r:end} fires and closes the derivation at once.
+If $n = T$, no rule of \cref{fig:dataization} applies, since every rule demands
+  a formation or, for \nameref{r:norm}, an expression distinct from $T$.
+The derivation halts with no datum, which is the error we intend: $T$ carries
+  no data to read.
 
 If \(n\) is neither a formation nor $T$,
   then \(\phinoNotFormation{n}\) and $n \neq T$,
   which is exactly the condition of \nameref{r:norm};
   the rule morphs \(n\) and dataizes the result,
   and since morphing delivers a formation or $T$ (\cref{sec:morphing}),
-  that result falls into one of the two other cases.
+  that result falls into one of the other cases.
 
 If $n = [[ B ]]$ is a formation, we inspect its assets and attributes in order:
   \begin{inparaenum}[a)]
@@ -238,23 +241,25 @@ If $n = [[ B ]]$ is a formation, we inspect its assets and attributes in order:
   \item otherwise, if \(B\) carries an $@$-attribute, \nameref{r:box} fires,
     its condition $[D, L] \cap B = \emptyset$ granted by the two exclusions above;
   \item otherwise \(B\) holds none of $D$, $L$, and $@$,
-    which is the condition of \nameref{r:none}, and that rule fires.
+    which is the condition of \nameref{r:none}; that rule fires and reduces
+    the goal to the dataization of $T$, which then halts as above --- a
+    formation with nothing to dataize is itself an error.
   \end{inparaenum}
-These four alternatives are exhaustive, so a formation always matches a rule.
-No input is therefore stuck, and dataization is defined on the whole of its domain.
+So every formation matches a rule, and $T$ alone is left without one.
 
 Termination is by induction on the derivation.
-The rules \nameref{r:delta}, \nameref{r:none}, and \nameref{r:end} are axioms
-  and discharge with no premise.
+\nameref{r:delta} is an axiom and discharges with no premise.
 Each remaining rule reduces the dataization of \(n\) to the dataization of a normal
   form produced by an operator that itself terminates---contextualization
   (\cref{sec:contextualization}) and normalization (\cref{sec:normalization})
   for \nameref{r:box}, evaluation and normalization for \nameref{r:fire},
-  and morphing (\cref{sec:morphing}) for \nameref{r:norm}---so every premise is
-  again a dataization judgment, and \nameref{r:norm} never recurs into itself.
+  and morphing (\cref{sec:morphing}) for \nameref{r:norm}, while \nameref{r:none}
+  reduces directly to $T$---so every premise is again a dataization judgment,
+  and \nameref{r:norm} never recurs into itself.
 The derivation is hence finite whenever the recursion through \nameref{r:box}
   and \nameref{r:fire} is well-founded,
-  which holds for every program that denotes a terminating computation.
+  which holds for every program that denotes a terminating computation;
+  such a derivation ends either at a datum or at the terminator $T$.
 \end{proof}
 
 \begin{figure*}
@@ -269,7 +274,7 @@ The derivation is hence finite whenever the recursion through \nameref{r:box}
 
 \begin{theorem}
 The dataization function is confluent, meaning that
-  every normal form can be dataized to only one data,
+  every normal form can be dataized to at most one datum,
   provided the functions attached to atoms are pure---their result
   depends on nothing beyond the formation, the universe, and the state.
 \end{theorem}
@@ -284,9 +289,10 @@ We argue by induction on the first derivation, after observing that at most
   one rule applies to any configuration \(\langle n, e, s_1 \rangle\),
   so both derivations are headed by the same rule.
 
-The conclusions of the six rules partition every configuration.
-If $n = T$, only \nameref{r:end} matches, since every other rule demands
-  a formation or, for \nameref{r:norm}, an expression distinct from $T$.
+The conclusions of the five rules partition every configuration, and $T$ falls
+  under none of them.
+If $n = T$, no rule matches, so dataization is undefined and there is nothing
+  to disprove.
 If \(n\) is neither a formation nor $T$, only \nameref{r:norm} matches.
 If $n = [[ B ]]$ is a formation, the asset and attribute it carries select
   a single rule:
@@ -302,10 +308,11 @@ Hence no configuration matches two rules.
 
 Because the same rule heads both derivations, it suffices to check that each
   rule maps its premises to a single result.
-\nameref{r:delta}, \nameref{r:none}, and \nameref{r:end} are axioms whose
-  conclusions read the result directly off \(n\)---the attached data,
-  the empty data, and the empty data respectively---each leaving the state
-  untouched, so they admit no other outcome.
+\nameref{r:delta} is an axiom whose conclusion reads the result directly off
+  \(n\)---the attached data---leaving the state untouched, so it admits no other
+  outcome.
+\nameref{r:none} reduces to the dataization of $T$, which is undefined, so it
+  yields no result and hence no second one.
 \nameref{r:box} chains three premises: contextualization is a total function
   (\cref{sec:contextualization}) and yields a unique \(n\); normalization is
   confluent (\cref{sec:normalization}) and yields a unique normal form \(n_1\);
