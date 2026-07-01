@@ -16,6 +16,7 @@
 \usepackage{paralist} % for inlined lists
 \usepackage{anyfontsize} % To get rid of font not found warnings
 \usepackage{/code/ctan/eolang.sty/eolang} % for EO sources and formulas
+\catcode`\$=3 % shield: if eolang activates $ at end of its load, undo it so later packages (mathtools, soul via to-be-determined) and acmart's \begin{document} hooks see a normal dollar; our \phino* macros use \phiq, not active $, so nothing here depends on it; harmless no-op once eolang stops the preamble activation
 \usepackage{tabularx} % for special tables
 \usepackage{naive-ebnf} % for EBNF
 \usepackage{to-be-determined} % for \tbd command
@@ -90,12 +91,12 @@
 \newcommand\phinoNormalizationRule[6][]{%
   \newrule[#1]{#2}:
   &
-  { $ #3 $ }
+  { \phiq{#3} }
   \(\trans\)
-  { $ #4 $ }
-  \ifblank{#5}{}{\; if { $ #5 $ } }%
+  { \phiq{#4} }
+  \ifblank{#5}{}{\; if { \phiq{#5} } }%
   \\
-  \ifblank{#6}{}{& where { $ #6 $ } \\}%
+  \ifblank{#6}{}{& where { \phiq{#6} } \\}%
   }
 \newcommand\phinoEvaluate[5]{%
   \langle #1 {,}\; #2 {,}\; #3 \rangle%
@@ -115,13 +116,13 @@
 \let\phino@premises\@empty
 \newcommand\phinoName[1]{\gdef\phino@name{#1}}
 \newcommand\phinoLabel[1]{\gdef\phino@label{#1}}
-\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{$#1$}}
-\newcommand\phinoCondition[1]{\gdef\phino@condition{$#1$}}
+\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{\phiq{#1}}}
+\newcommand\phinoCondition[1]{\gdef\phino@condition{\phiq{#1}}}
 \newcommand\phinoPremise[1]{%
   \ifx\phino@premises\@empty
-    \gdef\phino@premises{$#1$}%
+    \gdef\phino@premises{\phiq{#1}}%
   \else
-    \g@addto@macro\phino@premises{\qquad $#1$}%
+    \g@addto@macro\phino@premises{\qquad \phiq{#1}}%
   \fi}
 \newenvironment{phinoContextualizationInference}
   {\begin{phinoInference}}

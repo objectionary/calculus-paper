@@ -85,24 +85,18 @@ A formation may have data attached only to its $D$-asset, for example:
 
 A formation may have a \emph{function} attached to its $L$-asset.
 Such a formation is referred to as an \emph{atom}.
-An atom may be \emph{morphed} to another formation by evaluating its function,
-for example:
+An atom may be \emph{morphed} to another expression by evaluating its function,
+  for example:
 %
 \begin{phiquation}
 \label{eq:Sqrt}
-\frac \
-  { \vdash |Sqrt| {(} b {,}\; e {,}\; s {)} \to << [[ D> \sqrt{ 256 } ]], s >> } \
-  {[[ L> |Sqrt|, |x| -> 256 ]] \to 16} {.}
-\;\text{where}\;
-\phinoDataize{b.|x|}{e}{s}{256}{s}
+\phinoMorph{[[ L> |Sqrt|, |x| -> 256 ]]}{e}{s}{[[ D> 16 ]]}{s} {.}
 \end{phiquation}
 %
-There is also a \emph{dataization} function
-  that normalizes its first argument and then either returns the data
-  attached to the $D$-asset of the normal form or morphs the atom
-  into a formation and dataizes it (recursively),
+An expression may be \emph{dataizated} by morphing its atoms first and then
+  extracting the data attached to the $D$-asset of the formation,
   for example:
 %
 \begin{phiquation*}
-\phinoDataize{[[ |x| -> 42 ]].|x|}{e}{s}{|42|}{s}.
+\phinoDataize{[[ L> |Sqrt|, |x| -> 256 ]]}{e}{s}{|16|}{s}.
 \end{phiquation*}
