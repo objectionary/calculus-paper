@@ -9,7 +9,7 @@ The syntax of a program is defined by BNF in \cref{fig:ebnf}, where the starting
 \begin{mdframed}
 \raggedright
 \begin{ebnf}[8em]
-<Program> := "\(\Phi\)" "\(\mapsto\)" <Formation> \\
+<Program> := "\(\Phi\)" "\(\mapsto\)" <Expression> \\
 <Expression> := <Formation> | <Application> | <Dispatch> | <Locator> | "\(\dead\)" \\
 <Formation> := "\(\llbracket\)" <Binding> "\(\rrbracket\)" \\
 <Application> := <Expression> "\(\lparen\)" <A-Pair> "\(\rparen\)" \\
@@ -77,7 +77,7 @@ Syntax sugar & Its more verbose equivalent \\
 \sugar
   {42}
   { Q.|number| ( Q.|bytes| ( [[ D> |40-45-00-00-00-00-00-00| ]] ) )}
-  \subs{eight bytes per integer}
+  \subs{eight bytes per integer, assuming it has a floating point}
 \sugar
   {3.14}
   { Q.|number| ( Q.|bytes| ( [[ D> |40-09-1E-B8-51-EB-85-1F| ]] ) )}

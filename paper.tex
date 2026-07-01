@@ -70,6 +70,92 @@
 \crefformat{phimeet}{{\color{gray}\Pi_{#2#1#3}}}
 \newcommand\phinoAgain[1]{\cref{phimeet:#1}}
 
+\newcounter{rule}
+\makeatletter
+\newcommand\rulemnemo[1]{\text{\sffamily{}R\(_\text{\scshape\sffamily{}#1}\)}}
+\newcommand\newrule[2][]{%
+  \def\param{#1}%
+  \ifx\param\empty%
+    \def\sub{#2}%
+  \else%
+    \def\sub{\(#1\)}%
+  \fi%
+  \refstepcounter{rule}%
+  \protected@edef\@currentlabelname{\rulemnemo{\sub}}%
+  \label@noarg{r:#2}%
+  \rulemnemo{\sub}%
+  }
+\makeatother
+
+\newcommand\phinoNormalizationRule[6][]{%
+  \newrule[#1]{#2}:
+  &
+  { $ #3 $ }
+  \(\trans\)
+  { $ #4 $ }
+  \ifblank{#5}{}{\; if { $ #5 $ } }%
+  \\
+  \ifblank{#6}{}{& where { $ #6 $ } \\}%
+  }
+\newcommand\phinoEvaluate[5]{%
+  \langle #1 {,}\; #2 {,}\; #3 \rangle%
+  \mathrel{\vcenter{\hbox{\begin{tikzpicture}\draw[-{Triangle[length=1.8mm,width=1.8mm]},line width=0.6pt](0,0)--(1.3em,0);\end{tikzpicture}}}}%
+  \langle #4 {,}\; #5 \rangle}
+\newcommand\phinoNormalize[2]{#1 \trans{} #2}
+\newcommand\phinoDataize[5]{%
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \mathrel{\Downarrow} \langle #4 {,}\; #5 \rangle}
+\newcommand\phinoMorph[5]{%
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \mathrel{\Rrightarrow} \langle #4 {,}\; #5 \rangle}
+\newcommand\phinoContextualize[3]{%
+  \langle #1 {,}\; #2 \rangle \mathrel{\Rightarrow} \langle #3 \rangle}
+\newcommand\phinoNotFormation[1]{#1 \notin \mathcal{B}}
+\newcommand\phinoGlobal{Q}
+
+\makeatletter
+\let\phino@premises\@empty
+\newcommand\phinoName[1]{\gdef\phino@name{#1}}
+\newcommand\phinoLabel[1]{\gdef\phino@label{#1}}
+\newcommand\phinoConclusion[1]{\gdef\phino@conclusion{$#1$}}
+\newcommand\phinoCondition[1]{\gdef\phino@condition{$#1$}}
+\newcommand\phinoPremise[1]{%
+  \ifx\phino@premises\@empty
+    \gdef\phino@premises{$#1$}%
+  \else
+    \g@addto@macro\phino@premises{\qquad $#1$}%
+  \fi}
+\newenvironment{phinoContextualizationInference}
+  {\begin{phinoInference}}
+  {\end{phinoInference}}
+\newenvironment{phinoMorphingInference}
+  {\begin{phinoInference}}
+  {\end{phinoInference}}
+\newenvironment{phinoDataizationInference}
+  {\begin{phinoInference}}
+  {\end{phinoInference}}
+\newenvironment{phinoInference}{%
+  \global\let\phino@name\@empty
+  \global\let\phino@label\@empty
+  \global\let\phino@premises\@empty
+  \global\let\phino@conclusion\@empty
+  \global\let\phino@condition\@empty
+}{%
+  \adjustbox{max width=\linewidth,margin=0em .3em}{%
+    \ifx\phino@label\@empty%
+      \newrule{\phino@name}\;%
+    \else%
+      \newrule[\phino@label]{\phino@name}\;%
+    \fi%
+    \ensuremath{\dfrac{\text{\phino@premises}}{\text{\phino@conclusion}}}%
+    \ifx\phino@condition\@empty\else\; if\;\phino@condition\fi%
+  }}%
+\makeatother
+
+\newcommand\inputrules[1]{
+  \adjustbox{max width=\linewidth}{
+  \begin{tabular}{rl}
+  \input{#1}
+  \end{tabular}}}
+
 \acmBooktitle{untitled}
 \title{\texorpdfstring{\(\varphi\)}{phi}-Calculus: Object-Oriented Formalism}
 \subtitle{%

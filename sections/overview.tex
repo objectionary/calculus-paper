@@ -91,16 +91,18 @@ for example:
 \begin{phiquation}
 \label{eq:Sqrt}
 \frac \
-  { \vdash |Sqrt| {(} b {,}\; e {,}\; s {)} \to << [[ D> \sqrt{\mathbb{D} {(} b.|x| {,}\; e {,}\; s {)} } ]], s >> } \
+  { \vdash |Sqrt| {(} b {,}\; e {,}\; s {)} \to << [[ D> \sqrt{ 256 } ]], s >> } \
   {[[ L> |Sqrt|, |x| -> 256 ]] \to 16} {.}
+\;\text{where}\;
+\phinoDataize{b.|x|}{e}{s}{256}{s}
 \end{phiquation}
 %
-There is also a \emph{dataization} function \(\mathbb{D}(b, e, s)\)
+There is also a \emph{dataization} function
   that normalizes its first argument and then either returns the data
   attached to the $D$-asset of the normal form or morphs the atom
   into a formation and dataizes it (recursively),
   for example:
 %
 \begin{phiquation*}
-\mathbb{D} \lparen [[ |x| -> 42 ]].|x| \trans 42 {,}\; e {,}\; s \rparen \to 42.
+\phinoDataize{[[ |x| -> 42 ]].|x|}{e}{s}{|42|}{s}.
 \end{phiquation*}

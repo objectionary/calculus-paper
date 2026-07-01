@@ -42,10 +42,6 @@ A \textbf{state} of evaluation \(s_i\) ranges over \(\mathcal{S}\),
   where \(s_0\) is an empty state.
 \end{definition}
 
-\begin{definition}[Universe]
-A \textbf{universe} is an expression denoted as $Q$.
-\end{definition}
-
 \begin{definition}[Function]
 A \textbf{function} is a total mapping
   \(\mathcal{B} \times \mathcal{E} \times \mathcal{S}
@@ -189,7 +185,7 @@ Consider the following abstract with an inner formation:
 \Big\{ [[ |x| -> [[ |a| -> ?, next -> [[ @ -> $.^.|a|.plus( 1 ), ^ -> Q.|x| ]] ]], |k| -> $.|x|( |42| ) ]] \Big\} {.}
 \end{phiquation*}
 Here, if the parent of $Q.|x|.|next|$ were attached in the formation,
-  the result of $\mathbb{D} {(} Q.|k|.|next| {)}$
+  the result of dataization of $Q.|k|.|next|$
   would not be equal to \ff{43}.
 Instead, it would be equal to $T$, because $ Q.|k|.|next|.^ $
   would still be attached to $ Q.|x| $ after the dispatch of $ Q.|k|.next $.
