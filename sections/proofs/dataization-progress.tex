@@ -1,0 +1,48 @@
+% SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
+% SPDX-License-Identifier: MIT
+
+\begin{proof}[Proof of \cref{thm:dataization-progress}]
+By the grammar of \cref{fig:ebnf}, every expression, and hence every normal form,
+  is a formation, an application, a dispatch, a locator, or the terminator $T$;
+  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
+We show that every case other than $T$ matches a rule, while $T$ matches none.
+
+If $n = T$, no rule of \cref{fig:dataization} applies, since every rule demands
+  a formation or, for \nameref{r:norm}, an expression distinct from $T$.
+The derivation halts with no datum, which is the error we intend: $T$ carries
+  no data to read.
+
+If \(n\) is neither a formation nor $T$,
+  then \(\phinoNotFormation{n}\) and $n \neq T$,
+  which is exactly the condition of \nameref{r:norm};
+  the rule morphs \(n\) and dataizes the result,
+  and since morphing delivers a formation or $T$ (\cref{sec:morphing}),
+  that result falls into one of the other cases.
+
+If $n = [[ B ]]$ is a formation, we inspect its assets and attributes in order:
+  \begin{inparaenum}[a)]
+  \item if \(B\) carries a $D$-asset, \nameref{r:delta} fires;
+  \item otherwise, if \(B\) carries an $L$-asset, \nameref{r:fire} fires;
+  \item otherwise, if \(B\) carries an $@$-attribute, \nameref{r:box} fires,
+    its condition $[D, L] \cap B = \emptyset$ granted by the two exclusions above;
+  \item otherwise \(B\) holds none of $D$, $L$, and $@$,
+    which is the condition of \nameref{r:none}; that rule fires and reduces
+    the goal to the dataization of $T$, which then halts as above --- a
+    formation with nothing to dataize is itself an error.
+  \end{inparaenum}
+So every formation matches a rule, and $T$ alone is left without one.
+
+Termination is by induction on the derivation.
+\nameref{r:delta} is an axiom and discharges with no premise.
+Each remaining rule reduces the dataization of \(n\) to the dataization of a normal
+  form produced by an operator that itself terminates---contextualization
+  (\cref{sec:contextualization}) and normalization (\cref{sec:normalization})
+  for \nameref{r:box}, evaluation and normalization for \nameref{r:fire},
+  and morphing (\cref{sec:morphing}) for \nameref{r:norm}, while \nameref{r:none}
+  reduces directly to $T$---so every premise is again a dataization judgment,
+  and \nameref{r:norm} never recurs into itself.
+The derivation is hence finite whenever the recursion through \nameref{r:box}
+  and \nameref{r:fire} is well-founded,
+  which holds for every program that denotes a terminating computation;
+  such a derivation ends either at a datum or at the terminator $T$.
+\end{proof}

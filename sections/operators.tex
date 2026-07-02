@@ -55,37 +55,10 @@ The notation \(\phinoContextualize{e_1}{k}{e_2}\)
 \label{fig:contextualization}
 \end{figure*}
 
-\begin{theorem}
+\begin{theorem}\label{thm:contextualization-total}
 The contextualization function is total, meaning that
   every expression can be contextualized and its derivation terminates.
 \end{theorem}
-
-\begin{proof}
-Fix an absolute \(k\) and argue by structural induction on the expression \(e\),
-  establishing at once that a derivation of \(\phinoContextualize{e}{k}{e_1}\)
-  exists for some \(e_1\) and that it is finite.
-By the grammar of \cref{fig:ebnf} an expression is a locator ($Q$ or
-  \(\phiTerminal{\xi}\)), a terminator $T$, a formation, a dispatch, or an
-  application, and its outermost constructor tells these cases apart.
-The rules of \cref{fig:contextualization} match the cases one-to-one, so exactly
-  one rule applies to every expression.
-For $Q$, \(\phiTerminal{\xi}\), $T$ and a formation $[[ B ]]$
-  the matching rule---\nameref{r:cg}, \nameref{r:cxi}, \nameref{r:ct} or
-  \nameref{r:cf}---is an axiom that yields a result in a single step, so the base
-  cases hold; \nameref{r:cf} rewrites the formation to itself and never descends
-  into \(B\), halting the recursion at every formation boundary.
-A dispatch $e_1.\tau$ selects \nameref{r:cd}, whose single premise
-  contextualizes the subject \(e_1\); an application $e_1( \tau -> e_2 )$ or
-  $e_1( \phiTerminal{\alpha_i} -> e_2 )$ selects \nameref{r:ca} or
-  \nameref{r:caa}, whose two premises contextualize \(e_1\) and \(e_2\).
-Every premise is a strict subexpression of its conclusion, so by the induction
-  hypothesis each has a finite derivation and a result, and the chosen rule
-  assembles them into a finite derivation of the whole; the argument \(k\) is
-  copied wholesale at \nameref{r:cxi} and never traversed.
-The recursion therefore follows the finite syntax tree and every rule is defined
-  on its case, so contextualization is total on \(\mathcal{E} \times \mathcal{K}\)
-  and each derivation terminates.
-\end{proof}
 
 \subsection{Normalization}\label{sec:normalization}
 
@@ -120,20 +93,16 @@ Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
 \label{fig:reduction}
 \end{figure*}
 
-\begin{theorem}
+\begin{theorem}\label{thm:normalization-terminates}
 Every expression has a normal form, meaning that reduction always terminates.
 \end{theorem}
-
-\begin{proof}
-\tbd{We still need to prove this.}
-\end{proof}
 
 \ifdefined\examples
 \Cref{app:normalization-examples} demonstrates how normalization
   works through examples.
 \fi
 
-\begin{theorem}
+\begin{theorem}\label{thm:normalization-confluent}
 The reduction relation is \emph{confluent}:
   if \(e \strans e_1\) and \(e \strans e_2\),
   then there exists an expression \(e_3\) such that
@@ -142,12 +111,6 @@ The reduction relation is \emph{confluent}:
 
 Confluence guarantees that the normal form of an expression is unique,
   irrespective of the order in which the rules are applied.
-
-\begin{proof}
-We have proved this property mechanically in Lean~4,
-  with the proof available in a public
-  GitHub repository\footnote{\url{https://github.com/objectionary/proof}}.
-\end{proof}
 
 \subsection{Equivalence}\label{sec:equivalence}
 
@@ -190,14 +153,10 @@ The \emph{morphing} function
   in the universe \(e\).
 \end{definition}
 
-\begin{theorem}
+\begin{theorem}\label{thm:morphing-total}
 The morphing function is total, meaning that
   every normal form can be morphed and its derivation terminates.
 \end{theorem}
-
-\begin{proof}
-\tbd{We still need to prove this.}
-\end{proof}
 
 \begin{figure*}
 \begin{mdframed}
@@ -209,14 +168,10 @@ The morphing function is total, meaning that
 \label{fig:morphing}
 \end{figure*}
 
-\begin{theorem}
+\begin{theorem}\label{thm:morphing-confluent}
 The morphing function is confluent, meaning that
   every normal form can be morphed to only one formation or $T$.
 \end{theorem}
-
-\begin{proof}
-\tbd{We still need to prove this.}
-\end{proof}
 
 \subsection{Dataization}\label{sec:dataization}
 
@@ -230,7 +185,7 @@ The \emph{dataization} function
   in the universe \(e\).
 \end{definition}
 
-\begin{theorem}[Progress]
+\begin{theorem}[Progress]\label{thm:dataization-progress}
 Dataization is defined for every normal form except the terminator $T$,
   meaning that for any \(n \neq T\), \(e\), and \(s_1\) at least one rule of
   \cref{fig:dataization} applies, so a derivation never gets stuck at a term
@@ -238,52 +193,6 @@ Dataization is defined for every normal form except the terminator $T$,
 The terminator $T$ matches no rule: a derivation that reaches it halts without
   a datum, which is exactly the error that $T$ signals.
 \end{theorem}
-
-\begin{proof}
-By the grammar of \cref{fig:ebnf}, every expression, and hence every normal form,
-  is a formation, an application, a dispatch, a locator, or the terminator $T$;
-  neither the universe \(e\) nor the state \(s_1\) restricts which rule fires.
-We show that every case other than $T$ matches a rule, while $T$ matches none.
-
-If $n = T$, no rule of \cref{fig:dataization} applies, since every rule demands
-  a formation or, for \nameref{r:norm}, an expression distinct from $T$.
-The derivation halts with no datum, which is the error we intend: $T$ carries
-  no data to read.
-
-If \(n\) is neither a formation nor $T$,
-  then \(\phinoNotFormation{n}\) and $n \neq T$,
-  which is exactly the condition of \nameref{r:norm};
-  the rule morphs \(n\) and dataizes the result,
-  and since morphing delivers a formation or $T$ (\cref{sec:morphing}),
-  that result falls into one of the other cases.
-
-If $n = [[ B ]]$ is a formation, we inspect its assets and attributes in order:
-  \begin{inparaenum}[a)]
-  \item if \(B\) carries a $D$-asset, \nameref{r:delta} fires;
-  \item otherwise, if \(B\) carries an $L$-asset, \nameref{r:fire} fires;
-  \item otherwise, if \(B\) carries an $@$-attribute, \nameref{r:box} fires,
-    its condition $[D, L] \cap B = \emptyset$ granted by the two exclusions above;
-  \item otherwise \(B\) holds none of $D$, $L$, and $@$,
-    which is the condition of \nameref{r:none}; that rule fires and reduces
-    the goal to the dataization of $T$, which then halts as above --- a
-    formation with nothing to dataize is itself an error.
-  \end{inparaenum}
-So every formation matches a rule, and $T$ alone is left without one.
-
-Termination is by induction on the derivation.
-\nameref{r:delta} is an axiom and discharges with no premise.
-Each remaining rule reduces the dataization of \(n\) to the dataization of a normal
-  form produced by an operator that itself terminates---contextualization
-  (\cref{sec:contextualization}) and normalization (\cref{sec:normalization})
-  for \nameref{r:box}, evaluation and normalization for \nameref{r:fire},
-  and morphing (\cref{sec:morphing}) for \nameref{r:norm}, while \nameref{r:none}
-  reduces directly to $T$---so every premise is again a dataization judgment,
-  and \nameref{r:norm} never recurs into itself.
-The derivation is hence finite whenever the recursion through \nameref{r:box}
-  and \nameref{r:fire} is well-founded,
-  which holds for every program that denotes a terminating computation;
-  such a derivation ends either at a datum or at the terminator $T$.
-\end{proof}
 
 \begin{figure*}
 \begin{mdframed}
@@ -295,69 +204,12 @@ The derivation is hence finite whenever the recursion through \nameref{r:box}
 \label{fig:dataization}
 \end{figure*}
 
-\begin{theorem}
+\begin{theorem}\label{thm:dataization-confluent}
 The dataization function is confluent, meaning that
   every normal form can be dataized to at most one datum,
   provided the functions attached to atoms are pure---their result
   depends on nothing beyond the formation, the universe, and the state.
 \end{theorem}
-
-\begin{proof}
-Dataization is specified by the syntax-directed inference system of
-  \cref{fig:dataization}, so confluence amounts to the relation $\Downarrow$
-  being single-valued: whenever \(\phinoDataize{n}{e}{s_1}{\delta}{s_2}\)
-  and \(\phinoDataize{n}{e}{s_1}{\delta'}{s_2'}\), we have \(\delta = \delta'\)
-  and \(s_2 = s_2'\).
-We argue by induction on the first derivation, after observing that at most
-  one rule applies to any configuration \(\langle n, e, s_1 \rangle\),
-  so both derivations are headed by the same rule.
-
-The conclusions of the five rules partition every configuration, and $T$ falls
-  under none of them.
-If $n = T$, no rule matches, so dataization is undefined and there is nothing
-  to disprove.
-If \(n\) is neither a formation nor $T$, only \nameref{r:norm} matches.
-If $n = [[ B ]]$ is a formation, the asset and attribute it carries select
-  a single rule:
-  \begin{inparaenum}[a)]
-  \item a $D$-asset selects \nameref{r:delta} and an $L$-asset selects
-    \nameref{r:fire}, the two being mutually exclusive in a normal form;
-  \item with neither asset present, an $@$-attribute selects \nameref{r:box}
-    and its absence selects \nameref{r:none},
-  \end{inparaenum}
-  the latter pair separated by the explicit conditions
-  $[D, L] \cap B = \emptyset$ and $[D, L, @] \cap B = \emptyset$.
-Hence no configuration matches two rules.
-
-Because the same rule heads both derivations, it suffices to check that each
-  rule maps its premises to a single result.
-\nameref{r:delta} is an axiom whose conclusion reads the result directly off
-  \(n\)---the attached data---leaving the state untouched, so it admits no other
-  outcome.
-\nameref{r:none} reduces to the dataization of $T$, which is undefined, so it
-  yields no result and hence no second one.
-\nameref{r:box} chains three premises: contextualization is a total function
-  (\cref{sec:contextualization}) and yields a unique \(n\); normalization is
-  confluent (\cref{sec:normalization}) and yields a unique normal form \(n_1\);
-  and the dataization of \(n_1\) is unique by the induction hypothesis.
-\nameref{r:norm} chains morphing, which is confluent (\cref{sec:morphing}) and
-  yields a unique formation or $T$, with a dataization premise that is unique
-  by the induction hypothesis.
-\nameref{r:fire} evaluates the function \(F\) attached to the $L$-asset.
-By \cref{sec:evaluation} a function is a total mapping that deterministically
-  maps formation, universe, and state to an expression and a new state;
-  being pure, its result depends on nothing else.
-The universe \(e\) is fixed throughout the derivation and the state propagates
-  only through the explicit threading of the rules, so both derivations present
-  the call with identical arguments and it returns the same
-  \(\langle n, s_2 \rangle\); normalization then yields a unique \(n_1\) and the
-  dataization premise is unique by the induction hypothesis.
-In every case the preceding premises are determined before the recursive one,
-  so the sub-derivations dataize the same normal form in the same state and the
-  induction hypothesis applies.
-The two derivations therefore agree on the result, and dataization relates each
-  normal form to at most one data and state.
-\end{proof}
 
 \ifdefined\examples
 \Cref{app:dataization-examples} demonstrates how the dataization function works through examples.

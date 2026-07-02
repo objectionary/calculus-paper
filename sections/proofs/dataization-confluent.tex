@@ -1,0 +1,59 @@
+% SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
+% SPDX-License-Identifier: MIT
+
+\begin{proof}[Proof of \cref{thm:dataization-confluent}]
+Dataization is specified by the syntax-directed inference system of
+  \cref{fig:dataization}, so confluence amounts to the relation $\Downarrow$
+  being single-valued: whenever \(\phinoDataize{n}{e}{s_1}{\delta}{s_2}\)
+  and \(\phinoDataize{n}{e}{s_1}{\delta'}{s_2'}\), we have \(\delta = \delta'\)
+  and \(s_2 = s_2'\).
+We argue by induction on the first derivation, after observing that at most
+  one rule applies to any configuration \(\langle n, e, s_1 \rangle\),
+  so both derivations are headed by the same rule.
+
+The conclusions of the five rules partition every configuration, and $T$ falls
+  under none of them.
+If $n = T$, no rule matches, so dataization is undefined and there is nothing
+  to disprove.
+If \(n\) is neither a formation nor $T$, only \nameref{r:norm} matches.
+If $n = [[ B ]]$ is a formation, the asset and attribute it carries select
+  a single rule:
+  \begin{inparaenum}[a)]
+  \item a $D$-asset selects \nameref{r:delta} and an $L$-asset selects
+    \nameref{r:fire}, the two being mutually exclusive in a normal form;
+  \item with neither asset present, an $@$-attribute selects \nameref{r:box}
+    and its absence selects \nameref{r:none},
+  \end{inparaenum}
+  the latter pair separated by the explicit conditions
+  $[D, L] \cap B = \emptyset$ and $[D, L, @] \cap B = \emptyset$.
+Hence no configuration matches two rules.
+
+Because the same rule heads both derivations, it suffices to check that each
+  rule maps its premises to a single result.
+\nameref{r:delta} is an axiom whose conclusion reads the result directly off
+  \(n\)---the attached data---leaving the state untouched, so it admits no other
+  outcome.
+\nameref{r:none} reduces to the dataization of $T$, which is undefined, so it
+  yields no result and hence no second one.
+\nameref{r:box} chains three premises: contextualization is a total function
+  (\cref{sec:contextualization}) and yields a unique \(n\); normalization is
+  confluent (\cref{sec:normalization}) and yields a unique normal form \(n_1\);
+  and the dataization of \(n_1\) is unique by the induction hypothesis.
+\nameref{r:norm} chains morphing, which is confluent (\cref{sec:morphing}) and
+  yields a unique formation or $T$, with a dataization premise that is unique
+  by the induction hypothesis.
+\nameref{r:fire} evaluates the function \(F\) attached to the $L$-asset.
+By \cref{sec:evaluation} a function is a total mapping that deterministically
+  maps formation, universe, and state to an expression and a new state;
+  being pure, its result depends on nothing else.
+The universe \(e\) is fixed throughout the derivation and the state propagates
+  only through the explicit threading of the rules, so both derivations present
+  the call with identical arguments and it returns the same
+  \(\langle n, s_2 \rangle\); normalization then yields a unique \(n_1\) and the
+  dataization premise is unique by the induction hypothesis.
+In every case the preceding premises are determined before the recursive one,
+  so the sub-derivations dataize the same normal form in the same state and the
+  induction hypothesis applies.
+The two derivations therefore agree on the result, and dataization relates each
+  normal form to at most one data and state.
+\end{proof}

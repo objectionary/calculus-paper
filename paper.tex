@@ -205,8 +205,11 @@
 \bibliography{bibliography/main}}
 \vfill\eject
 
-\ifdefined\examples
 \appendix
+
+\input{sections/app-proofs}
+
+\ifdefined\examples
 \input{sections/app-normalization}
 \input{sections/app-dataization}
 \fi
