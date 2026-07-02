@@ -12,14 +12,14 @@ An object \emph{formation} is a collection of \emph{attributes},
 \end{phiquation}
 %
 This formation has two attributes \ff{price} and \ff{color}.
-The formation is an \emph{abstract} because the \ff{price} attribute
+The formation is an \emph{abstract formation} because the \ff{price} attribute
   is \emph{void}, i.e. there is nothing \emph{attached} to it.
 The \ff{color} attribute is attached to another formation
   with one $D$-\emph{asset},
   which is attached to \emph{data} (three bytes).
 
 A \emph{full application} of a pair---an attribute and
-  an \emph{expression}---to an abstract
+  an \emph{expression}---to an abstract formation
   \emph{results} in a new \emph{closed} formation, for example:
 %
 \begin{phiquation}
@@ -27,7 +27,7 @@ A \emph{full application} of a pair---an attribute and
 [[ |x| -> ? ]]( |y| -> b ) \trans [[ |x| -> b ]] {.}
 \end{phiquation}
 %
-A \emph{partial} application results in a new abstract, for example:
+A \emph{partial} application results in a new abstract formation, for example:
 %
 \begin{phiquation*}
 [[ |x| -> ?, |y| -> ? ]]( |x| -> b ) \trans [[ |x| -> b, |y| -> ? ]] {.}

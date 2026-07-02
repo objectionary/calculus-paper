@@ -102,14 +102,14 @@ The \textbf{terminator}, denoted as $T$,
   is an expression that signals an error.
 \end{definition}
 
-\begin{definition}[Abstract]
-An \textbf{abstract} is a formation with at least one void attribute.
+\begin{definition}[Abstract Formation]
+A formation with at least one void attribute is an \textbf{abstract formation}.
 \end{definition}
 
-\Cref{eq:price-color} is an example of a formation that is an abstract,
-  while the expression attached to its \ff{color} attribute is not an abstract.
+\Cref{eq:price-color} is an example of an abstract formation,
+  while the formation attached to its \ff{color} attribute is closed.
 
-A formation that is not an abstract may be called a \emph{closed} formation.
+A formation that is not an abstract formation may be called a \emph{closed} formation.
 
 \begin{definition}[Application]
 An \textbf{application},
@@ -120,14 +120,14 @@ An \textbf{application},
 \end{definition}
 
 \Cref{eq:simple-application} demonstrates application,
-  where $ |a| -> b_2 $ is applied to an abstract $[[ |a| -> ? ]]$.
+  where $ |a| -> b_2 $ is applied to an abstract formation $[[ |a| -> ? ]]$.
 The application creates a new formation $[[ |a| -> b_2 ]]$,
   while the existing formation remains intact.
 
-The formation in \cref{eq:price-color} is an abstract,
+The formation in \cref{eq:price-color} is an abstract formation,
   because its attribute \ff{price} is void.
 The formation in \cref{eq:simple-application}
-  was an abstract before the application,
+  was an abstract formation before the application,
   but the formation created by the application is closed
   since its attribute \ff{a} is not void (attached to \(b_2\)).
 
@@ -178,7 +178,7 @@ Attaching expression \(e\) to the $^$ attribute of formation \(b\)
 
 The presence of \enquote{parent} in each formation is essential
   for the coordination of inner formations after dispatch.
-Consider the following abstract with an inner formation:
+Consider the following abstract formation with an inner formation:
 \begin{phiquation*}
 [[ |x| -> [[ |a| -> ?, next -> [[ @ -> $.^.|a|.plus( 1 ) ]] ]], |k| -> $.|x|( |42| ) ]] {.}
 \end{phiquation*}
