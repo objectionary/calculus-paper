@@ -131,12 +131,12 @@ Two expressions are said to be syntactically equivalent or just
 \begin{definition}[Evaluation]
 The \emph{evaluation} function
   \(\mathcal{B} \times \mathcal{E} \times \mathcal{S}
-    \rightarrow \mathcal{E} \times \mathcal{S} \),
+    \rightharpoonup \mathcal{E} \times \mathcal{S} \),
   denoted as \(\phinoEvaluate{b}{e}{s_1}{n}{s_2}\),
-  maps \(b\) to \(n\)
-  calling by value the function attached to $L$ of \(b\)
-  and shifting the \emph{state} of evaluation \(s_1\) to \(s_2\),
-  in the universe \(e\):
+  maps an atom \(b\) to \(n\),
+  calling by value the function attached to its $L$-asset
+  in the universe \(e\),
+  possibly shifting the state \(s_1\) to \(s_2\):
 \begin{phiquation*}
 \dfrac{F \lparen [[ B_1, L>F, B_2 ]] {,}\; e {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>F, B_2 ]]}{e}{s_1}{n}{s_2}}
 \end{phiquation*}
