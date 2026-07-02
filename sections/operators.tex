@@ -36,16 +36,15 @@ An expression is \textbf{absolute},
   \end{inparaenum}
 \end{definition}
 
-\begin{definition}[Equivalence]
+\begin{definition}[Contextualization]
 The \emph{contextualization} function
-  \(\mathcal{E} \times \mathcal{K} \to \mathcal{E}\)
-  removes \(\phiTerminal{\xi}\) from the expression.
-The inference rules at \cref{fig:contextualization} inductively describe
-  the algorithm of contextualization: rules must be applied in any order
-  until they stop matching.
-The notation \(\phinoContextualize{e_1}{k}{e_2}\)
-  means that \(e_1\) turns into \(e_2\),
-  where all \(\phiTerminal{\xi}\) are replaced by \(k\).
+  \(\mathcal{E} \times \mathcal{K} \to \mathcal{E}\),
+  denoted as \(\phinoContextualize{e_1}{k}{e_2}\)
+  and specified by the rules of \cref{fig:contextualization},
+  turns an expression \(e_1\) into \(e_2\)
+  by replacing with the absolute \(k\)
+  every \(\phiTerminal{\xi}\) that denotes the context of \(e_1\)
+  rather than that of a nested formation.
 \end{definition}
 
 \begin{figure*}
