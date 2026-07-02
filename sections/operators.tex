@@ -36,6 +36,7 @@ An expression is \textbf{absolute},
   \end{inparaenum}
 \end{definition}
 
+\begin{definition}[Equivalence]
 The \emph{contextualization} function
   \(\mathcal{E} \times \mathcal{K} \to \mathcal{E}\)
   removes \(\phiTerminal{\xi}\) from the expression.
@@ -45,6 +46,7 @@ The inference rules at \cref{fig:contextualization} inductively describe
 The notation \(\phinoContextualize{e_1}{k}{e_2}\)
   means that \(e_1\) turns into \(e_2\),
   where all \(\phiTerminal{\xi}\) are replaced by \(k\).
+\end{definition}
 
 \begin{figure*}
 \begin{mdframed}
@@ -146,12 +148,13 @@ The \emph{evaluation} function
 \begin{definition}[Morphing]
 The \emph{morphing} function
   \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}
-    \rightarrow \mathcal{N} \times \mathcal{S} \),
+    \rightarrow ( \mathcal{B} \cup \{ T \} ) \times \mathcal{S} \),
   denoted as \(\phinoMorph{n_1}{e}{s_1}{n_2}{s_2}\),
-  maps \(n_1\) to \(n_2\),
-  which is either a formation or $T$,
-  possibly shifting the state \(s_1\) to \(s_2\)
-  in the universe \(e\).
+  reduces a normal form \(n_1\) to the formation it denotes,
+  or to $T$ if it denotes none,
+  by evaluating the atoms it reaches
+  and resolving the $Q$ locator against the universe \(e\),
+  possibly shifting the state \(s_1\) to \(s_2\).
 \end{definition}
 
 \begin{theorem}\label{thm:morphing-total}
