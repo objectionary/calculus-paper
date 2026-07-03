@@ -22,13 +22,15 @@ The functions are defined as follows:
 \begin{align*}
 \adjustbox{max width=\linewidth,margin=0em .3em}{%
   \text{\texttt{F1}:}\;%
-  \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}}}{%
-    \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
-      \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
-    }%
-    &
-    \infer{\text{\phiq{\phinoDataize{n_2}{e}{s}{\delta_2}{s}}}}{%
-      \text{\phiq{\phinoNormalize{b.|x|}{n_2}}}%
+  \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ n_3 }{s}}}}{%
+    \infer{\text{\phiq{\phinoNormalize{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{ n_3 }}}}{%
+      \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
+        \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
+      }%
+      &
+      \infer{\text{\phiq{\phinoDataize{n_2}{e}{s}{\delta_2}{s}}}}{%
+        \text{\phiq{\phinoNormalize{b.|x|}{n_2}}}%
+      }%
     }%
   }}%
   \; if\; \phiq{\delta := \delta_1 \times \delta_2}%
@@ -36,13 +38,15 @@ The functions are defined as follows:
 \\
 \adjustbox{max width=\linewidth,margin=0em .3em}{%
   \text{\texttt{F2}:}\;%
-  \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}}}{%
-    \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
-      \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
-    }%
-    &
-    \infer{\text{\phiq{\phinoDataize{n_2}{e}{s}{\delta_2}{s}}}}{%
-      \text{\phiq{\phinoNormalize{b.|x|}{n_2}}}%
+  \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ n_3 }{s}}}}{%
+    \infer{\text{\phiq{\phinoNormalize{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{ n_3 }}}}{%
+      \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
+        \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
+      }%
+      &
+      \infer{\text{\phiq{\phinoDataize{n_2}{e}{s}{\delta_2}{s}}}}{%
+        \text{\phiq{\phinoNormalize{b.|x|}{n_2}}}%
+      }%
     }%
   }}%
   \; if\; \phiq{\delta := \delta_1 + \delta_2}%
