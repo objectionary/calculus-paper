@@ -130,15 +130,19 @@ Two expressions are said to be syntactically equivalent or just
 \begin{definition}[Evaluation]
 The \emph{evaluation} function
   \(\mathcal{B} \times \mathcal{E} \times \mathcal{S}
-    \rightharpoonup \mathcal{E} \times \mathcal{S} \),
+    \rightharpoonup \mathcal{N} \times \mathcal{S} \),
   denoted as \(\phinoEvaluate{b}{e}{s_1}{n}{s_2}\),
   maps an atom \(b\) to \(n\),
   calling by value the function attached to its $L$-asset
   in the universe \(e\),
   possibly shifting the state \(s_1\) to \(s_2\):
-\begin{phiquation*}
-\dfrac{f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen \rightarrow \langle n {,}\; s_2 \rangle}{\phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2}}
-\end{phiquation*}
+\begin{gather*}
+\begin{phinoInference}
+  \phinoPremise{ \langle e {,}\; s_2 \rangle := f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen }
+  \phinoPremise{ \phinoNormalize{e}{n} }
+  \phinoConclusion{ \phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2} }
+\end{phinoInference}
+\end{gather*}
 \end{definition}
 
 \subsection{Morphing}\label{sec:morphing}

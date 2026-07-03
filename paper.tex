@@ -140,10 +140,12 @@
   \global\let\phino@condition\@empty
 }{%
   \adjustbox{max width=\linewidth,margin=0em .3em}{%
-    \ifx\phino@label\@empty%
-      \newrule{\phino@name}\;%
-    \else%
-      \newrule[\phino@label]{\phino@name}\;%
+    \ifx\phino@name\@empty\else%
+      \ifx\phino@label\@empty%
+        \newrule{\phino@name}\;%
+      \else%
+        \newrule[\phino@label]{\phino@name}\;%
+      \fi%
     \fi%
     \ensuremath{\dfrac{\text{\phino@premises}}{\text{\phino@conclusion}}}%
     \ifx\phino@condition\@empty\else\; if\;\phino@condition\fi%
