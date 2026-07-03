@@ -43,8 +43,6 @@
 
 \newcommand\nospell[1]{#1}
 
-\def\examples{}
-
 \def\trans{\mathrel{\leadsto}}
 \def\strans{\mathrel{\setbox0\hbox{\(\trans\)}\rlap{\hbox to \wd0{\hss*\hss}}\box0}}
 \def\stepto{\mathrel{\Downarrow}}
@@ -207,11 +205,8 @@
 
 \appendix
 
-\input{sections/app-proofs}
-
-\ifdefined\examples
 \input{sections/app-normalization}
 \input{sections/app-dataization}
-\fi
+\input{sections/app-proofs}
 
 \end{document}
