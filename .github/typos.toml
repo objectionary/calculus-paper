@@ -5,3 +5,8 @@
 extend-exclude = [
     "/sections/acks.tex"
 ]
+
+[default]
+extend-ignore-identifiers-re = [
+  "thm"       # false positive
+]
