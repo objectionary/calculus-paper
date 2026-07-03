@@ -95,9 +95,10 @@ Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
 \label{fig:reduction}
 \end{figure*}
 
-\begin{theorem}\label{thm:normalization-terminates}
-Every expression has a normal form, meaning that reduction always terminates.
-\end{theorem}
+Not every expression has a normal form.
+For some expressions normalization may never terminate, for example:
+
+\iexec[maybe]{echo '[[ x -> $.y, y -> $.x ]].x' | phino rewrite --normalize --max-depth=5 --max-cycles=1 --nonumber --sequence --compress --output=latex --flat --sweet}
 
 \ifdefined\examples
 \Cref{app:normalization-examples} demonstrates how normalization
