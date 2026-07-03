@@ -1,8 +1,8 @@
-{[[
+[[
     bytes -> [[
         data -> ?
     ]],
     number -> [[
         bytes -> ?
     ]]
-]]}
+]]
