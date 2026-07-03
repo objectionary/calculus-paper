@@ -20,21 +20,25 @@ Assuming that \(^{\circ}C\) already equals \ff{25} and is attached
 
 The functions are defined as follows:
 \begin{align*}
-\begin{phinoInference}
-  \phinoName{F1}
-  \phinoCondition{\delta := \delta_1 \times \delta_2}
-  \phinoPremise{\phinoDataize{b.^}{e}{s}{\delta_1}{s}}
-  \phinoPremise{\phinoDataize{b.|x|}{e}{s}{\delta_2}{s}}
-  \phinoConclusion{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}
-\end{phinoInference}
+\adjustbox{max width=\linewidth,margin=0em .3em}{%
+  \newrule{F1}\;%
+  \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}}}{%
+    \text{\phiq{\phinoDataize{b.^}{e}{s}{\delta_1}{s}}}%
+    &
+    \text{\phiq{\phinoDataize{b.|x|}{e}{s}{\delta_2}{s}}}%
+  }}%
+  \; if\; \phiq{\delta := \delta_1 \times \delta_2}%
+}
 \\
-\begin{phinoInference}
-  \phinoName{F2}
-  \phinoCondition{\delta := \delta_1 + \delta_2}
-  \phinoPremise{\phinoDataize{b.^}{e}{s}{\delta_1}{s}}
-  \phinoPremise{\phinoDataize{b.|x|}{e}{s}{\delta_2}{s}}
-  \phinoConclusion{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}
-\end{phinoInference}
+\adjustbox{max width=\linewidth,margin=0em .3em}{%
+  \newrule{F2}\;%
+  \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}}}{%
+    \text{\phiq{\phinoDataize{b.^}{e}{s}{\delta_1}{s}}}%
+    &
+    \text{\phiq{\phinoDataize{b.|x|}{e}{s}{\delta_2}{s}}}%
+  }}%
+  \; if\; \phiq{\delta := \delta_1 + \delta_2}%
+}
 \end{align*}
 
 The following sequence of transformations constitutes
