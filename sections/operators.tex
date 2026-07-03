@@ -100,10 +100,8 @@ For some expressions normalization may never terminate, for example:
 
 \iexec[maybe]{echo '[[ x -> $.y, y -> $.x ]].x' | phino rewrite --normalize --max-depth=5 --max-cycles=1 --nonumber --sequence --compress --output=latex --flat --sweet}
 
-\ifdefined\examples
 \Cref{app:normalization-examples} demonstrates how normalization
   works through examples.
-\fi
 
 \begin{theorem}\label{thm:normalization-confluent}
 The reduction relation is \emph{confluent}:
@@ -218,9 +216,7 @@ The dataization function is confluent, meaning that
   depends on nothing beyond the formation, the universe, and the state.
 \end{theorem}
 
-\ifdefined\examples
 \Cref{app:dataization-examples} demonstrates how the dataization function works through examples.
-\fi
 
 \subsection{Congruence}
 
