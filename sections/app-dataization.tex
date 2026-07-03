@@ -21,21 +21,29 @@ Assuming that \(^{\circ}C\) already equals \ff{25} and is attached
 The functions are defined as follows:
 \begin{align*}
 \adjustbox{max width=\linewidth,margin=0em .3em}{%
-  \newrule{F1}\;%
+  \text{\texttt{F1}:}\;%
   \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}}}{%
-    \text{\phiq{\phinoDataize{b.^}{e}{s}{\delta_1}{s}}}%
+    \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
+      \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
+    }%
     &
-    \text{\phiq{\phinoDataize{b.|x|}{e}{s}{\delta_2}{s}}}%
+    \infer{\text{\phiq{\phinoDataize{n_2}{e}{s}{\delta_2}{s}}}}{%
+      \text{\phiq{\phinoNormalize{b.|x|}{n_2}}}%
+    }%
   }}%
   \; if\; \phiq{\delta := \delta_1 \times \delta_2}%
 }
 \\
 \adjustbox{max width=\linewidth,margin=0em .3em}{%
-  \newrule{F2}\;%
+  \text{\texttt{F2}:}\%
   \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{s}}}}{%
-    \text{\phiq{\phinoDataize{b.^}{e}{s}{\delta_1}{s}}}%
+    \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
+      \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
+    }%
     &
-    \text{\phiq{\phinoDataize{b.|x|}{e}{s}{\delta_2}{s}}}%
+    \infer{\text{\phiq{\phinoDataize{n_2}{e}{s}{\delta_2}{s}}}}{%
+      \text{\phiq{\phinoNormalize{b.|x|}{n_2}}}%
+    }%
   }}%
   \; if\; \phiq{\delta := \delta_1 + \delta_2}%
 }
