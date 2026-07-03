@@ -146,7 +146,7 @@ The \emph{evaluation} function
 \begin{definition}[Morphing]
 The \emph{morphing} function
   \(\mathcal{N} \times \mathcal{E} \times \mathcal{S}
-    \rightarrow ( \mathcal{B} \cup \{ T \} ) \times \mathcal{S} \),
+    \rightharpoonup ( \mathcal{B} \cup \{ T \} ) \times \mathcal{S} \),
   denoted as \(\phinoMorph{n_1}{e}{s_1}{n_2}{s_2}\)
   and specified by the rules of \cref{fig:morphing},
   reduces a normal form \(n_1\) to the formation it denotes,
@@ -154,12 +154,9 @@ The \emph{morphing} function
   by evaluating the atoms it reaches
   and resolving the $Q$ locator against the universe \(e\),
   possibly shifting the state \(s_1\) to \(s_2\).
+Morphing is a partial function, since it normalizes the expressions it
+  reaches (\cref{sec:normalization}) and normalization may not terminate.
 \end{definition}
-
-\begin{theorem}\label{thm:morphing-total}
-The morphing function is total, meaning that
-  every normal form can be morphed and its derivation terminates.
-\end{theorem}
 
 \begin{figure*}
 \begin{mdframed}
@@ -173,7 +170,7 @@ The morphing function is total, meaning that
 
 \begin{theorem}\label{thm:morphing-confluent}
 The morphing function is confluent, meaning that
-  every normal form can be morphed to only one formation or $T$.
+  every normal form can be morphed to at most one formation or $T$.
 \end{theorem}
 
 \subsection{Dataization}\label{sec:dataization}
