@@ -94,7 +94,7 @@ A \textbf{domain} of binding \(B\),
 \end{definition}
 
 The domain of the binding in the formation of \cref{eq:object-example}
-  is \(\langle \ff{b}, \ff{a}, \ff{foo} \rangle\).
+  is $ \langle |b| {,}\, |a| {,}\, |foo| {,}\, ^ \rangle $.
 Assets $D$ and $L$ do not belong to the domain.
 
 \begin{definition}[Terminator]
@@ -159,15 +159,9 @@ The implementation of functions is outside the scope of \phic{}:
   for example, in \(\lambda\)-calculus
   or a programming language such as Java or C++.
 
-\begin{definition}[Decoration]
-\textbf{Decoration} is a mechanism of extending a formation (``decoratee'')
-  by attaching it to the $@$-attribute of a formation (``decorator''),
-  which makes attributes of the decoratee retrievable from the decorator,
-  unless the decorator has its own attributes with the same names.
-\end{definition}
-
 \begin{definition}[Decorator]
-A formation is a \textbf{decorator} if it has an $@$-attribute with an expression attached to it;
+A formation is a \textbf{decorator} if it has
+  an $@$-attribute with an expression attached to it;
   the expression attached to the $@$-attribute is its \textbf{decoratee}.
 \end{definition}
 
