@@ -2,5 +2,58 @@
 % SPDX-License-Identifier: MIT
 
 \begin{proof}[Proof of \cref{thm:morphing-confluent}]
-\tbd{We still need to prove this.}
+Unlike normalization, whose rules may rewrite a redex at any position, morphing
+  acts only at the root of its argument \(n\): every rule of \cref{fig:morphing}
+  matches the whole of \(n\) against \(e\) and recurses through its premises on
+  determined subterms.
+It therefore suffices to show the rules are deterministic---at most one applies to
+  a pair \((n, e)\), and the one that applies fixes the result---for then the
+  relation they define is single-valued, which is the claim.
+Determinism neither needs nor implies termination, so this holds even though
+  morphing is partial (\cref{sec:morphing}).
+
+\emph{At most one rule matches.}
+By the grammar of \cref{fig:ebnf}, \(n\) is a locator ($Q$ or \(\phiTerminal{\xi}\)),
+  the terminator $T$, a formation, a dispatch, or an application, and its outermost
+  constructor already separates most rules.
+For $T$ only \nameref{r:dead} matches and for \(\phiTerminal{\xi}\) only
+  \nameref{r:xi}.
+For $Q$ the universe decides: \nameref{r:universe} requires \(e \neq Q\) and
+  \nameref{r:mg} requires \(e = Q\), so exactly one fits a given \(e\).
+A formation \([[ B ]]\) with no head operation matches only \nameref{r:mf}.
+A dispatch \(m.\tau\) is shared by \nameref{r:ml}, \nameref{r:mphi}, and
+  \nameref{r:md}, which their conditions render disjoint: \nameref{r:md} demands a
+  non-formation subject (\(\phinoNotFormation{m}\)), whereas \nameref{r:ml} and
+  \nameref{r:mphi} take a formation one, and among those \nameref{r:ml} requires an
+  $L$-asset while \nameref{r:mphi} forbids one (\(L \notin B\)).
+The formation-headed dispatches left over---a subject with neither an $L$-asset nor
+  an $@$-attribute, or one already binding \(\tau\)---match no rule, but they are
+  never normal forms: normalization reduces them by \nameref{r:stop} or
+  \nameref{r:dot} (\cref{sec:normalization}), and morphing is only ever applied to a
+  normal form, so it never meets them.
+An application splits four ways on its argument, an exhaustive and disjoint
+  partition: named or positional (\(\tau -> a\) versus
+  \(\phiTerminal{\alpha_i} -> a\)) crossed with absolute or not (\(a \in \mathcal{K}\)
+  for \nameref{r:ma} and \nameref{r:maa}, \(a \notin \mathcal{K}\) for
+  \nameref{r:mad} and \nameref{r:maad}), and every argument falls in one class.
+
+\emph{The matching rule fixes the result.}
+Its meta-variables are pinned by the term: a formation holds at most one $L$-asset,
+  so \nameref{r:ml} splits \([[ B_1, L> F, B_2 ]]\) uniquely, and the subject and
+  attribute of a dispatch, and the subject and argument of an application, are read
+  off the syntax.
+Each premise is then a single-valued judgment.
+A normalization premise yields the unique normal form guaranteed by
+  \cref{thm:normalization-total,thm:normalization-confluent}.
+The evaluation premise of \nameref{r:ml} calls the function attached to the
+  $L$-asset, which by \cref{sec:evaluation} maps a formation, the universe, and a
+  state deterministically to an expression and a state, and then normalizes that
+  expression to a unique normal form.
+Every morphing premise is a shorter derivation, single-valued by the induction
+  hypothesis.
+So the rule maps its configuration, state included, to one result.
+
+By induction on the derivation, then, \(\phinoMorph{n}{e}{s_1}{n_2}{s_2}\)
+  determines \(n_2\) and \(s_2\) from \(n\), \(e\), and \(s_1\): a normal form morphs
+  to at most one formation or $T$.
 \end{proof}
