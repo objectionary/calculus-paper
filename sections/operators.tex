@@ -95,10 +95,10 @@ Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
 \label{fig:reduction}
 \end{figure*}
 
-Not every expression has a normal form.
-For some expressions normalization may never terminate, for example:
-
-\iexec[maybe]{echo '[[ x -> $.y, y -> $.x ]].x' | phino rewrite --normalize --max-depth=5 --max-cycles=1 --nonumber --sequence --compress --output=latex --flat --sweet}
+\begin{theorem}\label{thm:normalization-total}
+Normalization is \emph{total}:
+  every expression has a normal form and its reduction terminates.
+\end{theorem}
 
 \Cref{app:normalization-examples} demonstrates how normalization
   works through examples.
@@ -158,8 +158,9 @@ The \emph{morphing} function
   by evaluating the atoms it reaches
   and resolving the $Q$ locator against the universe \(e\),
   possibly shifting the state \(s_1\) to \(s_2\).
-Morphing is a partial function, since it normalizes the expressions it
-  reaches (\cref{sec:normalization}) and normalization may not terminate.
+Morphing is a partial function, since it evaluates the atoms it reaches
+  (\cref{sec:evaluation}), whose attached functions may recurse without bound,
+  and it may follow a cyclic decoration chain that never resolves.
 \end{definition}
 
 \begin{figure*}

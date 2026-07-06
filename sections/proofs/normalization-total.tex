@@ -1,0 +1,56 @@
+% SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
+% SPDX-License-Identifier: MIT
+
+\begin{proof}[Proof of \cref{thm:normalization-total}]
+Consider any reduction sequence from a given expression under the rules of
+  \cref{fig:reduction}; we show it is finite.
+
+Away from \nameref{r:dot}, every rule strictly shrinks the term.
+The \emph{collapsing} rules---\nameref{r:amiss}, \nameref{r:dc}, \nameref{r:dca},
+  \nameref{r:dd}, \nameref{r:dl}, \nameref{r:miss}, \nameref{r:null},
+  \nameref{r:over}, \nameref{r:overa}, and \nameref{r:stop}---rewrite their redex
+  to the terminator $T$; \nameref{r:copy} and \nameref{r:stay} each discharge one
+  application; and \nameref{r:alpha} turns a positional argument into a named one.
+So only finitely many non-\nameref{r:dot} steps occur before either the term is
+  exhausted or a \nameref{r:dot} redex is reached.
+
+It remains to bound the \nameref{r:dot} steps.
+\nameref{r:dot} replaces a dispatch \([[ B_1, \tau -> n, B_2 ]].\tau\) by the body
+  \(n\) contextualized against \([[ B_1, B_2 ]]\) and decorated with the whole
+  formation under \(\phiTerminal{\rho}\).
+An infinite sequence would need infinitely many such steps, hence a
+  \nameref{r:dot} step that reproduces a dispatch of an attribute on a formation
+  that still binds it---a self-reproducing redex.
+None can.
+The body \(n\) is contextualized against the formation with the dispatched
+  attribute removed, \([[ B_1, B_2 ]]\) (\cref{sec:contextualization}), so every
+  \(\phiTerminal{\xi}\) in \(n\) that denotes the enclosing formation becomes a
+  formation binding neither \(\tau\) nor \(\phiTerminal{\rho}\); a self-reference
+  that reaches for \(\tau\) again, whether directly as \(\phiTerminal{\xi}.\tau\)
+  or through the parent as \(\phiTerminal{\xi}.\phiTerminal{\rho}.\tau\),
+  dispatches a missing attribute and collapses to $T$ by \nameref{r:stop},
+  \nameref{r:null}, \nameref{r:miss}, or \nameref{r:dd}.
+The copy of the formation stored under \(\phiTerminal{\rho}\) is reachable only by
+  dispatching \(\phiTerminal{\rho}\), again through such a chain, which dies the
+  same way.
+
+The calculus expresses recursion in only two further ways, and neither is a
+  reduction.
+Firing the atom that guards a recursive object---the base-case test that decides
+  whether to recur---belongs to evaluation (\cref{sec:evaluation}): a formation
+  carrying an unfired $L$-asset matches no rule of \cref{fig:reduction}
+  (\nameref{r:stop} excludes it), so the recursive branch never unfolds under
+  normalization.
+Following the \(\phiTerminal{\phi}\)-decoration to an inherited attribute belongs
+  to morphing (\cref{sec:morphing}): no reduction descends into
+  \(\phiTerminal{\phi}\), so dispatching an absent attribute of a decorated
+  formation is irreducible rather than chasing a possibly cyclic chain.
+
+Every dispatch a term exposes is thus drawn from its finite structure and consumed
+  once, so \nameref{r:dot} fires finitely often and the sequence is finite.
+Every expression therefore has a normal form, unique by
+  \cref{thm:normalization-confluent}.
+This argument is not yet mechanized; extending the Lean~4 development that
+  certifies \cref{thm:normalization-confluent} to strong normalization remains
+  future work.
+\end{proof}
