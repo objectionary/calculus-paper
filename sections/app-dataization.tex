@@ -51,9 +51,16 @@ The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
 }
 \end{align*}
 
-The following sequence of transformations constitutes
-  the dataization of \cref{eq:celsius}:
+\Cref{fig:celsius} demonstrates the sequence of transformations
+  that constitutes the dataization of \cref{eq:celsius}.
 
+\begin{figure*}
+\begin{mdframed}
+\centering
 \iexec[maybe]{phino dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=3
 --margin=140 --meet-popularity=1 ./examples/celsius.phi > _tex/celsius-dataization.tex}
-{\scriptsize\input{_tex/celsius-dataization.tex}}
+\scriptsize\input{_tex/celsius-dataization.tex}
+\end{mdframed}
+\capt{Dataization of \cref{eq:celsius}.}
+\label{fig:celsius}
+\end{figure*}
