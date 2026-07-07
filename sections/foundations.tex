@@ -38,6 +38,11 @@ An attribute is \textbf{void} if $?$ is attached to it,
 
 \begin{definition}[State]
 A \textbf{state} of evaluation \(s_i\) ranges over \(\mathcal{S}\).
+It represents the mutable external world---such as the store and
+  input/output---that functions may read and modify when applied;
+  \phic{} threads a state through its semantic operators but leaves
+  its internal structure unspecified, since the implementation of
+  functions lies outside its scope.
 \end{definition}
 
 \begin{definition}[Universe]
