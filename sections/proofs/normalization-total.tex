@@ -1,18 +1,23 @@
 % SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
 % SPDX-License-Identifier: MIT
 
-\begin{proof}[Proof of \cref{thm:normalization-total}]
+\begin{proof}[Proof sketch of \cref{thm:normalization-total}]
 Consider any reduction sequence from a given expression under the rules of
   \cref{fig:reduction}; we show it is finite.
 
-Away from \nameref{r:dot}, every rule strictly shrinks the term.
+Away from \nameref{r:dot} and \nameref{r:alpha}, every rule strictly shrinks the
+  term.
 The \emph{collapsing} rules---\nameref{r:amiss}, \nameref{r:dc}, \nameref{r:dca},
   \nameref{r:dd}, \nameref{r:dl}, \nameref{r:miss}, \nameref{r:null},
   \nameref{r:over}, \nameref{r:overa}, and \nameref{r:stop}---rewrite their redex
-  to the terminator $T$; \nameref{r:copy} and \nameref{r:stay} each discharge one
-  application; and \nameref{r:alpha} turns a positional argument into a named one.
-So only finitely many non-\nameref{r:dot} steps occur before either the term is
-  exhausted or a \nameref{r:dot} redex is reached.
+  to the terminator $T$, and \nameref{r:copy} and \nameref{r:stay} each discharge
+  one application.
+\nameref{r:alpha} alone leaves the size unchanged, relabelling a positional
+  argument \(\phiTerminal{\alpha_i}\) as the named \(\tau\); but it strictly
+  decreases the number of positional arguments, which no rule introduces, so it
+  too fires only finitely often.
+Hence only finitely many non-\nameref{r:dot} steps occur before either the term
+  is exhausted or a \nameref{r:dot} redex is reached.
 
 It remains to bound the \nameref{r:dot} steps.
 \nameref{r:dot} replaces a dispatch \([[ B_1, \tau -> n, B_2 ]].\tau\) by the body
@@ -21,7 +26,8 @@ It remains to bound the \nameref{r:dot} steps.
 An infinite sequence would need infinitely many such steps, hence a
   \nameref{r:dot} step that reproduces a dispatch of an attribute on a formation
   that still binds it---a self-reproducing redex.
-None can.
+We argue informally that none arises, though we do not yet exhibit the
+  well-founded measure that would settle it.
 The body \(n\) is contextualized against the formation with the dispatched
   attribute removed, \([[ B_1, B_2 ]]\) (\cref{sec:contextualization}), so every
   \(\phiTerminal{\xi}\) in \(n\) that denotes the enclosing formation becomes a
@@ -47,10 +53,12 @@ Following the $@$-decoration to an inherited attribute belongs
   formation is irreducible rather than chasing a possibly cyclic chain.
 
 Every dispatch a term exposes is thus drawn from its finite structure and consumed
-  once, so \nameref{r:dot} fires finitely often and the sequence is finite.
+  once, which is why \nameref{r:dot} fires finitely often and the sequence is
+  finite.
 Every expression therefore has a normal form, unique by
   \cref{thm:normalization-confluent}.
-This argument is not yet mechanized; extending the Lean~4 development that
-  certifies \cref{thm:normalization-confluent} to strong normalization remains
-  future work.
+This last step is a sketch rather than a proof: it rests on the informal argument
+  above instead of an explicit well-founded measure, and it is not yet mechanized.
+Supplying such a measure, and extending the Lean~4 development that certifies
+  \cref{thm:normalization-confluent} to strong normalization, remains future work.
 \end{proof}
