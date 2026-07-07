@@ -138,7 +138,7 @@ The \emph{evaluation} function
   possibly shifting the state \(s_1\) to \(s_2\):
 \begin{gather*}
 \begin{phinoInference}
-  \phinoPremise{ \langle e {,}\; s_2 \rangle := f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen }
+  \phinoCondition{ \langle e {,}\; s_2 \rangle = f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen }
   \phinoPremise{ \phinoNormalize{e}{n} }
   \phinoConclusion{ \phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2} }
 \end{phinoInference}
