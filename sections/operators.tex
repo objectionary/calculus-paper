@@ -4,7 +4,7 @@
 \section{Operators}\label{sec:operators}
 
 In this section we introduce a family of semantic operators
-  defined on \(\phi\)-expressions.
+  defined on \(\varphi\)-expressions.
 These operators do not extend the syntax of the calculus.
 Instead, they describe systematic transformations of expressions that reveal,
   modify, or project their semantic content.
@@ -158,10 +158,11 @@ The \emph{morphing} function
   by evaluating the atoms it reaches
   and resolving the $Q$ locator against the universe \(e\),
   possibly shifting the state \(s_1\) to \(s_2\).
+\end{definition}
+
 Morphing is a partial function, since it evaluates the atoms it reaches
   (\cref{sec:evaluation}), whose attached functions may recurse without bound,
   and it may follow a cyclic decoration chain that never resolves.
-\end{definition}
 
 \begin{figure*}
 \begin{mdframed}
