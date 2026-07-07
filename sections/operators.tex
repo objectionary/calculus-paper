@@ -236,6 +236,15 @@ Two expressions \(n_1\) and \(n_2\) are said to be behaviorally equivalent
 \end{phiquation*}
 \end{definition}
 
+Dataization gives the calculus its intended, observational semantics: the
+  meaning of an expression is the datum it computes under a given universe and
+  state, and two objects denote the same behavior exactly when they are
+  congruent.
+The reduction rules are sound with respect to this meaning, since equivalent
+  expressions are congruent (\(\equiv\) implies \(\cong\))---identical normal
+  forms dataize identically---so normalizing an expression never changes what
+  it computes.
+
 Two congruent expressions may be non-equivalent.
 For example, \(e_1 \cong e_2\) holds while \(e_1 \equiv e_2\) doesn't hold
   for the following expressions:
