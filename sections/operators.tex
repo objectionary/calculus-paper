@@ -138,8 +138,8 @@ The \emph{evaluation} function
   possibly shifting the state \(s_1\) to \(s_2\):
 \begin{gather*}
 \begin{phinoInference}
-  \phinoCondition{ \langle e {,}\; s_2 \rangle = f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen }
-  \phinoPremise{ \phinoNormalize{e}{n} }
+  \phinoCondition{ \langle e_1 {,}\; s_2 \rangle = f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen }
+  \phinoPremise{ \phinoNormalize{e_1}{n} }
   \phinoConclusion{ \phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2} }
 \end{phinoInference}
 \end{gather*}
@@ -160,8 +160,8 @@ The \emph{morphing} function
   possibly shifting the state \(s_1\) to \(s_2\).
 \end{definition}
 
-Morphing is a partial function, since it evaluates the atoms it reaches
-  (\cref{sec:evaluation}), whose attached functions may recurse without bound,
+Morphing is a partial function, since the atoms it reaches
+  (\cref{sec:evaluation}) may fire without bound,
   and it may follow a cyclic decoration chain that never resolves.
 
 \begin{figure*}
@@ -194,10 +194,10 @@ The \emph{dataization} function
 \end{definition}
 
 \begin{theorem}[Progress]\label{thm:dataization-progress}
-Dataization is defined for every normal form except the terminator $T$,
-  meaning that for any $n \neq T$, \(e\), and \(s_1\) at least one rule of
-  \cref{fig:dataization} applies, so a derivation never gets stuck at a term
-  that ought to carry data.
+For any normal form $n \neq T$, universe \(e\), and state \(s_1\),
+  at least one rule of \cref{fig:dataization} applies, so a derivation never
+  gets stuck at a non-$T$ normal form that ought to carry data:
+  whenever it halts, it halts either at a datum or at the terminator $T$.
 The terminator $T$ matches no rule: a derivation that reaches it halts without
   a datum, which is exactly the error that $T$ signals.
 \end{theorem}
@@ -224,9 +224,11 @@ The dataization function is confluent, meaning that
 \begin{definition}[Congruence]
 Two expressions \(n_1\) and \(n_2\) are said to be behaviorally equivalent
   or \textbf{congruent} (denoted by \(\cong\))
-  if for any state \(s_1\) and any \(e\):
+  if for any state \(s_1\) and any \(e\) their dataizations are either both
+  undefined, or both defined with the same datum and state,
+  i.e. there exist \(\delta\) and \(s_2\) such that:
 \begin{phiquation*}
-\phinoDataize{n_1}{e}{s_1}{n}{s_2} \quad\text{and}\quad \phinoDataize{n_2}{e}{s_1}{n}{s_2}.
+\phinoDataize{n_1}{e}{s_1}{\delta}{s_2} \quad\text{and}\quad \phinoDataize{n_2}{e}{s_1}{\delta}{s_2}.
 \end{phiquation*}
 \end{definition}
 
