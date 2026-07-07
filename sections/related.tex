@@ -9,6 +9,11 @@ However, we identified certain gaps in existing studies that make us believe tha
 
 Attempts were made to formalize OOP and introduce an object calculus similar to the lambda calculus~\citep{barendregt2012} used in functional programming.
 For example, \citet{abadi1995imperative} suggested an imperative calculus of objects, which was extended by~\citet{bono1998imperative} to support classes, by~\citet{gordon1998concurrent} to support concurrency and synchronization, and by~\citet{jeffrey1999distributed} to support distributed programming.
+These calculi, together with their functional counterpart, were consolidated into a comprehensive theory of objects~\citep{abadi1996theory}.
+
+A parallel line of work embeds objects directly into the \(\lambda\)-calculus rather than defining a standalone calculus.
+\citet{mitchell1993lambda} introduced a lambda calculus of objects with method specialization, extended by~\citet{di1998lambda} with self-inflicted extension.
+These systems show that object features can be encoded on a functional core, which qualifies the recurring claim that OOP lacks a \(\lambda\)-calculus of its own; \phic{} takes the opposite route, treating the object rather than the function as its single primitive, so that dispatch and decoration are native constructs rather than encodings.
 
 Earlier, \citet{honda1991object} combined OOP and \(\pi\)-calculus in order to introduce object calculus for asynchronous communication, which was further referenced by~\citet{jones1993pi} in their work on object-based design notation.
 
@@ -16,6 +21,10 @@ A few attempts were made to reduce existing OOP languages and formalize what is 
 Featherweight Java is the most notable example proposed by~\citet{igarashi2001featherweight}, which omits almost all features of the full language (including interfaces and even assignment) to obtain a small calculus.
 Later it was extended by~\citet{jagannathan2005transactional} to support nested and multi-threaded transactions.
 Featherweight Java is used in formal languages such as Obsidian~\citep{coblenz2019} and SJF~\citep{usov2020}.
+
+The calculi above are class-based, whereas \phic{} is prototype-based: objects arise by copying and decorating other objects rather than by instantiating classes.
+This tradition begins with Self~\citep{ungar1987self}, whose delegation mechanism \citet{stein1987delegation} showed to subsume inheritance, and continues in calculi of delegation by object composition~\citep{bettinibono2008delegation}.
+The meaning of inheritance in such settings has been given denotationally by~\citet{cook1989denotational} as a fixed point over records; \phic{} instead renders it operationally, through the $@$-decoration that its morphing operator resolves (\cref{sec:morphing}).
 
 Another example is Larch/C++~\citep{cheon1994quick}, which is a formal algebraic interface specification language tailored to C++.
 It allows interfaces of C++ classes and functions to be documented in a way that is unambiguous and concise.
@@ -30,5 +39,10 @@ However, all these OO extensions do not have comprehensive refinement rules that
 \citet{leekwakryu1996transform} developed an algorithm to transform an object calculus into an object algebra.
 
 However, all these theoretical attempts to formalize OO languages were unable to fully describe their features, as was noted by~\citet{nierstrasz1991towards}: ``The development of concurrent object-based programming languages has suffered from the lack of any generally accepted formal foundations for defining their semantics.''
-In addition, when describing the attempts of formalization, \citet{eden2002visual} summarized: ``Not one of the notations is defined formally, nor provided with \nospell{denotational} semantics, nor founded on axiomatic semantics.''
-Moreover, despite these efforts, \citet{ciaffaglione2003reasoning,ciaffaglione2003typetheories,ciaffaglione2007theory_of_contexts} noted in their series of works that relatively little formal work has been carried out on object-based languages, and it remains true to this day.
+The visual and architectural notations often used to model object-oriented designs fare worse still: \citet{eden2002visual}, surveying them, observed that ``Not one of the notations is defined formally, nor provided with \nospell{denotational} semantics, nor founded on axiomatic semantics.''
+Moreover, \citet{ciaffaglione2003reasoning,ciaffaglione2003typetheories,ciaffaglione2007theory_of_contexts} noted in their series of works that, at the time, relatively little formal work had been carried out on object-based languages.
+Mechanized treatments have appeared since---among them a machine-checked model of a Java-like language, virtual machine, and compiler~\citep{klein2006jinja}---yet a compact object calculus whose own meta-theory is machine-checked remains uncommon.
+
+\phic{} descends directly from the \(\varphi\)-calculus of~\citet{bugayenko2021eolang}, the formal basis of the EO programming language, an earlier version of which was formalized by~\citet{kudasov2022formalizing} as a calculus of decorated objects.
+The present paper reworks that calculus into a smaller and more uniform core, in which every entity is a formation and the semantic operators of \cref{sec:operators} are defined over this single syntactic category.
+What sets \phic{} apart from the surveyed formalisms is therefore not broader feature coverage, which it deliberately forgoes (\cref{sec:future}), but this uniformity together with a confluence result certified in Lean~4 (\cref{thm:normalization-confluent}).
