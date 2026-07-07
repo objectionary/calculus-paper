@@ -140,6 +140,15 @@ The \emph{evaluation} function
 \end{gather*}
 \end{definition}
 
+Because the function attached to an atom is arbitrary---its implementation
+  lies outside the calculus (\cref{sec:foundations})---firing it may run any
+  computation, and an atom that dispatches back into its own object recurs
+  without bound.
+This general recursion is why evaluation is partial: a call may never return.
+Morphing and dataization reach atoms and inherit that partiality,
+  whereas contextualization and normalization fire no atom and are total
+  (\cref{thm:contextualization-total,thm:normalization-total}).
+
 \subsection{Morphing}\label{sec:morphing}
 
 \begin{definition}[Morphing]
