@@ -38,6 +38,7 @@ hard ifmtarg
 hard lastpage
 hard lh
 hard libertine
+hard lkproof
 hard makecell
 hard mathtools
 hard mdframed
@@ -49,7 +50,6 @@ hard paralist
 hard pgf
 hard pgfopts
 hard preprint
-hard proof
 hard silence
 hard stmaryrd
 hard svg
