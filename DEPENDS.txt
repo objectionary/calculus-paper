@@ -49,6 +49,7 @@ hard paralist
 hard pgf
 hard pgfopts
 hard preprint
+hard proof
 hard silence
 hard stmaryrd
 hard svg
