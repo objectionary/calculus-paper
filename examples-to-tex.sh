@@ -12,7 +12,7 @@ while IFS= read -r f; do
     e=${e//.phi}
     e=${d}-${e}
     phino merge "${f}" runtime.phi | \
-        phino rewrite --normalize --hide=Q.org --focus=Q.ex "--expression=${e}" \
+        phino rewrite --normalize --hide=Q.org --focus=Q.ex \
             --nonumber --sequence --compress "--meet-prefix=${e}" --output=latex \
             --flat --sweet
 done < <(find "${dir}" -name '*.phi' -type f | sort)
