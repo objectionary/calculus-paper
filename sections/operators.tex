@@ -142,9 +142,11 @@ The \emph{evaluation} function
 
 Because the function attached to an atom is arbitrary---its implementation
   lies outside the calculus (\cref{sec:foundations})---firing it may run any
-  computation, and an atom that dispatches back into its own object recurs
-  without bound.
-This general recursion is why evaluation is partial: a call may never return.
+  computation, and the calculus cannot guarantee that a datum ever comes back.
+Evaluation is therefore partial on two counts: the call may diverge, as when an
+  atom dispatches back into its own object and recurs without bound, or it may
+  halt without a value, as when the function aborts on an undefined operation
+  such as division by zero.
 Morphing and dataization reach atoms and inherit that partiality,
   whereas contextualization and normalization fire no atom and are total
   (\cref{thm:contextualization-total,thm:normalization-total}).
