@@ -60,8 +60,8 @@ The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
 \iexec[maybe]{phino dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=3
 --margin=140 --meet-popularity=1 ./examples/celsius.phi | gsed '1d;$d' | perl _eolang/paper-phi.pl 'equation*' /dev/stdin > _tex/celsius-dataization.tex}
 \resizebox{\linewidth}{!}{%
-  \renewenvironment{equation*}{}{}%
-  \renewenvironment{split}{\(\begin{aligned}}{\end{aligned}\)}%
+  \renewenvironment{equation*}{\(}{\)}%
+  \renewenvironment{split}{\begin{aligned}}{\end{aligned}}%
   \input{_tex/celsius-dataization.tex}%
 }
 \end{mdframed}
