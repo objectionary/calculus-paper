@@ -126,19 +126,31 @@ Two expressions are said to be syntactically equivalent or just
 The \emph{evaluation} function
   \(\mathcal{B} \times \mathcal{E} \times \mathcal{S}
     \rightharpoonup \mathcal{N} \times \mathcal{S} \),
-  denoted as \(\phinoEvaluate{b}{e}{s_1}{n}{s_2}\),
+  denoted as \(\phinoEvaluate{b}{e}{s_1}{n}{s_2}\)
+  and specified by the rules of \cref{fig:evaluation},
   maps an atom \(b\) to \(n\),
   calling by value the function attached to its $L$-asset
   in the universe \(e\),
-  possibly shifting the state \(s_1\) to \(s_2\):
+  possibly shifting the state \(s_1\) to \(s_2\),
+\end{definition}
+
+\begin{figure*}
+\begin{mdframed}
 \begin{gather*}
 \begin{phinoInference}
   \phinoCondition{ \langle e_1 {,}\; s_2 \rangle = f \lparen [[ B_1, L>f, B_2 ]] {,}\; e {,}\; s_1 \rparen }
   \phinoPremise{ \phinoNormalize{e_1}{n} }
   \phinoConclusion{ \phinoEvaluate{[[ B_1, L>f, B_2 ]]}{e}{s_1}{n}{s_2} }
 \end{phinoInference}
+\begin{phinoInference}
+  \phinoCondition{ \lambda \not\in B }
+  \phinoConclusion{ \phinoEvaluate{[[ B_1 ]]}{e}{s}{\dead}{s} }
+\end{phinoInference}
 \end{gather*}
-\end{definition}
+\end{mdframed}
+\capt{Evaluation rules.}
+\label{fig:evaluation}
+\end{figure*}
 
 Because the function attached to an atom is arbitrary---its implementation
   lies outside the calculus (\cref{sec:foundations})---firing it may run any
