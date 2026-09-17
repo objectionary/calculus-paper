@@ -3,11 +3,11 @@
     @ -> $.c.times( 1.8 ).plus( 32.0 ),
     c -> 25.0
   ]],
-  bytes(data) -> [[
-    @ -> $.data
+  bytes -> [[
+    @ -> ?
   ]],
-  number(as-bytes) -> [[
-    @ -> $.as-bytes,
+  number -> [[
+    @ -> ?,
     times -> [[ x -> ?, L> L_number_times ]],
     plus -> [[ x -> ?, L> L_number_plus ]]
   ]]

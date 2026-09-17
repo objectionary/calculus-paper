@@ -23,7 +23,7 @@ The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
 \adjustbox{max width=\linewidth,margin=0em .3em}{%
   \text{\texttt{Fn1}:}\;%
   \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ n_3 }{s}}}}{%
-    \infer[\;\text{if}\;\text{\phiq{\delta = \delta_1 \times \delta_2}}]{\text{\phiq{\phinoNormalize{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{ n_3 }}}}{%
+    \infer[\;\text{if}\;\text{\phiq{\delta = \delta_1 \times \delta_2}}]{\text{\phiq{\phinoNormalize{ e.number( @ -> e.bytes( @ -> [[ D> \delta ]] ) ) }{ n_3 }}}}{%
       \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
         \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
       }%
@@ -38,7 +38,7 @@ The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
 \adjustbox{max width=\linewidth,margin=0em .3em}{%
   \text{\texttt{Fn2}:}\;%
   \ensuremath{\infer{\text{\phiq{\phinoEvaluate{b}{e}{s}{ n_3 }{s}}}}{%
-    \infer[\;\text{if}\;\text{\phiq{\delta = \delta_1 + \delta_2}}]{\text{\phiq{\phinoNormalize{ e.number( e.bytes( data -> [[ D> \delta ]] ) ) }{ n_3 }}}}{%
+    \infer[\;\text{if}\;\text{\phiq{\delta = \delta_1 + \delta_2}}]{\text{\phiq{\phinoNormalize{ e.number( @ -> e.bytes( @ -> [[ D> \delta ]] ) ) }{ n_3 }}}}{%
       \infer{\text{\phiq{\phinoDataize{n_1}{e}{s}{\delta_1}{s}}}}{%
         \text{\phiq{\phinoNormalize{b.^}{n_1}}}%
       }%
@@ -58,7 +58,7 @@ The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
 \begin{mdframed}
 \centering
 \iexec[maybe]{phino dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=3
---margin=140 --meet-popularity=1 ./examples/celsius.phi | sed '1d;$d' | perl _eolang/paper-phi.pl 'equation*' /dev/stdin > _tex/celsius-dataization.tex}
+--margin=240 --meet-popularity=1 --atoms=./examples/atoms.json ./examples/celsius.phi | sed '1d;$d' | perl _eolang/paper-phi.pl 'equation*' /dev/stdin > _tex/celsius-dataization.tex}
 \resizebox{\linewidth}{!}{%
   \renewenvironment{equation*}{\(}{\)}%
   \renewenvironment{split}{\begin{aligned}}{\end{aligned}}%

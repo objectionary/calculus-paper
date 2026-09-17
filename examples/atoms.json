@@ -1,0 +1,10 @@
+{
+  "L_number_plus": {
+    "path": "./examples/atoms.js",
+    "rt": "exec"
+  },
+  "L_number_times": {
+    "path": "./examples/atoms.js",
+    "rt": "exec"
+  }
+}
