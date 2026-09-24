@@ -15,7 +15,7 @@ Assuming that \(^{\circ}C\) already equals \ff{25} and is attached
   to the \ff{c} attribute instead of being provided by a user,
   the algorithm may be represented by an expression:
 %
-\iexec[maybe]{phino rewrite --output=latex --sweet --label=eq:celsius --margin=80 --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
+\iexec[maybe]{phino --pin-file=phino-version.txt rewrite --output=latex --sweet --label=eq:celsius --margin=80 --canonize ./examples/celsius.phi > _tex/celsius-formula.tex}
 \input{_tex/celsius-formula.tex}
 
 The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
@@ -57,7 +57,7 @@ The evaluations of \texttt{F1} and \texttt{F2} are defined as follows:
 \begin{figure*}
 \begin{mdframed}
 \centering
-\iexec[maybe]{phino --pin=0.0.137 dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=3
+\iexec[maybe]{phino --pin-file=phino-version.txt dataize --output=latex --sweet --nonumber --compress --canonize --meet-prefix=dataization --sequence --quiet --hide=Q.bytes --hide=Q.number --locator=Q.@ --focus=Q.@ --meet-length=3
 --margin=240 --meet-popularity=1 --symbolic=./examples/atoms.yaml ./examples/celsius.phi | sed '1d;$d' | perl _eolang/paper-phi.pl 'equation*' /dev/stdin > _tex/celsius-dataization.tex}
 \resizebox{\linewidth}{!}{%
   \renewenvironment{equation*}{\(}{\)}%

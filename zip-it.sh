@@ -13,6 +13,7 @@ cp ../paper.tex .
 cp ../examples-to-tex.sh .
 cp ../endless-to-tex.sh .
 cp ../runtime.phi .
+cp ../phino-version.txt .
 cp -R ../examples .
 mkdir bibliography
 cp ../bibliography/main.bib bibliography/main.bib
@@ -26,7 +27,10 @@ for d in _tex sections examples; do
 done
 
 version=$(curl --fail --silent --show-error -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/${REPO}/releases/latest" | jq -r '.tag_name')
-[ -n "${version}" ] && [ "${version}" != "null" ] || { echo "no release tag for ${REPO}" >&2; exit 1; }
+if [ -z "${version}" ] || [ "${version}" = "null" ]; then
+    echo "no release tag for ${REPO}" >&2
+    exit 1
+fi
 echo "Version is: ${version}"
 
 if ! sed --version; then
@@ -46,6 +50,7 @@ rm -rf ./*.aux ./*.bcf ./*.blg ./*.fdb_latexmk ./*.fls ./*.log ./*.run.xml ./*.o
 rm -rf bibliography
 rm -rf examples
 rm -rf runtime.phi
+rm -rf phino-version.txt
 rm -rf _eolang/*.pl
 zip="paper-${version}.zip"
 zip -x paper.pdf -r "${zip}" ./*

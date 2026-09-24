@@ -8,7 +8,7 @@
   ]],
   number -> [[
     @ -> ?,
-    times -> [[ x -> ?, L> L_number_times ]],
-    plus -> [[ x -> ?, L> L_number_plus ]]
+    times -> [[ x -> ?, ^ -> ?, L> L_number_times ]],
+    plus -> [[ x -> ?, ^ -> ?, L> L_number_plus ]]
   ]]
 ]]
