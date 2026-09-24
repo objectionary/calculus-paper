@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: Copyright (c) 2016-2026 Objectionary.com
+# SPDX-License-Identifier: MIT
+---
+# The two λ functions of the Celsius example. Both operands of an arithmetic
+# atom come down to data through 𝔻, and the atom answers the fixed number the
+# Celsius example expects: 25 times 1.8 is 45, and 45 plus 32 is 77.
+- λ: L_number_times
+  dataize:
+    𝛿1: $.ρ
+    𝛿2: $.x
+  𝑛: Φ.number( φ ↦ Φ.bytes( φ ↦ ⟦ Δ ⤍ 40-46-80-00-00-00-00-00 ⟧ ) )
+- λ: L_number_plus
+  dataize:
+    𝛿1: $.ρ
+    𝛿2: $.x
+  𝑛: Φ.number( φ ↦ Φ.bytes( φ ↦ ⟦ Δ ⤍ 40-53-40-00-00-00-00-00 ⟧ ) )
