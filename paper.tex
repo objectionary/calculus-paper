@@ -50,6 +50,8 @@
 \definecolor{rgbTerminals}{HTML}{ff8c00}
 \renewcommand\EbnfTerminal[1]{\textcolor{rgbTerminals}{#1}}
 \renewcommand\phiTerminal[1]{\EbnfTerminal{#1}}
+\colorlet{rgbArrows}{red}
+\newcommand\phinoArrow[1]{\mathrel{\textcolor{rgbArrows}{#1}}}
 
 \makeatletter
 \newcommand\phiOver[1]{%
@@ -87,7 +89,7 @@
   \newrule[#1]{#2}:
   &
   { \phiq{#3} }
-  \(\trans\)
+  \(\phinoArrow{\trans}\)
   { \phiq{#4} }
   \ifblank{#5}{}{\; if { \phiq{#5} } }%
   \\
@@ -95,15 +97,15 @@
   }
 \newcommand\phinoEvaluate[5]{%
   \langle #1 {,}\; #2 {,}\; #3 \rangle%
-  \mathrel{\vcenter{\hbox{\begin{tikzpicture}\draw[-{Triangle[length=1.8mm,width=1.8mm]},line width=0.6pt](0,0)--(1.3em,0);\end{tikzpicture}}}}%
+  \phinoArrow{\vcenter{\hbox{\begin{tikzpicture}\draw[-{Triangle[length=1.8mm,width=1.8mm]},line width=0.6pt](0,0)--(1.3em,0);\end{tikzpicture}}}}%
   \langle #4 {,}\; #5 \rangle}
-\newcommand\phinoNormalize[2]{#1 \trans{} #2}
+\newcommand\phinoNormalize[2]{#1 \phinoArrow{\trans} #2}
 \newcommand\phinoDataize[5]{%
-  \langle #1 {,}\; #2 {,}\; #3 \rangle \mathrel{\Downarrow} \langle #4 {,}\; #5 \rangle}
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \phinoArrow{\Downarrow} \langle #4 {,}\; #5 \rangle}
 \newcommand\phinoMorph[5]{%
-  \langle #1 {,}\; #2 {,}\; #3 \rangle \mathrel{\Rrightarrow} \langle #4 {,}\; #5 \rangle}
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \phinoArrow{\Rrightarrow} \langle #4 {,}\; #5 \rangle}
 \newcommand\phinoContextualize[3]{%
-  \langle #1 {,}\; #2 \rangle \mathrel{\Rightarrow} \langle #3 \rangle}
+  \langle #1 {,}\; #2 \rangle \phinoArrow{\Rightarrow} \langle #3 \rangle}
 \newcommand\phinoNotFormation[1]{#1 \notin \mathcal{B}}
 \newcommand\phinoNotAbsolute[1]{#1 \notin \mathcal{K}}
 \newcommand\phinoGlobal{Q}
