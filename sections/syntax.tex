@@ -82,6 +82,17 @@ Syntax sugar & Its more verbose equivalent \\
   {\texttt{3.14}}
   { Q.|number| ( Q.|bytes| ( [[ D> |40-09-1E-B8-51-EB-85-1F| ]] ) )}
   \subs{eight bytes per number with a floating point}
+\sugar
+  { Q.|nan| }
+  { Q.|number| ( Q.|bytes| ( [[ D> |7F-F8-00-00-00-00-00-00| ]] ) )}
+\sugar
+  { Q.|pinf| }
+  { Q.|number| ( Q.|bytes| ( [[ D> |7F-F0-00-00-00-00-00-00| ]] ) )}
+  \subs{positive infinity}
+\sugar
+  { Q.|ninf| }
+  { Q.|number| ( Q.|bytes| ( [[ D> |FF-F0-00-00-00-00-00-00| ]] ) )}
+  \subs{negative infinity}
 \bottomrule
 \end{tabular}
 \end{table*}
