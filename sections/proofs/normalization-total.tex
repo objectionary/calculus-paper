@@ -22,7 +22,7 @@ Hence only finitely many non-\nameref{r:dot} steps occur before either the term
 It remains to bound the \nameref{r:dot} steps.
 \nameref{r:dot} replaces a dispatch \([[ B_1, \tau -> n, B_2 ]].\tau\) by the body
   \(n\) contextualized against \([[ B_1, B_2 ]]\) and decorated with the whole
-  formation under \(\phiTerminal{\rho}\).
+  formation under \(\phiTerminal{\uprho}\).
 An infinite sequence would need infinitely many such steps, hence a
   \nameref{r:dot} step that reproduces a dispatch of an attribute on a formation
   that still binds it---a self-reproducing redex.
@@ -33,11 +33,11 @@ The body \(n\) is contextualized against the formation with the dispatched
   \(\phiTerminal{\xi}\) in \(n\) that denotes the enclosing formation becomes a
   formation binding neither \(\tau\) nor $^$; a self-reference
   that reaches for \(\tau\) again, whether directly as \(\phiTerminal{\xi}.\tau\)
-  or through the parent as \(\phiTerminal{\xi}.\phiTerminal{\rho}.\tau\),
+  or through the parent as \(\phiTerminal{\xi}.\phiTerminal{\uprho}.\tau\),
   dispatches a missing attribute and collapses to $T$ by \nameref{r:stop},
   \nameref{r:null}, \nameref{r:miss}, or \nameref{r:dd}.
-The copy of the formation stored under \(\phiTerminal{\rho}\) is reachable only by
-  dispatching \(\phiTerminal{\rho}\), again through such a chain, which dies the
+The copy of the formation stored under \(\phiTerminal{\uprho}\) is reachable only by
+  dispatching \(\phiTerminal{\uprho}\), again through such a chain, which dies the
   same way.
 
 The calculus expresses recursion in only two further ways, and neither is a
