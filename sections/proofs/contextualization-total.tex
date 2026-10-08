@@ -6,11 +6,11 @@ Fix an absolute \(k\) and argue by structural induction on the expression \(e\),
   establishing at once that a derivation of \(\phinoContextualize{e}{k}{e_1}\)
   exists for some \(e_1\) and that it is finite.
 By the grammar of \cref{fig:ebnf} an expression is a locator ($Q$ or
-  \(\phiTerminal{\xi}\)), a terminator $T$, a formation, a dispatch, or an
+  \(\phiTerminal{\upxi}\)), a terminator $T$, a formation, a dispatch, or an
   application, and its outermost constructor tells these cases apart.
 The rules of \cref{fig:contextualization} match the cases one-to-one, so exactly
   one rule applies to every expression.
-For $Q$, \(\phiTerminal{\xi}\), $T$ and a formation $[[ B ]]$
+For $Q$, \(\phiTerminal{\upxi}\), $T$ and a formation $[[ B ]]$
   the matching rule---\nameref{r:cg}, \nameref{r:cxi}, \nameref{r:ct} or
   \nameref{r:cf}---is an axiom that yields a result in a single step, so the base
   cases hold; \nameref{r:cf} rewrites the formation to itself and never descends

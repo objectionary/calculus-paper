@@ -13,10 +13,10 @@ Determinism neither needs nor implies termination, so this holds even though
   morphing is partial (\cref{sec:morphing}).
 
 \emph{At most one rule matches.}
-By the grammar of \cref{fig:ebnf}, \(n\) is a locator ($Q$ or \(\phiTerminal{\xi}\)),
+By the grammar of \cref{fig:ebnf}, \(n\) is a locator ($Q$ or \(\phiTerminal{\upxi}\)),
   the terminator $T$, a formation, a dispatch, or an application, and its outermost
   constructor already separates most rules.
-For $T$ only \nameref{r:dead} matches and for \(\phiTerminal{\xi}\) only
+For $T$ only \nameref{r:dead} matches and for \(\phiTerminal{\upxi}\) only
   \nameref{r:xi}.
 For $Q$ the universe decides: \nameref{r:universe} requires \(e \neq Q\) and
   \nameref{r:mg} requires \(e = Q\), so exactly one fits a given \(e\).
