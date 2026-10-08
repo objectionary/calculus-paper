@@ -13,7 +13,7 @@ The syntax is defined by BNF in \cref{fig:ebnf},
 <Expression> := <Formation> | <Application> | <Dispatch> | <Locator> | "\(\dead\)" \\
 <Formation> := "\(\llbracket\)" <Binding> "\(\rrbracket\)" \\
 <Application> := <Expression> "\(\lparen\)" <A-Pair> "\(\rparen\)" \\
-<A-Pair> := <\(\tau\)-Pair> | <\(\alpha\)-Pair> \\
+<A-Pair> := <\(\tau\)-Pair> | <\(\upalpha\)-Pair> \\
 <Dispatch> := <Expression> "." <Attribute> \\
 <Locator> := "\(\Phi\)" | "\(\upxi\)" \\
 <Binding> := <Pair> <Bindings> | \(\epsilon\) \\
@@ -21,7 +21,7 @@ The syntax is defined by BNF in \cref{fig:ebnf},
 <Pair> := <\(\varnothing\)-Pair> | <\(\tau\)-Pair> | <\(\Delta\)-Pair> | <\(\lambda\)-Pair> \\
 <\(\varnothing\)-Pair> := <Attribute> "\(\mapsto\)" "\(\varnothing\)" \\
 <\(\tau\)-Pair> := <Attribute> "\(\mapsto\)" <Expression> \\
-<\(\alpha\)-Pair> := <Alpha> "\(\mapsto\)" <Expression> \\
+<\(\upalpha\)-Pair> := <Alpha> "\(\mapsto\)" <Expression> \\
 <\(\Delta\)-Pair> := "\(\Delta\)" "\(\phiDotted\)" <Data> \\
 <\(\lambda\)-Pair> := "\(\lambda\)" "\(\phiDotted\)" <Function> \\
 \end{ebnf}
@@ -41,7 +41,7 @@ Besides the literals mentioned in the grammar in orange,
   \end{inparaenum}
   \item \EbnfNonTerminal{Data}: a sequence of bytes in hexadecimal format, e.g. \enquote{\ff{EF-41-5C}} is a sequence of three bytes, \enquote{\ff{42-}} is a one-byte sequence (with a trailing dash to avoid confusion with integers), and \enquote{\ff{-{}-}} (double dash) is an empty sequence of bytes;
   \item \EbnfNonTerminal{Function}: a string of English letters and numbers where the first symbol is an uppercase letter, e.g. \enquote{\ff{Sqrt}} or \enquote{\ff{F1}};
-  \item \EbnfNonTerminal{Alpha}: a Greek letter \(\alpha\) with a non-negative whole-number index, e.g. $~2$.
+  \item \EbnfNonTerminal{Alpha}: a Greek letter \(\upalpha\) with a non-negative whole-number index, e.g. $~2$.
 \end{itemize}
 
 \Cref{tab:sugar} shows all possible syntax sugar.
