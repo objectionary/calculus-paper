@@ -90,9 +90,7 @@
 \newcommand\phinoNormalizationRule[6][]{%
   \newrule[#1]{#2}:
   &
-  { \phiq{#3} }
-  \(\phinoArrow{\trans}\)
-  { \phiq{#4} }
+  \phiq{\phinoNormalize{#3}{#4}}
   \ifblank{#5}{}{\; \text{\textcolor{gray}{if}} { \phiq{#5} } }%
   \\
   \ifblank{#6}{}{& \text{\textcolor{gray}{where}} { \phiq{#6} } \\}%
