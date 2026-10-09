@@ -93,9 +93,9 @@
   { \phiq{#3} }
   \(\phinoArrow{\trans}\)
   { \phiq{#4} }
-  \ifblank{#5}{}{\; \text{if} { \phiq{#5} } }%
+  \ifblank{#5}{}{\; \text{\textcolor{gray}{if}} { \phiq{#5} } }%
   \\
-  \ifblank{#6}{}{& \text{where} { \phiq{#6} } \\}%
+  \ifblank{#6}{}{& \text{\textcolor{gray}{where}} { \phiq{#6} } \\}%
   }
 \newcommand\phinoEvaluate[5]{%
   \langle #1 {,}\; #2 {,}\; #3 \rangle%
