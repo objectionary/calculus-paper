@@ -53,6 +53,8 @@
 \colorlet{rgbArrows}{red}
 \newcommand\phinoArrow[1]{\mathrel{\textcolor{rgbArrows}{#1}}}
 
+\newcommand\phiText[1]{\;\text{\textcolor{gray}{#1}}\;}
+
 \makeatletter
 \newcommand\phiOver[1]{%
   {\color{gray}\overbracket[0.4pt][1pt]{{\color{black}#1}}}}
@@ -148,7 +150,7 @@
       \fi%
     \fi%
     \ensuremath{\dfrac{\text{\phino@premises}}{\text{\phino@conclusion}}}%
-    \ifx\phino@condition\@empty\else\; if\;\phino@condition\fi%
+    \ifx\phino@condition\@empty\else\phiText{if}\phino@condition\fi%
   }}%
 \makeatother
 
