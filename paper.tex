@@ -74,7 +74,7 @@
 \xdef\phinoversion{\phinoversionline}
 \endgroup
 \newcommand\phinotex{_tex/\phinoversion}
-\iexec{mkdir -p \phinotex}
+\iexec[maybe]{mkdir -p \phinotex}
 
 \newcounter{phimeet}
 % Remove phinoKey once https://github.com/objectionary/eolang.sty/issues/191 is fixed
