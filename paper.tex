@@ -65,6 +65,17 @@
 \newcommand\eolangversion{\expandafter\expandafter\expandafter\eolangversion@parse\csname ver@eolang.sty\endcsname\relax}
 \makeatother
 
+\newread\phinoversionfile
+\begingroup
+\endlinechar=-1
+\openin\phinoversionfile=phino-version.txt
+\readline\phinoversionfile to \phinoversionline
+\closein\phinoversionfile
+\xdef\phinoversion{\phinoversionline}
+\endgroup
+\newcommand\phinotex{_tex/\phinoversion}
+\iexec{mkdir -p \phinotex}
+
 \newcounter{phimeet}
 % Remove phinoKey once https://github.com/objectionary/eolang.sty/issues/191 is fixed
 \newcommand\phinoKey[1]{{\def\mathrel##1{##1}\def\phiTerminal##1{##1}\xdef\phinoKeyValue{#1}}}

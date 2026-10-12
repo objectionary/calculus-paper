@@ -22,7 +22,7 @@
 _eolang-xe/
 _eolang/
 _minted-*
-_tex/*.tex
+_tex/*/
 iexec.ret
 iexec.tmp
 node_modules/

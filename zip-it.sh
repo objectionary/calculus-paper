@@ -50,7 +50,6 @@ rm -rf ./*.aux ./*.bcf ./*.blg ./*.fdb_latexmk ./*.fls ./*.log ./*.run.xml ./*.o
 rm -rf bibliography
 rm -rf examples
 rm -rf runtime.phi
-rm -rf phino-version.txt
 rm -rf _eolang/*.pl
 zip="paper-${version}.zip"
 zip -x paper.pdf -r "${zip}" ./*

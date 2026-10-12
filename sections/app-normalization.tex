@@ -13,8 +13,8 @@
 The following examples demonstrate how the reduction rules of \cref{fig:reduction} may normalize
 some expressions, involving the contextualization function (\cref{sec:contextualization}):
 
-\iexec[maybe]{./examples-to-tex.sh examples/basic > _tex/examples.tex}
-\input{_tex/examples.tex}
+\iexec[maybe]{./examples-to-tex.sh examples/basic > \phinotex/examples.tex}
+\input{\phinotex/examples.tex}
 
 The expressions at \cref{fig:normals} may not be reduced any further;
   they are in normal form.
@@ -22,8 +22,8 @@ The expressions at \cref{fig:normals} may not be reduced any further;
 \begin{figure*}
 \begin{mdframed}
 \begin{multicols}{2}
-\iexec[maybe]{./examples-to-tex.sh examples/nf > _tex/examples-nf.tex}
-\input{_tex/examples-nf.tex}
+\iexec[maybe]{./examples-to-tex.sh examples/nf > \phinotex/examples-nf.tex}
+\input{\phinotex/examples-nf.tex}
 \end{multicols}
 \end{mdframed}
 \capt{Normal forms, checked by phino \iexec[maybe]{phino --version}\unskip.}
