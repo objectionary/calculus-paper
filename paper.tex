@@ -60,6 +60,11 @@
   {\color{gray}\overbracket[0.4pt][1pt]{{\color{black}#1}}}}
 \makeatother
 
+\makeatletter
+\def\eolangversion@parse#1 #2 #3\relax{#2}
+\newcommand\eolangversion{\expandafter\expandafter\expandafter\eolangversion@parse\csname ver@eolang.sty\endcsname\relax}
+\makeatother
+
 \newcounter{phimeet}
 % Remove phinoKey once https://github.com/objectionary/eolang.sty/issues/191 is fixed
 \newcommand\phinoKey[1]{{\def\mathrel##1{##1}\def\phiTerminal##1{##1}\xdef\phinoKeyValue{#1}}}
