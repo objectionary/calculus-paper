@@ -24,13 +24,13 @@ A \emph{full application} of a pair---an attribute and
 %
 \begin{phiquation}
 \label{eq:simple-application}
-[[ |x| -> ? ]]( |x| -> b ) \trans [[ |x| -> b ]] {.}
+[[ |x| -> ? ]]( |x| -> b ) \phiNormalize [[ |x| -> b ]] {.}
 \end{phiquation}
 %
 A \emph{partial} application results in a new abstract formation, for example:
 %
 \begin{phiquation*}
-[[ |x| -> ?, |y| -> ? ]]( |x| -> b ) \trans [[ |x| -> b, |y| -> ? ]] {.}
+[[ |x| -> ?, |y| -> ? ]]( |x| -> b ) \phiNormalize [[ |x| -> b, |y| -> ? ]] {.}
 \end{phiquation*}
 
 A formation may be \emph{dispatched} from another formation
@@ -39,7 +39,7 @@ A formation may be \emph{dispatched} from another formation
 %
 \begin{phiquation}
 \label{eq:dot-notation}
-[[ |x| -> \phiOver{$.|p|(|t| -> b)}.|y|, |p| -> [[ |t| -> ?, |y| -> $.|t| ]] ]].|x| \trans b {.}
+[[ |x| -> \phiOver{$.|p|(|t| -> b)}.|y|, |p| -> [[ |t| -> ?, |y| -> $.|t| ]] ]].|x| \phiNormalize b {.}
 \end{phiquation}
 %
 The leftmost symbol \phiTerminal{\(\upxi\)} denotes the formation itself;
@@ -52,15 +52,15 @@ Attributes are \emph{immutable}, i.e. an application to a formation,
   results in a \emph{terminator} denoted as $T$ (error), for example:
 %
 \begin{phiquation*}
-[[ |x| -> b_1 ]]( |x| -> b_2 ) \trans T {.}
+[[ |x| -> b_1 ]]( |x| -> b_2 ) \phiNormalize T {.}
 \end{phiquation*}
 
 An expression may be textually reduced, for example:
 %
 \begin{phiquation*}
-[[ |x| -> ?, |y| -> ? ]]( |x| -> b_1 )( |y| -> b_2 ) \trans
-  \trans [[ |x| -> b_1, |y| -> ? ]] ( |y| -> b_2 ) \trans
-  \trans [[ |x| -> b_1, |y| -> b_2 ]] {.}
+[[ |x| -> ?, |y| -> ? ]]( |x| -> b_1 )( |y| -> b_2 ) \phiNormalize
+  \phiNormalize [[ |x| -> b_1, |y| -> ? ]] ( |y| -> b_2 ) \phiNormalize
+  \phiNormalize [[ |x| -> b_1, |y| -> b_2 ]] {.}
 \end{phiquation*}
 %
 The formation on the left is reduced to the formation on the right in two reduction steps.
@@ -74,7 +74,7 @@ An attribute dispatched from a decorator reduces
   if the attribute is not present in the decorator, for example:
 %
 \begin{phiquation*}
-[[ @ -> [[ |x| -> b ]] ]].|x| \trans b {.}
+[[ @ -> [[ |x| -> b ]] ]].|x| \phiNormalize b {.}
 \end{phiquation*}
 
 A formation may have data attached only to its $D$-asset, for example:
