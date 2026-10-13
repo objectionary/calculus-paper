@@ -114,16 +114,16 @@
   \ifblank{#6}{}{ & \phiq{\phiText{if} #6} \\ }%
   }
 \newcommand\phinoEvaluate[5]{%
-  \langle #1 {,}\; #2 {,}\; #3 \rangle%
-  \phinoArrow{\vcenter{\hbox{\begin{tikzpicture}\draw[-{Triangle[length=1.8mm,width=1.8mm]},line width=0.6pt](0,0)--(1.3em,0);\end{tikzpicture}}}}%
-  \langle #4 {,}\; #5 \rangle}
-\newcommand\phinoNormalize[2]{#1 \phiNormalize{} #2}
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \phiEvaluate{} \langle #4 {,}\; #5 \rangle}
+\newcommand\phinoNormalize[2]{%
+  #1 \phiNormalize{} #2}
 \newcommand\phinoDataize[5]{%
-  \langle #1 {,}\; #2 {,}\; #3 \rangle \phinoArrow{\Downarrow} \langle #4 {,}\; #5 \rangle}
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \phiDataize{} \langle #4 {,}\; #5 \rangle}
 \newcommand\phinoMorph[5]{%
-  \langle #1 {,}\; #2 {,}\; #3 \rangle \phinoArrow{\Rrightarrow} \langle #4 {,}\; #5 \rangle}
+  \langle #1 {,}\; #2 {,}\; #3 \rangle \phiMorph{} \langle #4 {,}\; #5 \rangle}
 \newcommand\phinoContextualize[3]{%
-  \langle #1 {,}\; #2 \rangle \phinoArrow{\Rightarrow} #3}
+  \langle #1 {,}\; #2 \rangle \phiContextualize{} #3}
+
 \newcommand\phinoNotFormation[1]{#1 \notin \mathcal{B}}
 \newcommand\phinoNotAbsolute[1]{#1 \notin \mathcal{K}}
 \newcommand\phinoGlobal{Q}
