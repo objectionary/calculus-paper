@@ -66,7 +66,7 @@ The notation \(\phinoNormalize{e_1}{e_2}\), optionally followed by a condition,
 
 A specific reduction may be denoted, for example,
   as \(\trans_{\nameref{r:dot}}\),
-  or just \(\trans\) when no specific reduction is meant.
+  or just \(\phiNormalize\) when no specific reduction is meant.
 The notation \(e_1 \strans e_2\) denotes a reflexive transitive
   closure of all reductions, so that there is a possibly empty finite
   sequence of reductions between \(e_1\) and \(e_2\).
@@ -78,7 +78,7 @@ An expression that has no more possible applications of reductions
 \end{definition}
 
 Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
-  there is no expression \(e_1\) such that \(\nf \trans e_1\).
+  there is no expression \(e_1\) such that \(\phinoNormalize{\nf}{e_1}\).
 
 \begin{figure*}
 \begin{mdframed}
