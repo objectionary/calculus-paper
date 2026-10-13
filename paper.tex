@@ -109,9 +109,9 @@
   \newrule[#1]{#2}:
   &
   \phiq{\phinoNormalize{#3}{#4}}
-  \ifblank{#5}{}{\; \text{\textcolor{gray}{if}} { \phiq{#5} } }%
+  \ifblank{#5}{}{ \phiq{\phiText{if} #5} }%
   \\
-  \ifblank{#6}{}{& \text{\textcolor{gray}{where}} { \phiq{#6} } \\}%
+  \ifblank{#6}{}{ & \phiq{\phiText{if} #6} \\ }%
   }
 \newcommand\phinoEvaluate[5]{%
   \langle #1 {,}\; #2 {,}\; #3 \rangle%
