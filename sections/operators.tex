@@ -67,7 +67,7 @@ The notation \(\phinoNormalize{e_1}{e_2}\), optionally followed by a condition,
 A specific reduction may be denoted, for example,
   as \(\phiNormalize[\nameref{r:dot}]\),
   or just \(\phiNormalize\) when no specific reduction is meant.
-The notation \(e_1 \strans e_2\) denotes a reflexive transitive
+The notation \(e_1 \phiTransNormalize e_2\) denotes a reflexive transitive
   closure of all reductions, so that there is a possibly empty finite
   sequence of reductions between \(e_1\) and \(e_2\).
 
@@ -77,7 +77,7 @@ An expression that has no more possible applications of reductions
   ranging over \(\mathcal{N} \subseteq \mathcal{E}\).
 \end{definition}
 
-Thus, \(\nf\) is a normal form of \(e\) if \(e \strans \nf\) and
+Thus, \(\nf\) is a normal form of \(e\) if \(e \phiTransNormalize \nf\) and
   there is no expression \(e_1\) such that \(\phinoNormalize{\nf}{e_1}\).
 
 \begin{figure*}
@@ -100,9 +100,9 @@ Normalization is \emph{total}:
 
 \begin{theorem}\label{thm:normalization-confluent}
 The reduction relation is \emph{confluent}:
-  if \(e \strans e_1\) and \(e \strans e_2\),
+  if \(e \phiTransNormalize e_1\) and \(e \phiTransNormalize e_2\),
   then there exists an expression \(e_3\) such that
-  \(e_1 \strans e_3\) and \(e_2 \strans e_3\).
+  \(e_1 \phiTransNormalize e_3\) and \(e_2 \phiTransNormalize e_3\).
 \end{theorem}
 
 Confluence guarantees that the normal form of an expression is unique,
