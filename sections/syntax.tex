@@ -18,12 +18,12 @@ The syntax is defined by BNF in \cref{fig:ebnf},
 <Locator> := "\(\Phi\)" | "\(\upxi\)" \\
 <Binding> := <Pair> <Bindings> | \(\epsilon\) \\
 <Bindings> := "," <Pair> <Bindings> | \(\epsilon\) \\
-<Pair> := <\(\varnothing\)-Pair> | <\(\tau\)-Pair> | <\(\Delta\)-Pair> | <\(\lambda\)-Pair> \\
+<Pair> := <\(\varnothing\)-Pair> | <\(\tau\)-Pair> | <\(\Delta\)-Pair> | <\(\uplambda\)-Pair> \\
 <\(\varnothing\)-Pair> := <Attribute> "\(\mapsto\)" "\(\varnothing\)" \\
 <\(\tau\)-Pair> := <Attribute> "\(\mapsto\)" <Expression> \\
 <\(\upalpha\)-Pair> := <Alpha> "\(\mapsto\)" <Expression> \\
 <\(\Delta\)-Pair> := "\(\Delta\)" "\(\phiDotted\)" <Data> \\
-<\(\lambda\)-Pair> := "\(\lambda\)" "\(\phiDotted\)" <Function> \\
+<\(\uplambda\)-Pair> := "\(\uplambda\)" "\(\phiDotted\)" <Function> \\
 \end{ebnf}
 \end{mdframed}
 \capt{Syntax as a context-free grammar, in BNF.}
