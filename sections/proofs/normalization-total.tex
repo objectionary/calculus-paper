@@ -20,8 +20,8 @@ Hence only finitely many non-\nameref{r:dot} steps occur before either the term
   is exhausted or a \nameref{r:dot} redex is reached.
 
 It remains to bound the \nameref{r:dot} steps.
-\nameref{r:dot} replaces a dispatch \([[ B_1, \tau -> n, B_2 ]].\tau\) by the body
-  \(n\) contextualized against \([[ B_1, B_2 ]]\) and decorated with the whole
+\nameref{r:dot} replaces a dispatch $[[ B_1, \tau -> n, B_2 ]].\tau$ by the body
+  \(n\) contextualized against $[[ B_1, B_2 ]]$ and decorated with the whole
   formation under \(\phiTerminal{\uprho}\).
 An infinite sequence would need infinitely many such steps, hence a
   \nameref{r:dot} step that reproduces a dispatch of an attribute on a formation
@@ -29,7 +29,7 @@ An infinite sequence would need infinitely many such steps, hence a
 We argue informally that none arises, though we do not yet exhibit the
   well-founded measure that would settle it.
 The body \(n\) is contextualized against the formation with the dispatched
-  attribute removed, \([[ B_1, B_2 ]]\) (\cref{sec:contextualization}), so every
+  attribute removed, $[[ B_1, B_2 ]]$ (\cref{sec:contextualization}), so every
   \(\phiTerminal{\upxi}\) in \(n\) that denotes the enclosing formation becomes a
   formation binding neither \(\tau\) nor $^$; a self-reference
   that reaches for \(\tau\) again, whether directly as \(\phiTerminal{\upxi}.\tau\)
