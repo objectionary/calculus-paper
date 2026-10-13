@@ -18,10 +18,10 @@ By the grammar of \cref{fig:ebnf}, \(n\) is a locator ($Q$ or \(\phiTerminal{\up
   constructor already separates most rules.
 For $T$ only \nameref{r:dead} matches and for \(\phiTerminal{\upxi}\) only
   \nameref{r:xi}.
-For $Q$ the universe decides: \nameref{r:universe} requires \(e \neq Q\) and
-  \nameref{r:mg} requires \(e = Q\), so exactly one fits a given \(e\).
+For $Q$ the universe decides: \nameref{r:universe} requires $e \neq Q$ and
+  \nameref{r:mg} requires $e = Q$, so exactly one fits a given \(e\).
 A formation $[[ B ]]$ with no head operation matches only \nameref{r:mf}.
-A dispatch \(m.\tau\) is shared by \nameref{r:ml}, \nameref{r:mphi}, and
+A dispatch $m.\tau$ is shared by \nameref{r:ml}, \nameref{r:mphi}, and
   \nameref{r:md}, which their conditions render disjoint: \nameref{r:md} demands a
   non-formation subject (\(\phinoNotFormation{m}\)), whereas \nameref{r:ml} and
   \nameref{r:mphi} take a formation one, and among those \nameref{r:ml} requires an
