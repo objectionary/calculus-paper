@@ -9,11 +9,12 @@ SHELL=bash
 REPO=objectionary/calculus-paper
 
 TEXS := $(wildcard sections/*.tex sections/proofs/*.tex) paper.tex
+PHINO := phino-version.txt runtime.phi examples-to-tex.sh endless-to-tex.sh $(shell find examples -type f)
 
 all: paper.pdf zip
 
-paper.pdf: $(TEXS)
-	latexmk -pdf paper
+paper.pdf: $(TEXS) $(PHINO)
+	latexmk -g -pdf paper
 
 zip: *.tex sections/*.tex
 	./zip-it.sh "$(REPO)"
