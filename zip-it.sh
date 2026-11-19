@@ -26,7 +26,7 @@ for d in _tex sections examples; do
     cp -r "../${d}" .
 done
 
-version=$(curl --fail --silent --show-error -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/${REPO}/releases/latest" | jq -r '.tag_name')
+version=$(curl --fail --silent --show-error -H "Accept: application/vnd.github.v3+json" "https://api.github.com/repos/${REPO}/releases/latest" | jq -r '.tag_name') || version=''
 if [ -z "${version}" ] || [ "${version}" = "null" ]; then
     echo "no release tag for ${REPO}" >&2
     exit 1
