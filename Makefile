@@ -20,3 +20,6 @@ zip: *.tex sections/*.tex
 
 clean:
 	git clean -dfX
+
+test:
+	./tests/zip-it-no-release.sh
