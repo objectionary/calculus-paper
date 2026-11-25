@@ -22,10 +22,6 @@ An \textbf{attribute}, ranged over \(\mathcal{T}\) by \(\tau_i\),
   may be attached.
 \end{definition}
 
-\begin{definition}[Alpha]
-An \textbf{alpha} is a positional identifier.
-\end{definition}
-
 \begin{definition}[Void vs. Attached]
 An attribute is \textbf{void} if $?$ is attached to it,
   otherwise it is an \textbf{attached} attribute.
@@ -91,22 +87,12 @@ The following is an example of a formation with four pairs, where the first one
 %
 \begin{phiquation}
 \label{eq:object-example}
- [[ D> 00-2A, |b| -> b_2(~0 -> b_3).bar, |a| -> [[ L> |Sqrt| ]], foo -> T ]] {.}
+ [[ D> 00-2A, |b| -> b_2(|x| -> b_3).bar, |a| -> [[ L> |Sqrt| ]], foo -> T ]] {.}
 \end{phiquation}
 
 The arrow $ -> $ denotes an attachment of an expression (right-hand side)
   to an attribute (left-hand side).
 The arrow $ ..> $ denotes an attachment of data or function to an asset.
-
-\begin{definition}[Domain]
-A \textbf{domain} of binding \(B\),
-  denoted as \(\bar{B}\), is a sequence of all attributes of \(B\),
-  excluding assets and \(\uprho\).
-\end{definition}
-
-The domain of the binding in the formation of \cref{eq:object-example}
-  is $ \langle |b| {,}\, |a| {,}\, |foo| {,} \rangle $.
-Assets $D$ and $L$ do not belong to the domain.
 
 \begin{definition}[Terminator]
 The \textbf{terminator}, denoted as $T$,
@@ -124,10 +110,9 @@ A formation that is not an abstract formation may be called a \emph{closed} form
 
 \begin{definition}[Application]
 An \textbf{application},
-  denoted as $ e_1 ( \tau -> e_2 ) $ or $ e_1 ( \phiTerminal{\upalpha_i} -> e_2 ) $,
-  means an attempt to attach \(e_2\) (the \enquote{argument}) to either
-  the \(\tau\) attribute of \(e_1\) (the \enquote{subject})
-  or the \(i\)-th attribute of \(e_1\).
+  denoted as $ e_1 ( \tau -> e_2 ) $,
+  means an attempt to attach \(e_2\) (the \enquote{argument}) to
+  the \(\tau\) attribute of \(e_1\) (the \enquote{subject}).
 \end{definition}
 
 \Cref{eq:simple-application} demonstrates application,
@@ -147,9 +132,6 @@ Even though $?$ being attached to an attribute of a formation
   in \phic{}, void attributes may be attached to expressions only once,
   while any further reattachments are prohibited.
 
-In $b(\phiTerminal{\upalpha_i} -> e)$ application, \(e\) must be attached
-  to the \(i\)-th attribute of \(b\).
-
 \begin{definition}[Dispatch]
 A \textbf{dispatch},
   denoted as $ e . \tau $, where \(e\) is the \enquote{subject,}
@@ -164,7 +146,7 @@ An \textbf{atom} is a formation with a function attached to its $L$-asset.
 \Cref{eq:Sqrt} demonstrates an atom with a function
   that calculates the square root of a number,
   which it retrieves from the $D$-asset
-  of $b.~0$ with the help of the morphing function (\cref{sec:morphing}).
+  of $b.|x|$ with the help of the morphing function (\cref{sec:morphing}).
 
 \begin{definition}[Decorator]
 A formation is a \textbf{decorator} if it has
@@ -182,7 +164,7 @@ The presence of \enquote{parent} in each formation is essential
 Consider the following abstract formation with an inner formation:
 %
 \begin{phiquation*}
-[[ |x| -> [[ |a| -> ?, next -> [[ @ -> $.^.|a|.plus( 1 ) ]] ]], |k| -> $.|x|( |42| ) ]] {.}
+[[ |x| -> [[ |a| -> ?, next -> [[ @ -> $.^.|a|.plus( |x| -> 1 ) ]] ]], |k| -> $.|x|( |a| -> |42| ) ]] {.}
 \end{phiquation*}
 %
 Here, if the parent of $Q.|x|.|next|$ were attached in the formation,

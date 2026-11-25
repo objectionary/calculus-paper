@@ -12,8 +12,7 @@ The syntax is defined by BNF in \cref{fig:ebnf},
 \begin{ebnf}[8em]
 <Expression> := <Formation> | <Application> | <Dispatch> | <Locator> | "\(\dead\)" \\
 <Formation> := "\(\llbracket\)" <Binding> "\(\rrbracket\)" \\
-<Application> := <Expression> "\(\lparen\)" <A-Pair> "\(\rparen\)" \\
-<A-Pair> := <\(\tau\)-Pair> | <\(\upalpha\)-Pair> \\
+<Application> := <Expression> "\(\lparen\)" <\(\tau\)-Pair> "\(\rparen\)" \\
 <Dispatch> := <Expression> "." <Attribute> \\
 <Locator> := "\(\Phi\)" | "\(\upxi\)" \\
 <Binding> := <Pair> <Bindings> | \(\epsilon\) \\
@@ -21,7 +20,6 @@ The syntax is defined by BNF in \cref{fig:ebnf},
 <Pair> := <\(\varnothing\)-Pair> | <\(\tau\)-Pair> | <\(\Delta\)-Pair> | <\(\uplambda\)-Pair> \\
 <\(\varnothing\)-Pair> := <Attribute> "\(\mapsto\)" "\(\varnothing\)" \\
 <\(\tau\)-Pair> := <Attribute> "\(\mapsto\)" <Expression> \\
-<\(\upalpha\)-Pair> := <Alpha> "\(\mapsto\)" <Expression> \\
 <\(\Delta\)-Pair> := "\(\Delta\)" "\(\phiDotted\)" <Data> \\
 <\(\uplambda\)-Pair> := "\(\uplambda\)" "\(\phiDotted\)" <Function> \\
 \end{ebnf}
@@ -40,8 +38,7 @@ Besides the literals mentioned in the grammar in orange,
       \item a string of lowercase English letters possibly with dashes inside, e.g. \enquote{\ff{price}} or \enquote{\ff{a-car}};
   \end{inparaenum}
   \item \EbnfNonTerminal{Data}: a sequence of bytes in hexadecimal format, e.g. \enquote{\ff{EF-41-5C}} is a sequence of three bytes, \enquote{\ff{42-}} is a one-byte sequence (with a trailing dash to avoid confusion with integers), and \enquote{\ff{-{}-}} (double dash) is an empty sequence of bytes;
-  \item \EbnfNonTerminal{Function}: a string of English letters and numbers where the first symbol is an uppercase letter, e.g. \enquote{\ff{Sqrt}} or \enquote{\ff{F1}};
-  \item \EbnfNonTerminal{Alpha}: a Greek letter \(\upalpha\) with a non-negative whole-number index, e.g. $~2$.
+  \item \EbnfNonTerminal{Function}: a string of English letters and numbers where the first symbol is an uppercase letter, e.g. \enquote{\ff{Sqrt}} or \enquote{\ff{F1}}.
 \end{itemize}
 
 \Cref{tab:sugar} shows all possible syntax sugar.
@@ -51,6 +48,7 @@ Besides the literals mentioned in the grammar in orange,
 \label{tab:sugar}
 \newcommand\sugar[2]{$ #1 $ & $ #2 $ \\}
 \newcommand\subs[1]{& \textcolor{gray}{(#1)} \\}
+\small
 \begin{tabular}{ll}
 \toprule
 Syntax sugar & Its more verbose canonical equivalent \\
@@ -58,9 +56,6 @@ Syntax sugar & Its more verbose canonical equivalent \\
 \sugar
   {e ( \tau_1 -> e_1 , \tau_2 -> e_2 , \dots )}
   {e ( \tau_1 -> e_1 )( \tau_2 -> e_2 ) \dots}
-\sugar
-  {e ( e_0 ,\; e_1 , \dots )}
-  {e ( ~0 -> e_0 , ~1 -> e_1 , \dots )}
 \sugar
   {\tau_1 ( \tau_2 ,\; \tau_3 , \dots ) -> [[ B ]]}
   {\tau_1 -> [[ \tau_2 -> ? , \tau_3 -> ? , \dots , B ]]}
@@ -72,26 +67,26 @@ Syntax sugar & Its more verbose canonical equivalent \\
   {[[ \tau -> e ]]}
 \sugar
   {\texttt{\begin{CJK}{UTF8}{gbsn}"你好"\end{CJK}}}
-  { Q.|string| ( Q.|bytes| ( [[ D> |E4-BD-A0-E5-A5-BD| ]] ) )}
+  { Q.|string| ( @ -> Q.|bytes| ( @ -> [[ D> |E4-BD-A0-E5-A5-BD| ]] ) )}
   \subs{UTF-8 string}
 \sugar
   {\texttt{42}}
-  { Q.|number| ( Q.|bytes| ( [[ D> |40-45-00-00-00-00-00-00| ]] ) )}
+  { Q.|number| ( @ -> Q.|bytes| ( @ -> [[ D> |40-45-00-00-00-00-00-00| ]] ) )}
   \subs{eight bytes per integer, assuming it has a floating point}
 \sugar
   {\texttt{3.14}}
-  { Q.|number| ( Q.|bytes| ( [[ D> |40-09-1E-B8-51-EB-85-1F| ]] ) )}
+  { Q.|number| ( @ -> Q.|bytes| ( @ -> [[ D> |40-09-1E-B8-51-EB-85-1F| ]] ) )}
   \subs{eight bytes per number with a floating point}
 \sugar
   { Q.|nan| }
-  { Q.|number| ( Q.|bytes| ( [[ D> |7F-F8-00-00-00-00-00-00| ]] ) )}
+  { Q.|number| ( @ -> Q.|bytes| ( @ -> [[ D> |7F-F8-00-00-00-00-00-00| ]] ) )}
 \sugar
   { Q.|pinf| }
-  { Q.|number| ( Q.|bytes| ( [[ D> |7F-F0-00-00-00-00-00-00| ]] ) )}
+  { Q.|number| ( @ -> Q.|bytes| ( @ -> [[ D> |7F-F0-00-00-00-00-00-00| ]] ) )}
   \subs{positive infinity}
 \sugar
   { Q.|ninf| }
-  { Q.|number| ( Q.|bytes| ( [[ D> |FF-F0-00-00-00-00-00-00| ]] ) )}
+  { Q.|number| ( @ -> Q.|bytes| ( @ -> [[ D> |FF-F0-00-00-00-00-00-00| ]] ) )}
   \subs{negative infinity}
 \bottomrule
 \end{tabular}
