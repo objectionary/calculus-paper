@@ -63,8 +63,12 @@ An \textbf{asset} is an identifier to which either data
 
 \begin{definition}[Binding]
 A \textbf{binding}, ranged over \(\mathcal{G}\) by \(B_i\),
-is a possibly empty sequence of key-value pairs, where all keys are unique.
+is a possibly empty finite set of key-value pairs, where all keys are unique.
 \end{definition}
+
+The order in which the pairs of a binding are written is insignificant:
+  $[[ |a| -> e_1, |b| -> e_2 ]]$ and $[[ |b| -> e_2, |a| -> e_1 ]]$
+  denote the same formation.
 
 \begin{definition}[Formation]
 An object \textbf{formation}, denoted as $[[ B ]]$,
